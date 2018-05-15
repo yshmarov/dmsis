@@ -27,6 +27,7 @@ gem 'haml-rails'
 gem 'haml'
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.1.1'
+
 gem 'simple_form'
 
 gem "pundit"
