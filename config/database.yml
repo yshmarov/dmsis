@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: myclass110_development
+  database: doesmystartupideasuck_development
 
 test:
   <<: *default
-  database: myclass110_test
+  database: doesmystartupideasuck_test
 
 production:
   <<: *default
-  database: myclass110_production
+  database: doesmystartupideasuck_production
