@@ -17,6 +17,7 @@ haml
 bootstrap 4
 simple_form
 devise
+
 oauth - fb/google
 acts_as_votable
 ransack
