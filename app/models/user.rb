@@ -9,11 +9,8 @@ class User < ApplicationRecord
   end
   validates :email, uniqueness: true
   has_many :ideas
+  has_many :comments
   def username
     self.email.split(/@/).first
   end
-  def total_ideas
-    ideas.count
-  end
-    
 end

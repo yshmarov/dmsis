@@ -1,12 +1,12 @@
 -# frozen_string_literal: true
-= simple_form_for(@idea) do |f|
+= simple_form_for(@comment) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :name, autofocus: true
-    = f.input :description
-    /= f.association :user
+    = f.input :body
+    = f.association :idea
+    = f.association :user
 
   .form-actions
-    = f.button :submit, class: 'btn btn-success'
+    = f.button :submit

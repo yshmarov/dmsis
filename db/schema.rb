@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_15_222910) do
+ActiveRecord::Schema.define(version: 2018_05_15_230951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.bigint "idea_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_comments_on_idea_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "ideas", force: :cascade do |t|
     t.string "name"
@@ -55,5 +65,7 @@ ActiveRecord::Schema.define(version: 2018_05_15_222910) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
+  add_foreign_key "comments", "ideas"
+  add_foreign_key "comments", "users"
   add_foreign_key "ideas", "users"
 end

@@ -17,8 +17,13 @@
           = yield
         - if current_user
           .col
+            = link_to 'Submit new idea', new_idea_path, class: 'btn btn-success btn-block'
+            %p
             .card.container-fluid
               %b= current_user.username
               %p
-              = current_user.total_ideas
+              = current_user.ideas.count
               ideas
+              %p
+              = current_user.comments.count
+              comments

@@ -1,10 +1,10 @@
 .container-fluid
   - @ideas.each do |idea|
-    %p
-    = time_ago_in_words(idea.created_at)
-    ago by
-    = idea.user.username
-    %br
-    %b= link_to idea.name, idea
-    .card
+    .card.container
+      = time_ago_in_words(idea.created_at)
+      ago by
+      = idea.user.username
+      %br
+      %b= link_to idea.name, idea
       = idea.description
+    %p
