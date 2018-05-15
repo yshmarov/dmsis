@@ -12,4 +12,13 @@
     .container
       %p.notice= notice
       %p.alert= alert
-      = yield
+      .row
+        .col-9
+          = yield
+        - if current_user
+          .col
+            .card.container-fluid
+              %b= current_user.username
+              %p
+              = current_user.total_ideas
+              ideas
