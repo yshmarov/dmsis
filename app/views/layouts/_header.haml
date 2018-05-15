@@ -1,0 +1,19 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  %a.navbar-brand{:href => "/"} Does My Startup Idea Suck ?
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    %ul.navbar-nav.mr-auto
+      - if user_signed_in?
+        %li
+          = link_to 'Ideas', ideas_path, class: 'btn btn-default'
+        %li
+          = link_to 'Submit new idea', new_idea_path, class: 'btn btn-success'
+        %li
+          = link_to('Sign out', destroy_user_session_path, method: :delete)
+      - else
+        %li
+          = link_to('Sign in', new_user_session_path)
+        %li
+          = link_to('Sign up', new_user_registration_path)
+
