@@ -5,9 +5,13 @@ class IdeasController < ApplicationController
     @ideas = Idea.order("created_at DESC").all
   end
 
+  def fresh
+    @ideas = Idea.order("created_at DESC").all
+  end
+
   def top
     @ideas = Idea.order(:cached_weighted_score => :desc)
-    render 'index'
+    render 'top'
   end
 
   def upvote
