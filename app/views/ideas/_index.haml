@@ -2,10 +2,12 @@
   - @ideas.each do |idea|
     .row
       .col-1
-        .float-right
+        .text-center
           /= link_to "+", like_idea_path(idea), method: :put
           /= link_to "-", dislike_idea_path(idea), method: :put
           /= current_user.voted_for? idea
+          - if current_user.voted_up_on? idea
+            = fa_icon "caret-up 2x"
           - unless current_user.voted_for? idea
             = link_to like_idea_path(idea), method: :put do
               = fa_icon "caret-up 2x"
@@ -14,6 +16,8 @@
           - unless current_user.voted_for? idea
             = link_to dislike_idea_path(idea), method: :put do
               = fa_icon "caret-down 2x"
+          - if current_user.voted_down_on? idea
+            = fa_icon "caret-down 2x"
       .col
         /= idea.positive_score
         /= 'Vote'.pluralize(idea.positive_score)
