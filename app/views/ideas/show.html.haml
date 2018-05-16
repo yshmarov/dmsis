@@ -23,19 +23,19 @@
         = fa_icon "caret-down 2x"
   .col
     .card.container
-      %b= link_to @idea.name, @idea
+      %b= @idea.name
       = @idea.description
       %br
       .row
         .col
-          = link_to idea_path(@idea) do
-            = fa_icon "comments"
-            = @idea.comments.count
+          = fa_icon "comments"
+          = @idea.comments.count
         .col
           .text-right
-            = time_ago_in_words(@idea.created_at)
-            ago by
-            = @idea.user.username
+            .font-weight-light.font-italic
+              = time_ago_in_words(@idea.created_at)
+              ago by
+              = @idea.user.username
       %p
       /TOTAL
       /= @idea.total_votes
