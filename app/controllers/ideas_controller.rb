@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
   end
 
   def top
-    @ideas = Idea.all
+    @ideas = Idea.order(:cached_weighted_score => :desc)
     render 'index'
   end
 
