@@ -43,3 +43,7 @@
         .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
           =  @idea.negative_score
       %p
+    %p
+    = render 'comments/index'
+    %p
+    = render 'comments/form'

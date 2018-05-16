@@ -4,9 +4,9 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :body
-    = f.association :idea
-    = f.association :user
+    = f.input :body, label:false, autofocus: true
+    = f.input :idea_id, input_html: {value: @idea.id}, as: :hidden
+    /= f.input :user_id, input_html: {value: current_user.id}, as: :hidden
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'btn btn-success'
