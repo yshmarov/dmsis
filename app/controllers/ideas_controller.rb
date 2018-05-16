@@ -5,6 +5,11 @@ class IdeasController < ApplicationController
     @ideas = Idea.order("created_at DESC").all
   end
 
+  def top
+    @ideas = Idea.all
+    render 'index'
+  end
+
   def upvote
     @idea.upvote_by current_user
     redirect_to ideas_path

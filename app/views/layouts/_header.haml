@@ -1,26 +1,15 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
   %a.navbar-brand{:href => "/"}
-    /= fa_icon "rocket"
+    Idea
     = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
+    or
     = fa_icon "rocket"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    = fa_icon "trash"
-    Does your startup idea suck ?
-    %b Find out now!
+    ?
+    /Does your startup idea suck ?
+    Find out now!
   %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto
-
+    %ul.nav.navbar-nav
+      %li= link_to 'Fresh', ideas_path, class: 'btn btn-outline-success'
+      %li= link_to 'Top', top_ideas_path, class: 'btn btn-outline-success'
