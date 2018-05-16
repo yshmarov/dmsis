@@ -2,25 +2,44 @@
 - if @idea.user == current_user
   = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
   \|
-  = link_to 'Back', ideas_path, class: 'btn btn-secondary'
-  \|
   = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %p
-.card.container
-  = time_ago_in_words(@idea.created_at)
-  ago by
-  = @idea.user.username
-  %br
-  %b= link_to @idea.name, @idea
-  = @idea.description
-  %p
-  .progress{:style => "height: 13px"}
-    .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
-      =  @idea.positive_score
-    .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
-      =  @idea.negative_score
-  %p
-  = link_to idea_path(@idea) do
-    = fa_icon "comments"
-    = @idea.comments.count
-    comments
+.row
+  .col-1
+    .text-center
+      - if current_user.voted_up_on? @idea
+        = fa_icon "caret-up 2x"
+      - unless current_user.voted_for? @idea
+        = link_to like_idea_path(@idea), method: :put do
+          = fa_icon "caret-up 2x"
+      .row
+      %span.badge.badge-success
+        = @idea.total_score
+      .row
+      - unless current_user.voted_for? @idea
+        = link_to dislike_idea_path(@idea), method: :put do
+          = fa_icon "caret-down 2x"
+      - if current_user.voted_down_on? @idea
+        = fa_icon "caret-down 2x"
+  .col
+    .card.container
+      %b= link_to @idea.name, @idea
+      = @idea.description
+      %br
+      .row
+        .col
+          = link_to idea_path(@idea) do
+            = fa_icon "comments"
+            = @idea.comments.count
+        .col
+          .text-right
+            = time_ago_in_words(@idea.created_at)
+            ago by
+            = @idea.user.username
+      %p
+      .progress{:style => "height: 13px"}
+        .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
+          =  @idea.positive_score
+        .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
+          =  @idea.negative_score
+      %p

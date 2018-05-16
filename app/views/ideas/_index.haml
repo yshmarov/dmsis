@@ -3,36 +3,33 @@
     .row
       .col-1
         .text-center
-          /= link_to "+", like_idea_path(idea), method: :put
-          /= link_to "-", dislike_idea_path(idea), method: :put
-          /= current_user.voted_for? idea
           - if current_user.voted_up_on? idea
             = fa_icon "caret-up 2x"
           - unless current_user.voted_for? idea
             = link_to like_idea_path(idea), method: :put do
               = fa_icon "caret-up 2x"
+          .row
           %span.badge.badge-success
             = idea.total_score
+          .row
           - unless current_user.voted_for? idea
             = link_to dislike_idea_path(idea), method: :put do
               = fa_icon "caret-down 2x"
           - if current_user.voted_down_on? idea
             = fa_icon "caret-down 2x"
       .col
-        /= idea.positive_score
-        /= 'Vote'.pluralize(idea.positive_score)
-        /= idea.negative_score
-        /= 'Vote'.pluralize(idea.negative_score)
         .card.container
-          = time_ago_in_words(idea.created_at)
-          ago by
-          = idea.user.username
-          %br
           %b= link_to idea.name, idea
           = idea.description
           %br
-          = link_to idea_path(idea) do
-            = fa_icon "comments"
-            = idea.comments.count
-            /comments
+          .row
+            .col
+              = link_to idea_path(idea) do
+                = fa_icon "comments"
+                = idea.comments.count
+            .col
+              .text-right
+                = time_ago_in_words(idea.created_at)
+                ago by
+                = idea.user.username
     %p
