@@ -1,15 +1,18 @@
 %p#notice= notice
-
+- if @idea.user == current_user
+  = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
+  \|
+  = link_to 'Back', ideas_path, class: 'btn btn-secondary'
 %p
-  %b Name:
-  = @idea.name
-%p
-  %b Description:
+.card.container
+  = time_ago_in_words(@idea.created_at)
+  ago by
+  = @idea.user.username
+  %br
+  %b= link_to @idea.name, @idea
   = @idea.description
-%p
-  %b User:
-  = @idea.user
-
-= link_to 'Edit', edit_idea_path(@idea)
-\|
-= link_to 'Back', ideas_path
+  %br
+  = link_to idea_path(@idea) do
+    = fa_icon "comments"
+    = @idea.comments.count
+    comments

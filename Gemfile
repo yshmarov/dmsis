@@ -70,3 +70,4 @@ gem 'popper_js', '~> 1.12.9'
 gem 'simple_form'
 gem 'devise'
 gem 'acts_as_votable', '~> 0.11.1'
+gem "font-awesome-rails"

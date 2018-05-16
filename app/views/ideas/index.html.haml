@@ -3,14 +3,15 @@
     .row
       .col-1
         .float-right
-          = link_to "+", like_idea_path(idea), method: :put,class:'glyphicon glyphicon-thumbs-up'
-          = link_to "-", dislike_idea_path(idea), method: :put,class:'glyphicon glyphicon-thumbs-up'
-          %h4
-            %span.badge.badge-success
-              = idea.total_score
-
+          /= link_to "+", like_idea_path(idea), method: :put
+          /= link_to "-", dislike_idea_path(idea), method: :put
+          = link_to like_idea_path(idea), method: :put do
+            = fa_icon "caret-up 2x"
+          %span.badge.badge-success
+            = idea.total_score
+          = link_to dislike_idea_path(idea), method: :put do
+            = fa_icon "caret-down 2x"
       .col
-
         /= idea.positive_score
         /= 'Vote'.pluralize(idea.positive_score)
         /= idea.negative_score
@@ -22,4 +23,9 @@
           %br
           %b= link_to idea.name, idea
           = idea.description
+          %br
+          = link_to idea_path(idea) do
+            = fa_icon "comments"
+            = idea.comments.count
+            comments
     %p
