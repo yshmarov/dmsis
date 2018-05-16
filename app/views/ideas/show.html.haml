@@ -37,6 +37,16 @@
             ago by
             = @idea.user.username
       %p
+      /TOTAL
+      /= @idea.total_votes
+      /Ye
+      /= @idea.positive_score
+      /No
+      /= @idea.negative_score
+      /Positive%
+      /= @idea.positive_percent
+      /Negative%
+      /= @idea.negative_percent
       .progress{:style => "height: 13px"}
         .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
           =  @idea.positive_score
