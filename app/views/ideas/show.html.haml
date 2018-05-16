@@ -3,6 +3,8 @@
   = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
   \|
   = link_to 'Back', ideas_path, class: 'btn btn-secondary'
+  \|
+  = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %p
 .card.container
   = time_ago_in_words(@idea.created_at)
