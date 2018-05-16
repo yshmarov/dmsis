@@ -1,5 +1,8 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  def index
+    redirect_to fresh_ideas_path
+  end
 
   def mine
     @ideas = Idea.where(user: current_user)
