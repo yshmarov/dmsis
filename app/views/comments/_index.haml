@@ -2,13 +2,12 @@ Comments
 %p
 - @comments.each do |comment|
   .card.container
-    = time_ago_in_words(comment.created_at)
-
-    by
-    = comment.user.username
-    /- if comment.user_id == current_user.id
-    /  .pull-right
-    /    = link_to "x", comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary"
-    %br
+    .row
+      .col
+        = time_ago_in_words(comment.created_at)
+        by
+        = comment.user.username
+        - if comment.user_id == current_user.id
+          = link_to "delete", comment, method: :delete, data: { confirm: 'Are you sure?' }
     = comment.body
   %p
