@@ -22,13 +22,18 @@
             = link_to 'Submit new idea', new_idea_path, class: 'btn btn-success btn-block'
             %p
             .card.container-fluid
+              %p
               %b= current_user.username
               %p
               = current_user.ideas.count
               ideas
               %p
+              = current_user.votes.count
+              votes
+              %p
               = current_user.comments.count
               comments
+              %p
             %p
             = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-default'
         - else

@@ -13,7 +13,13 @@
   %br
   %b= link_to @idea.name, @idea
   = @idea.description
-  %br
+  %p
+  .progress{:style => "height: 13px"}
+    .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
+      =  @idea.positive_score
+    .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
+      =  @idea.negative_score
+  %p
   = link_to idea_path(@idea) do
     = fa_icon "comments"
     = @idea.comments.count

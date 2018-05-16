@@ -2,6 +2,10 @@ doesmystartupideasuck.com
 doesmystartupsuck.com
 share. validate. discover.
 
+#fresh
+#my likes
+#top liked
+
 Basic functions: 
 1) sign in with google or facebook
 2) submit idea (post)
