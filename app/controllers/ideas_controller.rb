@@ -1,8 +1,20 @@
 class IdeasController < ApplicationController
-  before_action :set_idea, only: [:show, :edit, :update, :destroy]
+  before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
     @ideas = Idea.order("created_at DESC").all
+  end
+
+  def upvote
+    @idea.upvote_by current_user
+    redirect_to ideas_path
+    #redirect_to idea_path(@idea)
+  end
+
+  def downvote
+    @idea.downvote_by current_user
+    redirect_to ideas_path
+    #redirect_to idea_path(@idea)
   end
 
   def show
