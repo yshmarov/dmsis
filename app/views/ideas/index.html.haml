@@ -1,16 +1,25 @@
 .container-fluid
   - @ideas.each do |idea|
-    = link_to "+", like_idea_path(idea), method: :put,class:'glyphicon glyphicon-thumbs-up'
-    = idea.positive_score
-    = 'Vote'.pluralize(idea.positive_score)
-    = link_to "-", dislike_idea_path(idea), method: :put,class:'glyphicon glyphicon-thumbs-up'
-    = idea.negative_score
-    = 'Vote'.pluralize(idea.negative_score)
-    .card.container
-      = time_ago_in_words(idea.created_at)
-      ago by
-      = idea.user.username
-      %br
-      %b= link_to idea.name, idea
-      = idea.description
+    .row
+      .col-1
+        .float-right
+          = link_to "+", like_idea_path(idea), method: :put,class:'glyphicon glyphicon-thumbs-up'
+          = link_to "-", dislike_idea_path(idea), method: :put,class:'glyphicon glyphicon-thumbs-up'
+          %h4
+            %span.badge.badge-success
+              = idea.total_score
+
+      .col
+
+        /= idea.positive_score
+        /= 'Vote'.pluralize(idea.positive_score)
+        /= idea.negative_score
+        /= 'Vote'.pluralize(idea.negative_score)
+        .card.container
+          = time_ago_in_words(idea.created_at)
+          ago by
+          = idea.user.username
+          %br
+          %b= link_to idea.name, idea
+          = idea.description
     %p
