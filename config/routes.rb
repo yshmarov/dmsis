@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "home#index"
   get 'home/index'
-  resources :ideas do
-    get :fresh, :top, on: :collection
+  resources :ideas, except: :index do
+    get :fresh, :top, :mine, on: :collection
     member do
       put "like", to: "ideas#upvote"
       put "dislike", to: "ideas#downvote"

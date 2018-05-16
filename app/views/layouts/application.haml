@@ -24,8 +24,7 @@
               %p
               %b= link_to current_user.username, edit_user_registration_path
               %p
-              = current_user.ideas.count
-              ideas
+              = link_to "#{current_user.ideas.count} ideas", mine_ideas_path
               %p
               = current_user.votes.count
               votes

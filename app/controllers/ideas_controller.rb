@@ -1,8 +1,8 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
-  def index
-    @ideas = Idea.order("created_at DESC").all
+  def mine
+    @ideas = Idea.where(user: current_user)
   end
 
   def fresh
@@ -16,13 +16,13 @@ class IdeasController < ApplicationController
 
   def upvote
     @idea.upvote_by current_user
-    redirect_to ideas_path
+    redirect_to fresh_ideas_path
     #redirect_to idea_path(@idea)
   end
 
   def downvote
     @idea.downvote_by current_user
-    redirect_to ideas_path
+    redirect_to fresh_ideas_path
     #redirect_to idea_path(@idea)
   end
 
@@ -57,7 +57,7 @@ class IdeasController < ApplicationController
 
   def destroy
     @idea.destroy
-      redirect_to ideas_url, notice: 'Idea was successfully destroyed.'
+      redirect_to fresh_ideas_path, notice: 'Idea was successfully destroyed.'
   end
 
   private
