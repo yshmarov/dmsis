@@ -52,6 +52,6 @@
               %span.badge.badge-default
                 = link_to tag.name, tag
         - else
-          /= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success'
-          /= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-success'
-          = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary'
+          = link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success'
+          = link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-success'
+          /= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary'
