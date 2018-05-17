@@ -33,4 +33,8 @@
                   = time_ago_in_words(idea.created_at)
                   ago by
                   = idea.user.username
+        - idea.tags.each do |tag|
+          %span.badge.badge-secondary= tag.name
+
+
     %p

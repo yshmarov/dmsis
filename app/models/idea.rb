@@ -5,7 +5,7 @@ class Idea < ApplicationRecord
   acts_as_votable
 
   has_many :idea_tags, inverse_of: :idea
-  has_many :tags, through: :idea_tags, class_name: 'Tag'
+  has_many :tags, through: :idea_tags
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :idea_tags, allow_destroy: true
 
