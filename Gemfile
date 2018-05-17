@@ -71,3 +71,4 @@ gem 'simple_form'
 gem 'devise'
 gem 'acts_as_votable', '~> 0.11.1'
 gem "font-awesome-rails"
+gem "cocoon"

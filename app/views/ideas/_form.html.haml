@@ -7,6 +7,11 @@
     = f.input :name, autofocus: true
     = f.input :description
     /= f.association :user
+    %h3 Tags
+    #tags.tab-pane
+      = f.simple_fields_for :idea_tags do |idea_tag|
+        = render 'idea_tag_fields', :f => idea_tag
+      = link_to_add_association 'add a tag', f, :idea_tags
 
   .form-actions
     = f.button :submit, class: 'btn btn-success'

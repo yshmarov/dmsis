@@ -4,6 +4,11 @@ class Idea < ApplicationRecord
   validates :user_id, :name, :description, presence: :true
   acts_as_votable
 
+  has_many :idea_tags, inverse_of: :idea
+  has_many :tags, through: :idea_tags, class_name: 'Tag'
+  accepts_nested_attributes_for :tags
+  accepts_nested_attributes_for :idea_tags, allow_destroy: true
+
   def positive_score
     self.get_upvotes.size
   end	
