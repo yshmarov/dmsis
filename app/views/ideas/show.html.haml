@@ -55,8 +55,8 @@
       %p
     .form-inline
       - @idea.tags.each do |tag|
-        %span.badge.badge-secondary
-          = tag.name
+        %span.badge.badge-default
+          = link_to tag.name, tag
         \| 
       %p
     Comments

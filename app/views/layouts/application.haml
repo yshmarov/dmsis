@@ -45,6 +45,12 @@
               = User.count
               users
               %p
+            %p
+            Tags
+            %p
+            - Tag.all.each do |tag|
+              %span.badge.badge-default
+                = link_to tag.name, tag
         - else
           = link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success'
           = link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-success'
