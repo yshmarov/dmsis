@@ -52,6 +52,7 @@
           =  @idea.positive_score
         .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
           =  @idea.negative_score
+      %p
     .form-inline
       - @idea.tags.each do |tag|
         %span.badge.badge-secondary
