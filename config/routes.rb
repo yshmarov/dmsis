@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   root to: "home#index"
   get 'home/index'
   resources :ideas do
-    get :fresh, :top, :mine, on: :collection
     member do
       put "like", to: "ideas#upvote"
       put "dislike", to: "ideas#downvote"
     end
+    get :fresh, :top, :mine, on: :collection
   end
   resources :comments
   resources :tags
