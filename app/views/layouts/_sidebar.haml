@@ -1,0 +1,40 @@
+= link_to 'Submit new idea', new_idea_path, class: 'btn btn-success btn-block'
+%p
+.card.container-fluid
+  %p
+  /.form-inline
+  .row
+    .col
+      %b= current_user.username
+    .col
+      = link_to edit_user_registration_path do
+        = fa_icon "cog"
+    .col
+      = link_to destroy_user_session_path, method: :delete do
+        = fa_icon "sign-out"
+  %p
+  = link_to "#{current_user.ideas.count} ideas", mine_ideas_path
+  %p
+  = current_user.votes.count
+  votes
+  %p
+  = current_user.comments.count
+  comments
+  %p
+%p
+.card.container-fluid
+  %p
+  Discover
+  = Idea.count
+  ideas 
+  %br
+  validated by 
+  = User.count
+  users
+  %p
+%p
+Tags
+%p
+- Tag.all.each do |tag|
+  %span.badge.badge-default
+    = link_to tag.name, tag

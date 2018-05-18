@@ -2,56 +2,27 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Doesmystartupideasuck
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title 
+      1000+ startup ideas from the crowd
+    = favicon_link_tag 'doesmystartupideasuck-logo.png'
+    %meta{:content => "#{content_for?(:description) ? yield(:description) : "Doesmystartupideasuck"}", :name => "description"}/
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = render 'layouts/header'
+    = render 'layouts/navbar'
     .container
       %br
-      /%p.notice= notice
-      /%p.alert= alert
+      = render 'layouts/messages'
       .row
-        .col-9
+        .col
           = yield
-        - if current_user
-          .col
-            = link_to 'Submit new idea', new_idea_path, class: 'btn btn-success btn-block'
+        .col
+          - if current_user
+            = render 'layouts/sidebar'
+          - else
+            = link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success'
+            = link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-success'
             %p
-            .card.container-fluid
-              %p
-              %b= link_to current_user.username, edit_user_registration_path
-              %p
-              = link_to "#{current_user.ideas.count} ideas", mine_ideas_path
-              %p
-              = current_user.votes.count
-              votes
-              %p
-              = current_user.comments.count
-              comments
-              %p
-            %p
-            = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-default'
-            %p
-            .card.container-fluid
-              %p
-              Discover
-              = Idea.count
-              ideas 
-              %br
-              validated by 
-              = User.count
-              users
-              %p
-            %p
-            Tags
-            %p
-            - Tag.all.each do |tag|
-              %span.badge.badge-default
-                = link_to tag.name, tag
-        - else
-          = link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success'
-          = link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-success'
-          /= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary'
+            = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
