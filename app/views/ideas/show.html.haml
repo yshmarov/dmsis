@@ -4,6 +4,7 @@
     = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
     \|
     = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    = render 'ideas/cofounder_modal'
 %p
 .row
   .col-1
@@ -64,8 +65,8 @@
     = render 'comments/form'
     %p
     = render 'comments/index'
-    I wanna do this!
-    = render 'cofounders/form'
+    /I wanna do this!
+    /= render 'cofounders/form'
     %p
     = render 'cofounders/index'
 %br
