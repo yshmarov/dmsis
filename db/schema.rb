@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_17_175522) do
+ActiveRecord::Schema.define(version: 2018_05_18_214354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cofounders", force: :cascade do |t|
+    t.string "role"
+    t.string "location"
+    t.bigint "user_id"
+    t.bigint "idea_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_cofounders_on_idea_id"
+    t.index ["user_id"], name: "index_cofounders_on_user_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -93,6 +104,8 @@ ActiveRecord::Schema.define(version: 2018_05_17_175522) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
+  add_foreign_key "cofounders", "ideas"
+  add_foreign_key "cofounders", "users"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
   add_foreign_key "idea_tags", "ideas"

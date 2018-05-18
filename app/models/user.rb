@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   has_many :ideas
   has_many :comments
+  has_many :cofounders
   def username
     self.email.split(/@/).first
   end

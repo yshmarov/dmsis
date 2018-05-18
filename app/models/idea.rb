@@ -1,13 +1,13 @@
 class Idea < ApplicationRecord
   belongs_to :user
   has_many :comments
-  validates :user_id, :name, :description, presence: :true
-  acts_as_votable
-
+  has_many :cofounders
   has_many :idea_tags, inverse_of: :idea
   has_many :tags, through: :idea_tags
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :idea_tags, allow_destroy: true
+  validates :user_id, :name, :description, presence: :true
+  acts_as_votable
 
   def positive_score
     self.get_upvotes.size

@@ -15,8 +15,11 @@
   %p
   = link_to "#{current_user.ideas.count} ideas", mine_ideas_path
   %p
-  = current_user.votes.count
-  votes
+  = current_user.votes.up.count
+  upvotes
+  %p
+  = current_user.votes.down.count
+  downvotes
   %p
   = current_user.comments.count
   comments

@@ -1,16 +1,17 @@
 .card.container
   %p
   -# frozen_string_literal: true
-  = simple_form_for(@comment) do |f|
+  = simple_form_for(@cofounder) do |f|
     = f.error_notification
     = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
   
     .form-inputs
-      = f.input :body, label:false, autofocus: true, placeholder: 'Lay it out.'
+      = f.input :role, label: 'My role'
+      = f.input :location, label: 'My location'
       = f.input :idea_id, input_html: {value: @idea.id}, as: :hidden
       /= f.input :user_id, input_html: {value: current_user.id}, as: :hidden
   
     .form-actions
       /= f.button :submit, class: 'btn btn-success'
-      = f.submit "Post", class: 'btn btn-success'
+      = f.submit "Add me", class: 'btn btn-success'
   %p

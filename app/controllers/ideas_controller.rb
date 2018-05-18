@@ -34,6 +34,8 @@ class IdeasController < ApplicationController
   def show
     @comments = @idea.comments
     @comment = Comment.new
+    @cofounder = Cofounder.new
+    @cofounders = @idea.cofounders
   end
 
   def new
