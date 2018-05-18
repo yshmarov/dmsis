@@ -1,7 +1,7 @@
 /.container-fluid
 - @ideas.each do |idea|
   .row
-    .col-1
+    .col-md-auto
       .text-center
         - if current_user.voted_up_on? idea
           = fa_icon "caret-up 2x"
