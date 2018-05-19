@@ -37,6 +37,8 @@
         .col
           = fa_icon "comments"
           = @idea.comments.count
+          = fa_icon "users"
+          = @idea.cofounders.count
         .col
           .text-right
             .font-weight-light.font-italic
@@ -62,8 +64,9 @@
     = render 'comments/form'
     %p
     = render 'comments/index'
-    /I wanna do this!
-    /= render 'cofounders/form'
+    %p
+    = fa_icon "users"
+    Cofounders
     %p
     = render 'cofounders/index'
 %br

@@ -5,9 +5,10 @@
       .col-md-auto
         = cofounder.user.username
       .col
-        %b role:
         = cofounder.role
-        %br
-        %b location:
-        = cofounder.location
+        (#{cofounder.location})
+      .col-md-auto
+        - if cofounder.user == current_user
+          = link_to 'Remove me', cofounder, method: :delete, data: { confirm: 'Are you sure?' }
+
   %p
