@@ -12,7 +12,11 @@ class User < ApplicationRecord
   has_many :comments
   has_many :cofounders
   def username
-    self.email.split(/@/).first
+    unless name.present?
+      self.email.split(/@/).first
+    else
+      name
+    end
   end
 
   def self.new_with_session(params, session)

@@ -4,7 +4,8 @@
   %p
   /.form-inline
   .row
-    .col
+    .col-auto
+      = image_tag current_user.image, size: '20x20', alt: "that's me"
       %b= current_user.username
     .col
       = link_to edit_user_registration_path do
@@ -23,6 +24,9 @@
   %p
   = current_user.comments.count
   comments
+  %p
+  = current_user.cofounders.count
+  I would be a cofounder
   %p
 %p
 .card.container-fluid

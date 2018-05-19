@@ -46,30 +46,30 @@
         %span.badge.badge-default
           = link_to tag.name, tag
         \| 
+%p
+.progress{:style => "height: 13px"}
+  .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
+    =  @idea.positive_score
+  .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
+    =  @idea.negative_score
+%p
+.row
+  .col-lg
+    = fa_icon "comments"
+    Discussion
     %p
-    .progress{:style => "height: 13px"}
-      .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
-        =  @idea.positive_score
-      .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
-        =  @idea.negative_score
+    = render 'comments/form'
     %p
-    .row
-      .col
-        = fa_icon "comments"
-        Discussion
-        %p
-        = render 'comments/form'
-        %p
-        = render 'comments/index'
-        %p
-      .col
-        = fa_icon "users"
-        Cofounders
-        - unless @current_user_is_a_cofounder
-          = render 'ideas/cofounder_modal'
-        - else
-          %span.badge.badge-secondary
-            %h5 You've applied!
-        %p
-        = render 'cofounders/index'
+    = render 'comments/index'
+    %p
+  .col-lg
+    = fa_icon "users"
+    Cofounders
+    - unless @current_user_is_a_cofounder
+      = render 'ideas/cofounder_modal'
+    - else
+      %span.badge.badge-secondary
+        %h5 You've applied!
+    %p
+    = render 'cofounders/index'
 %br

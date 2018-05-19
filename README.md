@@ -2,9 +2,16 @@ doesmystartupideasuck.com
 doesmystartupsuck.com
 share. validate. discover.
 
-#fresh
-#my likes
-#top liked
+#facebook login XXX
+#homepage
+#sidebar stats
+#my likes XXX
+#my cofoundery XXX
+#elasticsearch XXX
+#pundit XXX
+
+#fresh DONE
+#top liked DONE
 
 Basic functions: 
 1) sign in with google or facebook
