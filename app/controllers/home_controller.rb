@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [ :index, :privacy_policy, :terms_of_service ]
+  skip_before_action :authenticate_user!, :only => [ :index, :privacy_policy, :terms_of_service, :contacts ]
 
   def index
     if current_user
@@ -12,4 +12,8 @@ class HomeController < ApplicationController
 
   def terms_of_service
   end
+
+  def contacts
+  end
+
 end

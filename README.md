@@ -2,13 +2,20 @@ doesmystartupideasuck.com
 doesmystartupsuck.com
 share. validate. discover.
 
-#facebook login XXX
+#video what is DMSIS?
+#video I will steal your startup idea
+#video Will you steal my startup idea?
+
+#facebook login DONE
+#like on facebook
+#share on facebook
 #homepage
 #sidebar stats
 #my likes XXX
 #my cofoundery XXX
 #elasticsearch XXX
 #pundit XXX
+#devise soft delete
 
 #fresh DONE
 #top liked DONE

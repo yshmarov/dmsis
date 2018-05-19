@@ -1,9 +1,18 @@
-%h1.b doesmystartupideasuck.com
-%h3 Post idea. Validate. Discover.
-.embed-responsive.embed-responsive-16by9
-  %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak", :width => "560"}
+/%h1
+/  %b doesmystartupideasuck.com
+/%h1 Post idea. Validate. Discover.
+%h1 Startup inspiration from the crowd
+%h3 Validate your ideas. Discover new ones. Find a team.
+.row
+  .col
+    .embed-responsive.embed-responsive-16by9
+      %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
+  .col
+    .embed-responsive.embed-responsive-16by9
+      %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
 .row
 /.text-center
 /  %h1 How it looks:
 /  = image_tag("doesmystartupsuck-screenshot.png", :size => "820x435", :crop => :fill, :alt => "doesmystartupsuck screenshot")
 %br
+= render 'layouts/footer'

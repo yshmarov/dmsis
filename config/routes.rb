@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   get 'terms_of_service', to: 'home#terms_of_service'
   get 'privacy_policy', to: 'home#privacy_policy'
+  get 'contacts', to: 'home#contacts'
   get 'home/index'
   resources :ideas do
     member do

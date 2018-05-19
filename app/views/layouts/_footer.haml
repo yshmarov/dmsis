@@ -1,0 +1,29 @@
+%footer.page-footer.font-small.indigo.pt-0
+  .container
+    .row.pt-5.mb-3.text-center.d-flex.justify-content-center
+      .col-md-2.mb-3
+        %h6.text-uppercase.font-weight-bold
+          %a{:href => "privacy_policy"} Privacy Policy
+      .col-md-2.mb-3
+        %h6.text-uppercase.font-weight-bold
+          %a{:href => "terms_of_service"} Terms of service
+      .col-md-2.mb-3
+        %h6.text-uppercase.font-weight-bold
+          %a{:href => "contacts"} Contact
+    %hr.rgba-white-light{:style => "margin: 0 15%;"}/
+    .row.d-flex.text-center.justify-content-center.mb-md-0.mb-4
+      .col-md-8.col-12.mt-5
+        %p{:style => "line-height: 1.7rem"}
+          Here's to the crazy ones. The misfits. The rebels. The troublemakers. 
+          The ones who see things differently. 
+          They're not fond of rules. And they have no respect for the status quo. 
+          You can quote them, disagree with them, glorify or hate them. 
+          About the only thing you can't do is ignore them. Because they change things. 
+          They push the human race forward. And while some may see them as the crazy ones, we see genius. 
+          Because the people who are crazy enough to think they can change the world, are the ones who do.
+    %hr.clearfix.d-md-none.rgba-white-light{:style => "margin: 10% 15% 5%;"}/
+  .footer-copyright.py-3.text-center
+    © #{Time.now.year} Copyright:
+    %a{:href => "https://www.doesmystartupideasuck.com/"} doesmystartupideasuck.com
+    %br
+    Last updated on #{Time.now.strftime('%F')}
