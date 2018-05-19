@@ -3,7 +3,8 @@
   .card.container
     .row
       .col-md-auto
-        = image_tag cofounder.user.image, size: '20x20', alt: "that's me"
+        - if current_user.image?
+          = image_tag cofounder.user.image, size: '20x20', alt: "that's me"
         = cofounder.user.username
         %br
         - if cofounder.user == current_user
