@@ -5,11 +5,6 @@
   /- unless @idea.votes_for.size > 0 || @idea.comments.any? || @idea.cofounders.any?
   - unless @idea.associations?
     = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-- unless @current_user_is_a_cofounder
-  = render 'ideas/cofounder_modal'
-- else
-  %span.badge.badge-secondary
-    %h5 You've applied!
 %p
 .row
   .col-1
@@ -58,15 +53,23 @@
       .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
         =  @idea.negative_score
     %p
-    = fa_icon "comments"
-    Discussion
-    %p
-    = render 'comments/form'
-    %p
-    = render 'comments/index'
-    %p
-    = fa_icon "users"
-    Cofounders
-    %p
-    = render 'cofounders/index'
+    .row
+      .col
+        = fa_icon "comments"
+        Discussion
+        %p
+        = render 'comments/form'
+        %p
+        = render 'comments/index'
+        %p
+      .col
+        = fa_icon "users"
+        Cofounders
+        - unless @current_user_is_a_cofounder
+          = render 'ideas/cofounder_modal'
+        - else
+          %span.badge.badge-secondary
+            %h5 You've applied!
+        %p
+        = render 'cofounders/index'
 %br

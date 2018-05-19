@@ -4,11 +4,11 @@
     .row
       .col-md-auto
         = cofounder.user.username
+        %br
+        - if cofounder.user == current_user
+          = link_to 'remove me', cofounder, method: :delete, data: { confirm: 'Are you sure?' }
       .col
         = cofounder.role
         (#{cofounder.location})
-      .col-md-auto
-        - if cofounder.user == current_user
-          = link_to 'Remove me', cofounder, method: :delete, data: { confirm: 'Are you sure?' }
 
   %p
