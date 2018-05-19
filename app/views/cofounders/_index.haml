@@ -3,9 +3,9 @@
   .card.container
     .row
       .col-md-auto
-        - if current_user.image?
+        - if cofounder.user_id?
           = image_tag cofounder.user.image, size: '20x20', alt: "that's me"
-        = cofounder.user.username
+          = cofounder.user.username
         %br
         - if cofounder.user == current_user
           = link_to 'remove me', cofounder, method: :delete, data: { confirm: 'Are you sure?' }

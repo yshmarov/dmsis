@@ -39,7 +39,8 @@
             .font-weight-light.font-italic
               = time_ago_in_words(@idea.created_at)
               ago by
-              = @idea.user.username
+              - if @idea.user_id?
+                = @idea.user.username
       %p
     .form-inline
       - @idea.tags.each do |tag|

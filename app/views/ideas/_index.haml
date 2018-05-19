@@ -34,7 +34,8 @@
               .font-weight-light.font-italic
                 = time_ago_in_words(idea.created_at)
                 ago by
-                = idea.user.username
+                - if idea.user_id?
+                  = idea.user.username
       - idea.tags.each do |tag|
         %span.badge.badge-default
           = link_to tag.name, tag

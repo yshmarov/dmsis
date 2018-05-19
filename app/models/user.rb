@@ -8,14 +8,14 @@ class User < ApplicationRecord
     id
   end
   validates :email, uniqueness: true
-  has_many :ideas
-  has_many :comments
-  has_many :cofounders
+  has_many :ideas, dependent: :nullify
+  has_many :comments, dependent: :nullify
+  has_many :cofounders, dependent: :nullify
   def username
-    unless name.present?
-      self.email.split(/@/).first
-    else
+    if name.present?
       name
+    elsif email.present?
+      self.email.split(/@/).first
     end
   end
 
