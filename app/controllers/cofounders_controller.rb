@@ -11,7 +11,8 @@ class CofoundersController < ApplicationController
     if @cofounder.save
       redirect_to idea_path(@cofounder.idea), notice: 'Cofounder was successfully created.'
     else
-      render :new
+      redirect_to idea_path(@cofounder.idea), notice: 'You are already signed up!.'
+      #render :new
     end
   end
 

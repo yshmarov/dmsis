@@ -1,10 +1,15 @@
 /%p#notice= notice
-.text-right
-  - if @idea.user == current_user
-    = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
-    \|
+/.text-right
+- if @idea.user == current_user
+  = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
+  /- unless @idea.votes_for.size > 0 || @idea.comments.any? || @idea.cofounders.any?
+  - unless @idea.associations?
     = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-    = render 'ideas/cofounder_modal'
+- unless @current_user_is_a_cofounder
+  = render 'ideas/cofounder_modal'
+- else
+  %span.badge.badge-secondary
+    %h5 You've applied!
 %p
 .row
   .col-1
@@ -39,29 +44,21 @@
               ago by
               = @idea.user.username
       %p
-      /TOTAL
-      /= @idea.total_votes
-      /Ye
-      /= @idea.positive_score
-      /No
-      /= @idea.negative_score
-      /Positive%
-      /= @idea.positive_percent
-      /Negative%
-      /= @idea.negative_percent
-      .progress{:style => "height: 13px"}
-        .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
-          =  @idea.positive_score
-        .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
-          =  @idea.negative_score
-      %p
     .form-inline
       - @idea.tags.each do |tag|
         %span.badge.badge-default
           = link_to tag.name, tag
         \| 
-      %p
+    %p
+    .progress{:style => "height: 13px"}
+      .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
+        =  @idea.positive_score
+      .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
+        =  @idea.negative_score
+    %p
+    = fa_icon "comments"
     Discussion
+    %p
     = render 'comments/form'
     %p
     = render 'comments/index'

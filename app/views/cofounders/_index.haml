@@ -1,4 +1,3 @@
-Get in touch with people passionate about realizing this idea. Show others how you can contribute (eg. webdesign, funding, media coverage, launch in your country).
 %p
 - @cofounders.each do |cofounder|
   .card.container
@@ -6,9 +5,9 @@ Get in touch with people passionate about realizing this idea. Show others how y
       .col-md-auto
         = cofounder.user.username
       .col
-        role
+        %b role:
         = cofounder.role
         %br
-        location
+        %b location:
         = cofounder.location
   %p

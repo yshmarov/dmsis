@@ -33,4 +33,16 @@ class Idea < ApplicationRecord
     negative_score.to_d/total_votes.to_d*100
   end
 
+  def associations?
+    votes_for.size > 0 || comments.any? || cofounders.any?
+  end
+
+  private
+
+  def check_for_associations
+    if associations?
+      errors[:base] << "cannot delete"
+      false
+    end
+  end
 end

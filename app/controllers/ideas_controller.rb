@@ -36,6 +36,7 @@ class IdeasController < ApplicationController
     @comment = Comment.new
     @cofounder = Cofounder.new
     @cofounders = @idea.cofounders
+    @current_user_is_a_cofounder = Cofounder.where(idea_id: @idea.id).where(user_id: current_user.id).present?
   end
 
   def new
