@@ -6,8 +6,11 @@ class Idea < ApplicationRecord
   has_many :tags, through: :idea_tags
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :idea_tags, allow_destroy: true
-  validates :user_id, :name, :description, presence: :true
   acts_as_votable
+
+  validates :user_id, :name, :description, presence: :true
+  validates :name, length: {minimum: 2, maximum: 10000}
+  validates :description, length: {minimum: 2, maximum: 10000}
 
   def positive_score
     self.get_upvotes.size

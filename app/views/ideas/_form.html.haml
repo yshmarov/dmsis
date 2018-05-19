@@ -4,8 +4,8 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :name, autofocus: true, placeholder: 'Title of the idea'
-    = f.input :description, placeholder: 'What problem do you want to solve? What solution do you suggest?'
+    = f.input :name, autofocus: true, maxlength: 255, placeholder: 'Title of the idea'
+    = f.input :description, maxlength: 10000, placeholder: 'What problem do you want to solve? What solution do you suggest?'
     /= f.association :user
     %h4 Tags
     #tags.tab-pane
