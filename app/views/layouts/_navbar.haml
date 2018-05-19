@@ -24,8 +24,10 @@
       - if current_user
         %li= link_to 'Fresh', fresh_ideas_path, class: 'btn btn-outline-primary button'
         %li= link_to 'Top', top_ideas_path, class: 'btn btn-outline-primary button'
+        - unless current_user.name
+          %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-danger button'
       - else
-        = link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-primary button'
-        = link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-primary button'
+        /= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-primary button'
+        /= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-primary button'
         = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
         /= link_to "Logout", destroy_user_session_path, method: :delete

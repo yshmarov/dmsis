@@ -26,14 +26,45 @@ class User < ApplicationRecord
       end
     end
   end
-  
+
+  #if the user is new
+  #def self.from_omniauth(auth)
+  #  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #    user.email = auth.info.email
+  #    user.password = Devise.friendly_token[0,20]
+  #    user.name = auth.info.name   # assuming the user model has a name
+  #    user.image = auth.info.image # assuming the user model has an image
+  #    #user.description = auth.extra.raw_info.bio
+  #  end
+  #end
+
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+    if !where(email: auth.info.email).empty?
+      user = where(email: auth.info.email).first
+      user.provider = auth.provider # and connect him to facebook here
+      user.uid = auth.uid           # and here
       user.name = auth.info.name   # assuming the user model has a name
       user.image = auth.info.image # assuming the user model has an image
+      user.save!
+      user
+    else
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+        user.name = auth.info.name   # assuming the user model has a name
+        user.image = auth.info.image # assuming the user model has an image
+        #user.description = auth.extra.raw_info.bio
+      end
     end
   end
-
+  ### if user signed in with an email and wants to add FB
+  
+  #def self.from_omniauth(auth)
+  #  where(auth.info.slice(:email)).first_or_create do |user|
+  #    user.email = auth.info.email
+  #    user.password = Devise.friendly_token[0,20]
+  #    user.name = auth.info.name
+  #    user.image = auth.info.image # assuming the user model has an image
+  #  end
+  #end
 end
