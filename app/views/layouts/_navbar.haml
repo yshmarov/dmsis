@@ -25,6 +25,7 @@
       - if current_user
         %li= link_to 'Fresh', fresh_ideas_path, class: 'btn btn-outline-primary button'
         %li= link_to 'Top', top_ideas_path, class: 'btn btn-outline-primary button'
+        %li= link_to 'Unrated', unrated_ideas_path, class: 'btn btn-outline-primary button'
         - unless current_user.name
           %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-danger button'
       - else
