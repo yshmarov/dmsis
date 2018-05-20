@@ -6,10 +6,11 @@
     - unless current_user.voted_for? idea
       = link_to like_idea_path(idea), method: :put do
         = fa_icon "caret-up 3x"
-    .row
-    %span.badge.badge-success
-      = idea.total_score
-    .row
+    /.row
+    /%h3
+    /  %span.badge.badge-success
+    /    = idea.total_score
+    /.row
     - unless current_user.voted_for? idea
       = link_to dislike_idea_path(idea), method: :put do
         = fa_icon "caret-down 3x"
