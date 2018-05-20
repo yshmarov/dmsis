@@ -13,8 +13,8 @@ class Idea < ApplicationRecord
   acts_as_votable
 
   validates :user_id, :name, :description, presence: :true
-  validates :name, length: {minimum: 2, maximum: 10000}
-  validates :description, length: {minimum: 2, maximum: 10000}
+  validates :name, length: {minimum: 2, maximum: 250}, uniqueness: true
+  validates :description, length: {minimum: 2, maximum: 10000}, uniqueness: true
 
   def positive_score
     self.get_upvotes.size

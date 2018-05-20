@@ -6,6 +6,9 @@ share. validate. discover.
 #video I will steal your startup idea
 #video Will you steal my startup idea?
 
+#view as list or as cards
+#cards
+
 #facebook login DONE
 #like on facebook
 #share on facebook
