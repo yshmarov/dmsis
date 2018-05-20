@@ -14,9 +14,9 @@
     = render 'layouts/navbar'
     .container
       %br
-      = render 'layouts/messages'
       .row
         .col-lg
+          = render 'layouts/messages'
           = yield
         - if current_user
           .col-lg-3

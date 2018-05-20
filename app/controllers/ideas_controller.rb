@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
   end
 
   def unrated
-    @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id))
+    @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id)).limit(1)
   end
 
   def mine
@@ -24,14 +24,14 @@ class IdeasController < ApplicationController
 
   def upvote
     @idea.upvote_by current_user
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: root_path, notice: 'upvoted'
     #redirect_to fresh_ideas_path
     #redirect_to idea_path(@idea)
   end
 
   def downvote
     @idea.downvote_by current_user
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: root_path, notice: 'downvoted'
     #redirect_to fresh_ideas_path
     #redirect_to idea_path(@idea)
   end
