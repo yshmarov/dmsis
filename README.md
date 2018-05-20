@@ -8,14 +8,12 @@ share. validate. discover.
 
 #not allow "." in idea.name
 
-#view as list or as cards
-#cards
-
+#cards DONE
 #facebook login DONE
 #like on facebook
 #share on facebook
-#homepage
-#sidebar stats
+#homepage DONE
+#sidebar stats DONE
 #my likes XXX
 #my cofoundery XXX
 #elasticsearch XXX

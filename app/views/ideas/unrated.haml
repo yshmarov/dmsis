@@ -1,5 +1,14 @@
-.text-center
-  /%h1 Idea of the day
-  %h4 Vote!
 %br
-= render 'ideas/cards'
+- if @ideas.any?
+  .text-center
+    /%h1 Idea of the day
+    %h4 Vote!
+  = render 'ideas/cards'
+- else
+  .text-center
+    %h4 You've voted for all of them!
+    %br
+    %h6 
+      You can 
+      = link_to 'add a new idea', new_idea_path
+      yourself

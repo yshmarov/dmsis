@@ -29,6 +29,9 @@
               = idea.comments.count
               = fa_icon "users"
               = idea.cofounders.count
+            - if idea.cofounders.where(user_id: current_user.id).present?
+              %span.badge.badge-secondary
+                You've applied!
           .col
             .text-right
               .font-weight-light.font-italic
