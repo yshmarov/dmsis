@@ -6,6 +6,8 @@ share. validate. discover.
 #video I will steal your startup idea
 #video Will you steal my startup idea?
 
+#not allow "." in idea.name
+
 #view as list or as cards
 #cards
 

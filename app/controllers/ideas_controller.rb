@@ -1,18 +1,12 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+
   def index
-    redirect_to fresh_ideas_path
+    redirect_to unrated_ideas_path
   end
 
   def unrated
-    #if current_user.voted_up_on? idea
-    #@x = @user.find_voted_items Idea
-    #@uservotes = @user.get_voted Comment
     @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id))
-    #@ideas = @user.find_voted_items idea
-    #@ideas = Idea.joins.where(current_user.voted_up_on? true)
-    #- unless current_user.voted_for? @post
-    #.voted_up_on?(Something.first)
   end
 
   def mine

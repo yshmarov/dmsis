@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  #devise_for :users
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root to: "home#index"
   get 'terms_of_service', to: 'home#terms_of_service'
@@ -16,5 +15,4 @@ Rails.application.routes.draw do
   resources :comments
   resources :cofounders
   resources :tags, only: :show
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
