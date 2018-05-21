@@ -1,4 +1,5 @@
 class Cofounder < ApplicationRecord
+  default_scope { order(created_at: :desc) }
   belongs_to :idea
   belongs_to :user
   validates :user_id, :idea_id, :role, :location, presence: :true

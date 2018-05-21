@@ -4,9 +4,9 @@ class Idea < ApplicationRecord
   friendly_id :name, use: :slugged
 
   belongs_to :user
-  has_many :comments
-  has_many :cofounders
-  has_many :idea_tags, inverse_of: :idea
+  has_many :comments, dependent: :destroy
+  has_many :cofounders, dependent: :destroy
+  has_many :idea_tags, inverse_of: :idea, dependent: :destroy
   has_many :tags, through: :idea_tags
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :idea_tags, allow_destroy: true
