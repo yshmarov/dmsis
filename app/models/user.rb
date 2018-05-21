@@ -11,9 +11,9 @@ class User < ApplicationRecord
   def email_present
     email.present?
   end
-  has_many :ideas, dependent: :nullify
-  has_many :comments, dependent: :nullify
-  has_many :cofounders, dependent: :nullify
+  has_many :ideas, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :cofounders, dependent: :destroy
   def username
     if name.present?
       name
