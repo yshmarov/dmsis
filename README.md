@@ -7,6 +7,10 @@ share. validate. discover.
 #video Will you steal my startup idea?
 
 #not allow "." in idea.name
+#characters left
+
+#similar project links
+#attachements
 
 #cards DONE
 #facebook login DONE

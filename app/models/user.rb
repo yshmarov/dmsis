@@ -7,7 +7,10 @@ class User < ApplicationRecord
   def to_s
     id
   end
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, if: :email_present
+  def email_present
+    email.present?
+  end
   has_many :ideas, dependent: :nullify
   has_many :comments, dependent: :nullify
   has_many :cofounders, dependent: :nullify
