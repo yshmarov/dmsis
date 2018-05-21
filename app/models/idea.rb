@@ -1,7 +1,7 @@
 class Idea < ApplicationRecord
 
   extend FriendlyId
-  friendly_id :name
+  friendly_id :name, use: :slugged
 
   belongs_to :user
   has_many :comments
