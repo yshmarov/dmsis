@@ -1,0 +1,14 @@
+%h1 Users
+%table.table
+  %thead
+    %tr
+      %th ID
+      %th Email
+      %th Facebook name
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.email
+        %td= user.name
+
