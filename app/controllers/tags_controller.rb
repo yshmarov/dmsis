@@ -10,8 +10,12 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    @tag.destroy
-      redirect_to tags_path, notice: 'Tag was successfully destroyed.'
+    if current_user.has_role?(:admin)
+      @tag.destroy
+        redirect_to tags_path, notice: 'Tag was successfully destroyed.'
+    else
+      redirect_to root_path, alert: 'You are not authorized to view the page.'
+    end
   end
 
   private

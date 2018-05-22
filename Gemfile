@@ -74,3 +74,5 @@ gem "font-awesome-rails"
 gem "cocoon"
 gem 'omniauth-facebook'
 gem 'friendly_id'
+gem "pundit"
+gem "rolify"

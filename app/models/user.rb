@@ -1,18 +1,30 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  rolify
+
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+
   acts_as_voter
+
   def to_s
     id
   end
+
   validates :email, uniqueness: true, if: :email_present
+
   def email_present
     email.present?
   end
+
   has_many :ideas, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy
+
+  after_create :assign_default_role
+
+  def assign_default_role
+    self.add_role(:member) if self.roles.blank?
+  end
+
   def username
     if name.present?
       name

@@ -5,10 +5,11 @@
       %th ID
       %th Email
       %th Facebook name
+      %th Roles
   %tbody
     - @users.each do |user|
       %tr
         %td= user.id
         %td= user.email
         %td= user.name
-
+        %td= user.roles.collect{|r| r.name}.to_sentence
