@@ -5,6 +5,11 @@ class IdeasController < ApplicationController
     redirect_to unrated_ideas_path
   end
 
+  def trending
+    #has the most association quantity
+    @ideas = Idea.all
+  end
+
   def cofounding
     @ideas = Idea.joins(:cofounders).where(cofounders: {user_id: current_user.id})
   end

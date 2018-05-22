@@ -25,6 +25,8 @@
       - if current_user
         %b
           %li.nav-item= link_to "New ideas: #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unrated_ideas_path, class: "nav-link"
+        /%b
+        /  %li.nav-item= link_to "Trending", trending_ideas_path, class: "nav-link"
         %b
           %li.nav-item= link_to "Top", top_ideas_path, class: "nav-link"
         %b

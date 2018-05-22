@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       put "like", to: "ideas#upvote"
       put "dislike", to: "ideas#downvote"
     end
-    get :fresh, :top, :mine, :unrated, :upvoted, :cofounding, on: :collection
+    get :fresh, :top, :mine, :unrated, :upvoted, :cofounding, :trending, on: :collection
   end
   resources :comments
   resources :cofounders
