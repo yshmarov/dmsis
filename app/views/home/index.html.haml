@@ -1,15 +1,18 @@
 /%h1
 /  %b doesmystartupideasuck.com
 /%h1 Post idea. Validate. Discover.
-%h1 Startup inspiration from the crowd
-%h3 Validate your ideas. Discover new ones. Find a team.
 .row
   .col
     .embed-responsive.embed-responsive-16by9
       %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
   .col
-    .embed-responsive.embed-responsive-16by9
-      %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
+    %h2
+      %b Startup inspiration from the crowd
+    %br
+    %h3 Validate your ideas. Discover new ones. Find a team.
+    = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
+  /  .embed-responsive.embed-responsive-16by9
+  /    %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
 .row
 /.text-center
 /  %h1 How it looks:
