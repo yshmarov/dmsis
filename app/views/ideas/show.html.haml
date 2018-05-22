@@ -44,7 +44,10 @@
             .font-weight-light.font-italic
               = time_ago_in_words(@idea.created_at)
               ago by
-              - if @idea.user_id?
+              - if @idea.user_id == current_user.id
+                %span.badge.badge-success
+                  You
+              - else
                 = @idea.user.username
 %p
 .progress{:style => "height: 13px"}
