@@ -5,4 +5,7 @@ class Tag < ApplicationRecord
   def to_s
     name
   end
+  def popular_name
+    "#{name.to_s} #{idea_tags.count.to_s}"
+  end
 end

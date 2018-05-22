@@ -43,9 +43,18 @@
   times
   %p
 %p
-Tags
-%p
-- Tag.all.each do |tag|
-  /%div{:style => "word-wrap: break-word"}
-  %span.badge.badge-default
-    = link_to tag.name, tag
+.card.container-fluid
+  %p
+  .row
+    .col
+      Top tags
+    .col
+      .text-right
+        = link_to 'all tags', tags_path
+  %p
+  .form-inline
+    - Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC').limit(7).each do |tag|
+      /%div{:style => "word-wrap: break-word"}
+      %span.badge.badge-default
+        = link_to tag.popular_name, tag
+  %p
