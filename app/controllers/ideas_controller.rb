@@ -5,6 +5,10 @@ class IdeasController < ApplicationController
     redirect_to unrated_ideas_path
   end
 
+  def upvoted
+    @ideas = Idea.where(id: current_user.find_up_voted_items.map(&:id))
+  end
+
   def unrated
     @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id)).limit(1)
   end
