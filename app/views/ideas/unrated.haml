@@ -1,9 +1,13 @@
 %br
 - if @ideas.any?
   .text-center
-    /%h1 Idea of the day
-    %h4
-      %b VOTE
+    - unless current_user.votes.any?
+      %h4 Start by voting for some ideas.
+      %h6 Be fair and ruthless.
+    - else
+      /%h1 Idea of the day
+      %h4
+        %b VOTE
   = render 'ideas/cards'
 - else
   .text-center

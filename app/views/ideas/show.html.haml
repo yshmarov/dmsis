@@ -50,11 +50,15 @@
               - else
                 = @idea.user.username
 %p
-.progress{:style => "height: 13px"}
-  .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
-    =  @idea.positive_score
-  .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
-    =  @idea.negative_score
+- if @idea.votes_for.any?
+  .progress{:style => "height: 13px"}
+    .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
+      =  @idea.positive_score
+    .progress-bar.bg-danger{:style => "width:#{@idea.negative_percent}%"}
+      =  @idea.negative_score
+- else
+  .progress{:style => "height: 13px"}
+    .progress-bar.bg-success{:style => "width: 0%"}
 %p
 .row
   .col-lg
