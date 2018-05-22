@@ -5,6 +5,10 @@ class IdeasController < ApplicationController
     redirect_to unrated_ideas_path
   end
 
+  def cofounding
+    @ideas = Idea.joins(:cofounders).where(cofounders: {user_id: current_user.id})
+  end
+
   def upvoted
     @ideas = Idea.where(id: current_user.find_up_voted_items.map(&:id))
   end
@@ -23,7 +27,6 @@ class IdeasController < ApplicationController
 
   def top
     @ideas = Idea.order(:cached_weighted_score => :desc)
-    render 'top'
   end
 
   def upvote

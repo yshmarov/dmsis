@@ -25,8 +25,7 @@
   = current_user.comments.count
   comments
   %p
-  = current_user.cofounders.count
-  I would be a cofounder
+  = link_to "#{current_user.cofounders.count} cofounding", cofounding_ideas_path
   %p
 %p
 .card.container-fluid
