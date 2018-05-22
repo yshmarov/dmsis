@@ -27,8 +27,13 @@
     .card.container
       %b= @idea.name
       = @idea.description
-      %br
       .row
+      .form-inline
+        - @idea.tags.each do |tag|
+          %span.badge.badge-default
+            = link_to tag.name, tag
+        %br
+      .row.bg-light
         .col
           = fa_icon "comments"
           = @idea.comments.count
@@ -41,12 +46,6 @@
               ago by
               - if @idea.user_id?
                 = @idea.user.username
-      %p
-    .form-inline
-      - @idea.tags.each do |tag|
-        %span.badge.badge-default
-          = link_to tag.name, tag
-        \| 
 %p
 .progress{:style => "height: 13px"}
   .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}

@@ -21,12 +21,18 @@
       .card.container
         %b= link_to idea.name, idea
         = idea.description
-        %br
         .row
+        .form-inline
+          - idea.tags.each do |tag|
+            %span.badge.badge-default
+              = link_to tag.name, tag
+          %br
+        .row.bg-light
           .col
             = link_to idea_path(idea) do
               = fa_icon "comments"
               = idea.comments.count
+            = link_to idea_path(idea) do
               = fa_icon "users"
               = idea.cofounders.count
             - if idea.cofounders.where(user_id: current_user.id).present?
@@ -39,7 +45,4 @@
                 ago by
                 - if idea.user_id?
                   = idea.user.username
-      - idea.tags.each do |tag|
-        %span.badge.badge-default
-          = link_to tag.name, tag
   %p
