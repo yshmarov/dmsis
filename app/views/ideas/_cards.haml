@@ -37,6 +37,7 @@
           = fa_icon "users"
           = idea.cofounders.count
           cofounders
+      .col.text-center
         %p
         - if idea.cofounders.where(user_id: current_user.id).present?
           %span.badge.badge-secondary
