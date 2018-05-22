@@ -23,25 +23,13 @@
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.nav.navbar-nav
       - if current_user
-        %li.nav-item
-          %a.nav-link{:href => "unrated"}
-            #white
-              /%i.fa.fa-compass
-              %b Vote
-        %li.nav-item
-          %a.nav-link{:href => "top"}
-            #white
-              /%i.fa.fa-chart-bar
-              %b Top
-        %li.nav-item
-          %a.nav-link{:href => "fresh"}
-            #white
-              %i.fa.fa-clock
-              %b Fresh
+        %b
+          %li.nav-item= link_to "Vote", unrated_ideas_path, class: "nav-link"
+        %b
+          %li.nav-item= link_to "Top", top_ideas_path, class: "nav-link"
+        %b
+          %li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
         - unless current_user.name
           %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-danger button'
       /- else
-      /  /= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-primary button'
-      /  /= link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-primary button'
       /  = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
-      /  /= link_to "Logout", destroy_user_session_path, method: :delete
