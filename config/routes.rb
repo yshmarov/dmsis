@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   end
   resources :comments
   resources :cofounders
-  resources :tags, only: :show
+  resources :tags, only: [:show, :index, :destroy]
 end

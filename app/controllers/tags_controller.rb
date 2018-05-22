@@ -1,7 +1,17 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show]
+  before_action :set_tag, only: [:show, :destroy]
+  
+  def index
+    @tags = Tag.order("name ASC")
+  end
+
   def show
     @ideas = @tag.ideas
+  end
+
+  def destroy
+    @tag.destroy
+      redirect_to tags_path, notice: 'Tag was successfully destroyed.'
   end
 
   private

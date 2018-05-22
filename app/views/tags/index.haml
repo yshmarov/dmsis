@@ -1,0 +1,16 @@
+%h1 Tags
+%table.table
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Ideas
+      %th
+  %tbody
+    - @tags.each do |tag|
+      %tr
+        %td= tag.id
+        %td= tag.name
+        %td= tag.idea_tags.count
+        %td= link_to 'delete', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
