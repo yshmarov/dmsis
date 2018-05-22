@@ -53,7 +53,7 @@
         = link_to 'all', tags_path
   %p
   .form-inline
-    - Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC').limit(7).each do |tag|
+    - Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC').limit(5).each do |tag|
       /%div{:style => "word-wrap: break-word"}
       %span.badge.badge-default
         = link_to tag.popular_name, tag
