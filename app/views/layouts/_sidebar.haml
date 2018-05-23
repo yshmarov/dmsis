@@ -15,21 +15,27 @@
       = link_to destroy_user_session_path, method: :delete do
         = fa_icon "sign-out"
   %p
-  = link_to "#{current_user.ideas.count} ideas", mine_ideas_path
+  %b= link_to "#{current_user.ideas.count} ideas", mine_ideas_path
   %p
-  = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path
+  %b= link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path
   %p
-  = current_user.votes.down.count
-  downvotes
+  %b
+    = current_user.votes.down.count
+    downvotes
   %p
-  = current_user.comments.count
-  comments
+  %b
+    = current_user.comments.count
+    comments
   %p
-  = link_to "#{current_user.cofounders.count} cofounding", cofounding_ideas_path
+  %b= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path
   %p
 %p
 .card.container-fluid
   %p
+  Join
+  = Cofounder.count
+  cofounders.
+  %br
   Discover
   = Idea.count
   ideas 

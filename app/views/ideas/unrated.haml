@@ -11,7 +11,12 @@
   = render 'ideas/cards'
 - else
   .text-center
-    %h4 You've voted for all of them!
+    %h4 
+      You've voted for all of them!
+    %p
+    %h6 
+      Here's a little rocket for you
+      = fa_icon "rocket"
     %br
     %h6 
       You can 
@@ -19,3 +24,4 @@
       yourself
     %br
     = link_to 'Top ideas', top_ideas_path, class: 'btn btn-outline-success'      
+%br
