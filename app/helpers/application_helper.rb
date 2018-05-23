@@ -6,7 +6,7 @@ module ApplicationHelper
   end
   
   def nav_link(text, path)
-    options = current_page?(path) ? { class: "nav-link bg-secondary" } : {}
+    options = current_page?(path) ? { class: "btn btn-secondary" } : { class: "btn btn" }
     content_tag(:li, options) do
       link_to text, path
     end
