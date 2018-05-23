@@ -6,7 +6,12 @@
         .font-weight-light.font-italic
           = time_ago_in_words(comment.created_at)
           by
-          = comment.user.username
+          /= comment.user.username
+          - if comment.user_id == current_user.id
+            %span.badge.badge-success
+              You
+          - else
+            = link_to comment.user.username, user_path(comment.user)
           - if comment.user_id == current_user.id
             = link_to "delete", comment, method: :delete, data: { confirm: 'Are you sure?' }
     = comment.body
