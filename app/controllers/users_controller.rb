@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  before_action :set_idea, only: [:show]
+
+  def show
+  end
+  
   def index
     if current_user.has_role?(:admin)
       @users = User.order("created_at DESC")
@@ -6,4 +11,9 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: 'Page does not exist.'
     end
   end
+
+  private
+    def set_idea
+      @user = User.find(params[:id])
+    end
 end

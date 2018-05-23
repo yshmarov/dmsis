@@ -47,5 +47,6 @@
                   %span.badge.badge-success
                     You
                 - else
-                  = idea.user.username
+                  = link_to idea.user.username, user_path(idea.user)
+                  /= idea.user.username
   %p
