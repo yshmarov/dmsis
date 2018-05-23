@@ -49,8 +49,10 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @comments = @idea.comments
     @comment = Comment.new
+    @comments = @idea.comments
+    @attachment = Attachment.new
+    @attachments = @idea.attachments
     @cofounder = Cofounder.new
     @cofounders = @idea.cofounders
     @current_user_is_a_cofounder = Cofounder.where(idea_id: @idea.id).where(user_id: current_user.id).present?

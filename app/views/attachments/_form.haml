@@ -1,0 +1,20 @@
+%button.btn.btn-primary{"data-target" => "#exampleModal2", "data-toggle" => "modal", :type => "button"}
+  Add
+#exampleModal2.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel2", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel2.modal-title Link
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        = simple_form_for(@attachment) do |f|
+          = f.error_notification
+          = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+          .form-inputs
+            = f.input :url, label: false, placeholder: 'URL'
+            = f.input :title, label: false, placeholder: 'description'
+            = f.input :status, collection: ["Similar", "Article"], as: :radio_buttons, label: 'Type'
+            = f.input :idea_id, input_html: {value: @idea.id}, as: :hidden
+          .form-actions
+            = f.submit "Add", class: 'btn btn-success'

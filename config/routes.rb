@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get :fresh, :top, :mine, :unrated, :upvoted, :cofounding, :trending, on: :collection
   end
   resources :comments
+  resources :attachments
   resources :cofounders
   resources :tags, only: [:show, :index, :destroy]
   resources :users, only: [:show, :index]

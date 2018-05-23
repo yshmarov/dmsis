@@ -4,6 +4,7 @@ class Idea < ApplicationRecord
   friendly_id :name, use: :slugged
 
   belongs_to :user
+  has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy
   has_many :idea_tags, inverse_of: :idea, dependent: :destroy
