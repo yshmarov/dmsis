@@ -23,10 +23,6 @@
     = current_user.votes.down.count
     downvotes
   %p
-  %b
-    = current_user.comments.count
-    comments
-  %p
   %b= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path
   %p
 %p
