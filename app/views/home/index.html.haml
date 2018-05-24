@@ -36,3 +36,6 @@
                 ago by
                 = link_to idea.user.username, user_path(idea.user)
   %p
+.text-center
+  = link_to "See more >>", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
+%br
