@@ -20,7 +20,8 @@ class IdeasController < ApplicationController
   end
 
   def random
-    @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id)).limit(1)
+    #@ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id)).limit(1)
+    @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id)).limit(1).order("RANDOM()")
   end
 
   def mine

@@ -1,22 +1,38 @@
 /.container-fluid
+.list-group
+  %a.list-group-item{:href => "#"}
+    %i.fa.fa-home.fa-fw
+    Home
+  %a.list-group-item{:href => "#"}
+    %i.fa.fa-book.fa-fw
+    Library
+  %a.list-group-item{:href => "#"}
+    %i.fa.fa-pencil.fa-fw
+    Applications
+  %a.list-group-item{:href => "#"}
+    %i.fa.fa-cog.fa-fw
+    Settings
+
 - @ideas.each do |idea|
   .row
     .col-md-auto
       .text-center
         - if current_user.voted_up_on? idea
-          = fa_icon "caret-up 2x"
+          = fa_icon "check", class: 'btn btn-sm btn-default'
         - unless current_user.voted_for? idea
-          = link_to like_idea_path(idea), method: :put do
-            = fa_icon "caret-up 2x"
+          = link_to "<i class='fa fa-check'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success'
+          /= link_to like_idea_path(idea), method: :put do
+          /  = fa_icon "check"
         .row
         %span.badge.badge-success
           = idea.total_score
         .row
         - unless current_user.voted_for? idea
-          = link_to dislike_idea_path(idea), method: :put do
-            = fa_icon "caret-down 2x"
+          = link_to "<i class='fa fa-ban'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger'
+          /= link_to dislike_idea_path(idea), method: :put do
+          /  = fa_icon "ban"
         - if current_user.voted_down_on? idea
-          = fa_icon "caret-down 2x"
+          = fa_icon "ban", class: 'btn btn-sm btn-default'
     .col
       .card.container
         %b= link_to idea.name, idea

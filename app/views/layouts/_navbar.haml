@@ -33,6 +33,8 @@
           = nav_link "Top", top_ideas_path
         %b
           = nav_link "Fresh", fresh_ideas_path
+        %b
+          = nav_link "Tags", tags_path
           /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
       - if current_user
         - unless current_user.name
