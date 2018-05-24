@@ -1,21 +1,38 @@
-/%h1
-/  %b doesmystartupideasuck.com
-/%h1 Post idea. Validate. Discover.
-.row
-  .col
-    .embed-responsive.embed-responsive-16by9
-      %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
-  .col
-    %h2
-      %b Startup inspiration from the crowd
-    %br
-    %h3 Validate your ideas. Discover new ones. Find a team.
-    = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
-  /  .embed-responsive.embed-responsive-16by9
-  /    %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
-.row
-/.text-center
-/  %h1 How it looks:
-/  = image_tag("doesmystartupsuck-screenshot.png", :size => "820x435", :crop => :fill, :alt => "doesmystartupsuck screenshot")
-%br
-= render 'layouts/footer'
+/.container-fluid
+- @ideas.each do |idea|
+  .row
+    .col-md-auto
+      .text-center
+        = link_to like_idea_path(idea), method: :put do
+          = fa_icon "caret-up 2x"
+        .row
+        %span.badge.badge-success
+          = idea.total_score
+        .row
+        = link_to dislike_idea_path(idea), method: :put do
+          = fa_icon "caret-down 2x"
+    .col
+      .card.container
+        %b= link_to idea.name, idea
+        = idea.description
+        .row
+        .form-inline
+          - idea.tags.each do |tag|
+            %span.badge.badge-default
+              = link_to tag.name, tag
+          %br
+        .row.bg-light
+          .col
+            = link_to idea_path(idea) do
+              = fa_icon "comments"
+              = idea.comments.count
+            = link_to idea_path(idea) do
+              = fa_icon "users"
+              = idea.cofounders.count
+          .col
+            .text-right
+              .font-weight-light.font-italic
+                = time_ago_in_words(idea.created_at)
+                ago by
+                = link_to idea.user.username, user_path(idea.user)
+  %p

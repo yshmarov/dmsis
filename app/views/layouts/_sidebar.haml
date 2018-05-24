@@ -1,57 +1,86 @@
-= link_to 'Submit new idea', new_idea_path, class: 'btn btn-success btn-block'
-%p
-.card.container-fluid
+- if current_user
+  = link_to 'Submit new idea', new_idea_path, class: 'btn btn-success btn-block'
   %p
-  /.form-inline
-  .row
-    .col-auto
-      - if current_user.image?
-        = image_tag current_user.image, size: '20x20', alt: "that's me"
-      %b= link_to current_user.username, user_path(current_user)
-    /.col
-    /  = link_to edit_user_registration_path do
-    /    = fa_icon "cog"
-    .col
-      = link_to destroy_user_session_path, method: :delete do
-        = fa_icon "sign-out"
+  .card.container-fluid
+    %p
+    /.form-inline
+    .row
+      .col-auto
+        - if current_user.image?
+          = image_tag current_user.image, size: '20x20', alt: "that's me"
+        %b= link_to current_user.username, user_path(current_user)
+      /.col
+      /  = link_to edit_user_registration_path do
+      /    = fa_icon "cog"
+      .col
+        = link_to destroy_user_session_path, method: :delete do
+          = fa_icon "sign-out"
+    %p
+    %b= link_to "#{current_user.ideas.count} ideas", mine_ideas_path
+    %p
+    %b= link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path
+    %p
+    %b
+      = current_user.votes.down.count
+      downvotes
+    %p
+    %b= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path
+    %p
   %p
-  %b= link_to "#{current_user.ideas.count} ideas", mine_ideas_path
+  .card.container-fluid
+    %p
+    Discover
+    = Idea.count
+    ideas 
+    %br
+    validated by 
+    = User.count
+    users
+    = ActsAsVotable::Vote.count
+    times
+    %p
   %p
-  %b= link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path
-  %p
-  %b
-    = current_user.votes.down.count
-    downvotes
-  %p
-  %b= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path
-  %p
-%p
-.card.container-fluid
-  %p
-  Discover
-  = Idea.count
-  ideas 
+  .card.container-fluid
+    %p
+    .row
+      .col
+        Top tags
+      .col
+        .text-right
+          = link_to 'all', tags_path
+    %p
+    .form-inline
+      - Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC').limit(5).each do |tag|
+        /%div{:style => "word-wrap: break-word"}
+        %span.badge.badge-default
+          = link_to tag.popular_name, tag
+    %p
   %br
-  validated by 
-  = User.count
-  users
-  = ActsAsVotable::Vote.count
-  times
-  %p
-%p
-.card.container-fluid
-  %p
-  .row
-    .col
-      Top tags
-    .col
-      .text-right
-        = link_to 'all', tags_path
-  %p
-  .form-inline
-    - Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC').limit(5).each do |tag|
-      /%div{:style => "word-wrap: break-word"}
-      %span.badge.badge-default
-        = link_to tag.popular_name, tag
-  %p
+- else
+  .card.container
+    .row
+    %h4
+      %b Startup inspiration from the crowd
+    .embed-responsive.embed-responsive-16by9
+      %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
+    %p
+    %h5 
+      Validate your ideas.
+      %br
+      Discover new ones.
+      %br
+      Find a team.
+    .text-center
+      = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
+      %p
+      = link_to 'Privacy Policy', privacy_policy_path
+      %br
+      = link_to 'Terms of service', terms_of_service_path
+      %br
+      = link_to 'Contact', contacts_path
+      .footer-copyright.py-3.text-center
+        © #{Time.now.year} Copyright:
+        %a{:href => "https://www.doesmystartupideasuck.com/"} doesmystartupideasuck.com
+        %br
+        Last updated on #{Time.now.strftime('%F')}
 %br

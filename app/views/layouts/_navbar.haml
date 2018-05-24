@@ -18,22 +18,23 @@
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.nav.navbar-nav
+      = nav_bar do
+        /%li.nav-item= nav_link "Offices", random_ideas_path
+        /%span.badge.bg-light
+        /  = Idea.where.not(id: current_user.find_voted_items.map(&:id)).count
+        /%b
+        /  %li= link_to "<i class='fa fa-dashboard'></i> New ideas".html_safe, root_path, class: 'nav-link'
+        %b
+          = nav_link "Random", random_ideas_path
+          /- if current_user
+        /%b
+        /  %li.nav-item= link_to "Trending", trending_ideas_path, class: "nav-link"
+        %b
+          = nav_link "Top", top_ideas_path
+        %b
+          = nav_link "Fresh", fresh_ideas_path
+          /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
       - if current_user
-        = nav_bar do
-          /%li.nav-item= nav_link "Offices", unrated_ideas_path
-          /%span.badge.bg-light
-          /  = Idea.where.not(id: current_user.find_voted_items.map(&:id)).count
-          /%b
-          /  %li= link_to "<i class='fa fa-dashboard'></i> New ideas".html_safe, root_path, class: 'nav-link'
-          %b
-            = nav_link "New ideas: #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unrated_ideas_path
-          /%b
-          /  %li.nav-item= link_to "Trending", trending_ideas_path, class: "nav-link"
-          %b
-            = nav_link "Top", top_ideas_path
-          %b
-            = nav_link "Fresh", fresh_ideas_path
-            /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
         - unless current_user.name
           %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-danger button'
       /- else

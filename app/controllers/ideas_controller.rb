@@ -2,7 +2,8 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
-    redirect_to unrated_ideas_path
+    @ideas = Idea.all
+    redirect_to random_ideas_path
   end
 
   def trending
@@ -18,7 +19,7 @@ class IdeasController < ApplicationController
     @ideas = Idea.where(id: current_user.find_up_voted_items.map(&:id))
   end
 
-  def unrated
+  def random
     @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id)).limit(1)
   end
 

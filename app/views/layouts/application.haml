@@ -18,11 +18,5 @@
         .col-lg
           = render 'layouts/messages'
           = yield
-        - if current_user
-          .col-lg-3
-            = render 'layouts/sidebar'
-          /- else
-          /  = link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success'
-          /  = link_to 'Sign up', new_user_registration_path, class: 'btn btn-outline-success'
-          /  %p
-          /  = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
+        .col-lg-3
+          = render 'layouts/sidebar'
