@@ -29,3 +29,15 @@
       %br
       %br
 %br
+- if current_user.has_role?(:admin)
+  .jumbotron
+    Upvoted
+    %br
+    - Idea.where(id: @user.find_up_voted_items.map(&:id)).each do |idea|
+      %br= link_to idea.name, idea_path(idea)
+    %br
+    Downvoted
+    %br
+    - Idea.where(id: @user.find_down_voted_items.map(&:id)).each do |idea|
+      %br= link_to idea.name, idea_path(idea)
+  %br

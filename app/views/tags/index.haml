@@ -1,3 +1,7 @@
+- @tags.each do |tag|
+  %span.badge.badge-secondary
+    = link_to tag.popular_name, tag_path(tag), class: 'white-text'
+%br
 - if current_user.has_role?(:admin)
   %h1 Tags
   %table.table
@@ -14,7 +18,3 @@
           %td= tag.name
           %td= tag.idea_tags.count
           %td= link_to 'delete', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
-- else
-  - @tags.each do |tag|
-    %span.badge.badge-secondary
-      = link_to tag.popular_name, tag_path(tag), class: 'white-text'

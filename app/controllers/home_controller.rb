@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!, :only => [ :index, :privacy_policy, :terms_of_service, :contacts ]
 
   def index
-    @ideas = Idea.order("created_at DESC").limit(3)
+    @ideas = Idea.order("created_at DESC").limit(5)
     if current_user
       redirect_to random_ideas_path
     end
