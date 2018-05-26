@@ -6,50 +6,46 @@
   - unless @idea.associations?
     = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %p
-.row
-  .col-1
-    .text-center
-      - if current_user.voted_up_on? @idea
-        = fa_icon "thumbs-up"
-      - unless current_user.voted_for? @idea
-        = link_to like_idea_path(@idea), method: :put do
-          = fa_icon "thumbs-up"
-      .row
-      %span.badge.badge-success
-        = @idea.total_score
-      .row
-      - unless current_user.voted_for? @idea
-        = link_to dislike_idea_path(@idea), method: :put do
-          = fa_icon "thumbs-down"
-      - if current_user.voted_down_on? @idea
-        = fa_icon "thumbs-down"
-  .col
-    .card.container
-      %b= @idea.name
-      = @idea.description
-      .row
-      .form-inline
-        - @idea.tags.each do |tag|
-          %span.badge.badge-default
-            = link_to tag.name, tag
-        %br
-      .row.bg-light
-        .col
-          = fa_icon "comments"
-          = @idea.comments.count
-          = fa_icon "users"
-          = @idea.cofounders.count
-        .col
-          .text-right
-            .font-weight-light.font-italic
-              = time_ago_in_words(@idea.created_at)
-              ago by
-              - if @idea.user_id == current_user.id
-                %span.badge.badge-success
-                  You
-              - else
-                = link_to @idea.user.username, user_path(@idea.user)
-                /= @idea.user.username
+.card.container
+  %b= @idea.name
+  = @idea.description
+  .row
+  .form-inline
+    - @idea.tags.each do |tag|
+      %span.badge.badge-default
+        = link_to tag.name, tag
+    %br
+  .row.bg-light
+    .col
+      = fa_icon "comments"
+      = @idea.comments.count
+      = fa_icon "users"
+      = @idea.cofounders.count
+    .col
+      .text-right
+        .font-weight-light.font-italic
+          = time_ago_in_words(@idea.created_at)
+          ago by
+          - if @idea.user_id == current_user.id
+            %span.badge.badge-success
+              You
+          - else
+            = link_to @idea.user.username, user_path(@idea.user)
+            /= @idea.user.username
+%br
+- if current_user.voted_up_on? @idea
+  = fa_icon "thumbs-up"
+- unless current_user.voted_for? @idea
+  = link_to like_idea_path(@idea), method: :put do
+    = fa_icon "thumbs-up", class: 'btn btn-sm btn-outline-success rounded-circle'
+%span.badge.badge-success
+  = @idea.total_score
+- unless current_user.voted_for? @idea
+  = link_to dislike_idea_path(@idea), method: :put do
+    = fa_icon "thumbs-down", class: 'btn btn-sm btn-outline-danger rounded-circle'
+- if current_user.voted_down_on? @idea
+  = fa_icon "thumbs-down"
+
 
 %p
 - if @idea.votes_for.any?

@@ -1,25 +1,15 @@
 /.container-fluid
 - @ideas.each do |idea|
   .text-center
-    - if current_user.voted_up_on? idea
-      = far_icon "thumbs-up 3x"
-      UPVOTE
     - unless current_user.voted_for? idea
-      = link_to "<i class='fa fa-thumbs-up'></i> UPVOTE".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-outline-success'
-      /= link_to like_idea_path(idea), method: :put do
-      /  = fa_icon "thumbs-up 3x"
-      /  UPVOTE
-    /.row
-    /%h3
-    /  %span.badge.badge-success
-    /    = idea.total_score
-    /.row
+      = link_to "<i class='fa fa-thumbs-up'></i> UPVOTE".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-outline-success rounded-circle'
+    /%span.badge.badge-secondary
+    /  vote to see rating
+    /  /= idea.total_score
     - unless current_user.voted_for? idea
-      = link_to "<i class='fa fa-thumbs-down'></i> DOWN".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-outline-danger'
-      /= link_to dislike_idea_path(idea), method: :put do
-      /  = fa_icon "thumbs-down 3x"
-    - if current_user.voted_down_on? idea
-      = fa_icon "thumbs-down 3x"
+      = link_to "<i class='fa fa-thumbs-down'></i> DOWN".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-outline-danger rounded-circle'
+    /.pull-right
+    /  = link_to 'Skip', random_ideas_path, class: 'btn btn-secondary rounded-circle'
     %p
   .card.container
     %b= link_to idea.name, idea
