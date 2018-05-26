@@ -8,7 +8,7 @@
 %p
 .card.container
   %b= @idea.name
-  = @idea.description
+  = simple_format(@idea.description)
   .row
   .form-inline
     - @idea.tags.each do |tag|
