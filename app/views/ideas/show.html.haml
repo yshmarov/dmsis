@@ -1,8 +1,8 @@
 /%p#notice= notice
 /.text-right
 - if @idea.user == current_user
-  = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
-  /- unless @idea.votes_for.size > 0 || @idea.comments.any? || @idea.cofounders.any?
+  - if @idea.created_at > Time.now - 24.hours
+    = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
   - unless @idea.associations?
     = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %p
