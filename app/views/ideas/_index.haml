@@ -3,21 +3,21 @@
     .col-md-auto
       .text-center
         - if current_user.voted_up_on? idea
-          = fa_icon "check", class: 'btn btn-sm btn-default'
+          = fa_icon "thumbs-up", class: 'btn btn-sm btn-default'
         - unless current_user.voted_for? idea
-          = link_to "<i class='fa fa-check'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success'
+          = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success'
           /= link_to like_idea_path(idea), method: :put do
-          /  = fa_icon "check"
+          /  = fa_icon "thumbs-up"
         .row
         %span.badge.badge-success
           = idea.total_score
         .row
         - unless current_user.voted_for? idea
-          = link_to "<i class='fa fa-ban'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger'
+          = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger'
           /= link_to dislike_idea_path(idea), method: :put do
-          /  = fa_icon "ban"
+          /  = fa_icon "thumbs-down"
         - if current_user.voted_down_on? idea
-          = fa_icon "ban", class: 'btn btn-sm btn-default'
+          = fa_icon "thumbs-down", class: 'btn btn-sm btn-default'
     .col
       .card.container
         %b= link_to idea.name, idea

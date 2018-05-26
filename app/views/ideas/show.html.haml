@@ -10,19 +10,19 @@
   .col-1
     .text-center
       - if current_user.voted_up_on? @idea
-        = fa_icon "caret-up 2x"
+        = fa_icon "thumbs-up"
       - unless current_user.voted_for? @idea
         = link_to like_idea_path(@idea), method: :put do
-          = fa_icon "caret-up 2x"
+          = fa_icon "thumbs-up"
       .row
       %span.badge.badge-success
         = @idea.total_score
       .row
       - unless current_user.voted_for? @idea
         = link_to dislike_idea_path(@idea), method: :put do
-          = fa_icon "caret-down 2x"
+          = fa_icon "thumbs-down"
       - if current_user.voted_down_on? @idea
-        = fa_icon "caret-down 2x"
+        = fa_icon "thumbs-down"
   .col
     .card.container
       %b= @idea.name
