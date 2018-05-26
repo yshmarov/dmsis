@@ -9,7 +9,7 @@
           /= link_to like_idea_path(idea), method: :put do
           /  = fa_icon "thumbs-up"
         .row
-        %span.badge.badge-success
+        %span.badge.badge-success.btn-block
           = idea.total_score
         .row
         - unless current_user.voted_for? idea
