@@ -1,17 +1,20 @@
 /.container-fluid
 - @ideas.each do |idea|
-  .text-center
-    - unless current_user.voted_for? idea
-      = link_to "<i class='fa fa-thumbs-up'></i> UPVOTE".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-outline-success rounded-circle'
-    /%span.badge.badge-secondary
-    /  vote to see rating
-    /  /= idea.total_score
-    - unless current_user.voted_for? idea
-      = link_to "<i class='fa fa-thumbs-down'></i> DOWN".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-outline-danger rounded-circle'
-    .pull-right
-      = link_to 'Skip for now', random_ideas_path, class: 'btn btn-secondary rounded-circle'
-    %p
   .card.container
+    .row.bg-light
+      .container
+        %p
+        .text-center
+          - unless current_user.voted_for? idea
+            = link_to "<i class='fa fa-thumbs-up'></i> UPVOTE".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-outline-success rounded-circle'
+          /%span.badge.badge-secondary
+          /  vote to see rating
+          /  /= idea.total_score
+          - unless current_user.voted_for? idea
+            = link_to "<i class='fa fa-thumbs-down'></i> DOWN".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-outline-danger rounded-circle'
+          .pull-right
+            = link_to 'Skip for now', random_ideas_path, class: 'btn btn-secondary rounded-circle'
+          %p
     %b= link_to idea.name, idea
     = simple_format(idea.description)
     .row

@@ -5,7 +5,8 @@
 
   .form-inputs
     = f.input :name, autofocus: true, maxlength: 255, placeholder: 'Title of the idea'
-    = f.input :description, maxlength: 10000, placeholder: 'What problem do you want to solve? What solution do you suggest?'
+    %div{:style => "min-height: 100%"}
+    = f.input :description, maxlength: 10000, placeholder: 'What problem do you want to solve? What solution do you suggest?', :input_html => {:rows => 8}
     /= f.association :user
     %h4 Tags
     #tags.tab-pane
