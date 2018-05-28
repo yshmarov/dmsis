@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
     @ideas = Idea.order("created_at DESC").limit(5)
     if current_user
-      redirect_to random_ideas_path
+      redirect_to top_ideas_path
     end
   end
 

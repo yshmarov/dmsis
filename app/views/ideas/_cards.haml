@@ -1,4 +1,30 @@
-/.container-fluid
+/- if @ideas.any?
+/  .text-center
+/    - unless current_user.votes.any?
+/      %h4 Start by voting for some ideas.
+/      %h6 Be fair and ruthless.
+/    /- else
+/    /  /%h1 Idea of the day
+/    /  %h4
+/    /    %b VOTE
+/  = render 'ideas/cards'
+/- else
+/  .text-center
+/    %h4 
+/      You've voted for all of them!
+/    %p
+/    %h6 
+/      Here's a little rocket for you
+/      = fa_icon "rocket"
+/    %br
+/    %h6 
+/      You can 
+/      = link_to 'add a new idea', new_idea_path
+/      yourself
+/    %br
+/    = link_to 'Top ideas', top_ideas_path, class: 'btn btn-outline-success'      
+/%br
+
 - @ideas.each do |idea|
   .card.container
     .row.bg-light
