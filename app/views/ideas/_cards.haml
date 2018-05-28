@@ -4,17 +4,17 @@
     .row.bg-light
       .container
         %p
-        .text-center
-          - unless current_user.voted_for? idea
-            = link_to "<i class='fa fa-thumbs-up'></i> UPVOTE".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-outline-success rounded-circle'
-          /%span.badge.badge-secondary
-          /  vote to see rating
-          /  /= idea.total_score
-          - unless current_user.voted_for? idea
-            = link_to "<i class='fa fa-thumbs-down'></i> DOWN".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-outline-danger rounded-circle'
-          .pull-right
-            = link_to 'Skip for now', random_ideas_path, class: 'btn btn-secondary rounded-circle'
-          %p
+        .text-left
+          %h5
+            - unless current_user.voted_for? idea
+              = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-outline-success rounded-circle'
+              %span.badge.badge-secondary
+                = idea.total_score
+            - unless current_user.voted_for? idea
+              = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-outline-danger rounded-circle'
+        /.pull-right
+        /  = link_to 'Skip for now', random_ideas_path, class: 'btn btn-secondary rounded-circle'
+        %p
     %b= link_to idea.name, idea
     = simple_format(idea.description)
     .row
@@ -34,23 +34,14 @@
           = fa_icon "users"
           = idea.cofounders.count
           cofounders
-      .col.text-center
-        %p
-        - if idea.cofounders.where(user_id: current_user.id).present?
-          %span.badge.badge-secondary
-            You've applied!
-        - else
-          = link_to 'I wanna do this!', idea_path(idea), class: 'btn btn-primary'
-        %p
-      .col
-        .text-right
-          .font-weight-light.font-italic
-            = time_ago_in_words(idea.created_at)
-            ago by
-            - if idea.user_id == current_user.id
-              %span.badge.badge-success
-                You
-            - else
-              = link_to idea.user.username, user_path(idea.user)
-              /= idea.user.username
+      .col.text-right
+        .font-weight-light.font-italic
+          - if idea.user_id == current_user.id
+            %span.badge.badge-success
+              You
+          - else
+            = link_to idea.user.username, user_path(idea.user)
+          %br
+          = time_ago_in_words(idea.created_at)
+          ago by
   %p

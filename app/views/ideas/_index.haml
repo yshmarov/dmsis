@@ -2,22 +2,26 @@
   .row
     .col-md-auto
       .text-center
-        - if current_user.voted_up_on? idea
-          = fa_icon "thumbs-up", class: 'btn btn-sm btn-default'
-        - unless current_user.voted_for? idea
-          = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
-          /= link_to like_idea_path(idea), method: :put do
-          /  = fa_icon "thumbs-up"
-        .row
-        %span.badge.badge-success.btn-block
-          = idea.total_score
-        .row
-        - unless current_user.voted_for? idea
-          = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger rounded-circle'
-          /= link_to dislike_idea_path(idea), method: :put do
-          /  = fa_icon "thumbs-down"
-        - if current_user.voted_down_on? idea
-          = fa_icon "thumbs-down", class: 'btn btn-sm btn-default'
+        - if current_user
+          - if current_user.voted_up_on? idea
+            = fa_icon "thumbs-up", class: 'btn btn-sm btn-default'
+          - unless current_user.voted_for? idea
+            = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
+          .row
+          %span.badge.badge-secondary.btn-block
+            = idea.total_score
+          .row
+          - unless current_user.voted_for? idea
+            = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger rounded-circle'
+          - if current_user.voted_down_on? idea
+            = fa_icon "thumbs-down", class: 'btn btn-sm btn-default'
+        - else
+          = fa_icon "thumbs-up", class: 'btn btn-sm btn-outline-success rounded-circle'
+          .row
+          %span.badge.badge-secondary.btn-block
+            = idea.total_score
+          .row
+          = fa_icon "thumbs-down", class: 'btn btn-sm btn-outline-danger rounded-circle'
     .col
       .card.container
         %b= link_to idea.name, idea
@@ -36,18 +40,20 @@
             = link_to idea_path(idea) do
               = fa_icon "users"
               = idea.cofounders.count
-            - if idea.cofounders.where(user_id: current_user.id).present?
-              %span.badge.badge-secondary
-                You've applied!
+            - if current_user
+              - if idea.cofounders.where(user_id: current_user.id).present?
+                %span.badge.badge-secondary
+                  You've applied!
           .col
             .text-right
               .font-weight-light.font-italic
                 = time_ago_in_words(idea.created_at)
                 ago by
-                - if idea.user_id == current_user.id
-                  %span.badge.badge-success
-                    You
-                - else
-                  = link_to idea.user.username, user_path(idea.user)
-                  /= idea.user.username
+                - if current_user
+                  - if idea.user_id == current_user.id
+                    %span.badge.badge-success
+                      You
+                  - else
+                    = link_to idea.user.username, user_path(idea.user)
+                    /= idea.user.username
   %p
