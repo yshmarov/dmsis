@@ -4,17 +4,18 @@
       .text-center
         - if current_user
           - if current_user.voted_up_on? idea
-            = fa_icon "thumbs-up", class: 'btn btn-sm btn-default'
+            = fa_icon "thumbs-up", class: 'btn btn-sm btn-default', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
           - unless current_user.voted_for? idea
             = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
           .row
-          %span.badge.badge-secondary.btn-block
+          /%span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes", :type => "button"}
+          %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "all upvotes - downvotes"}
             = idea.total_score
           .row
           - unless current_user.voted_for? idea
             = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger rounded-circle'
           - if current_user.voted_down_on? idea
-            = fa_icon "thumbs-down", class: 'btn btn-sm btn-default'
+            = fa_icon "thumbs-down", class: 'btn btn-sm btn-default', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already downvoted"
         - else
           = fa_icon "thumbs-up", class: 'btn btn-sm btn-outline-success rounded-circle'
           .row
