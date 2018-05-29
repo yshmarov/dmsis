@@ -1,4 +1,12 @@
+- content_for :title do
+  = @tag.ideas.count
+  = @tag.name
+  startup ideas
+
+
 .text-center
-  %h1
+  %h3
+    = @tag.ideas.count
     = @tag.name
+    ideas
 = render 'ideas/index'

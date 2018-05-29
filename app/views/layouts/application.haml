@@ -4,7 +4,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title 
-      1000+ startup ideas from the crowd
+      = content_for?(:title) ? yield(:title) : "1000+ startup ideas from the crowd"
     = favicon_link_tag 'doesmystartupideasuck-logo.png'
     %meta{:content => "#{content_for?(:description) ? yield(:description) : "Doesmystartupideasuck"}", :name => "description"}/
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
@@ -17,6 +17,11 @@
       .row
         .col-lg
           = render 'layouts/messages'
+          - unless current_user
+            %div{:class => "alert alert-warning", :role => "alert"}
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+              Sign in to vote and see more
+              /Sign in to vote, join idea discussion, or become a cofounder
           = yield
         .col-lg-3
           = render 'layouts/sidebar'
