@@ -1,6 +1,6 @@
 - @tags.each do |tag|
   %span.badge.badge-secondary
-    = link_to tag.popular_name, tag_path(tag), class: 'white-text'
+    = link_to tag.popular_name, tag_path(tag), class: 'text-light'
 %br
 - if current_user.has_role?(:admin)
   %h1 Tags

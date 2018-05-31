@@ -19,27 +19,20 @@
         /  %span.badge.badge-light 9
         /  %span.sr-only unread messages
 
-        /%b
         /  %li= link_to "<i class='fa fa-dashboard'></i> New ideas".html_safe, root_path, class: 'nav-link'
-        %b
-          - if current_user
-            = nav_link "Unvoted #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unvoted_ideas_path
-          - else
-            = nav_link "Unvoted", unvoted_ideas_path
-        %b
-          = nav_link "Random", random_ideas_path
-          /- if current_user
-        /%b
+        - if current_user
+          = nav_link "Unvoted #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unvoted_ideas_path
+        - else
+          = nav_link "Unvoted", unvoted_ideas_path
+        = nav_link "Random", random_ideas_path
+        /- if current_user
         /  %li.nav-item= link_to "Trending", trending_ideas_path, class: "nav-link"
-        %b
-          = nav_link "Top", top_ideas_path
-        %b
-          = nav_link "Fresh", fresh_ideas_path
-        %b
-          = nav_link "Tags", tags_path
-          /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
+        = nav_link "Top", top_ideas_path
+        = nav_link "Fresh", fresh_ideas_path
+        = nav_link "Tags", tags_path
+        /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
       - if current_user
         - unless current_user.name
-          %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
+          %li= link_to "Link your Facebook account", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
       - else
-        = link_to "Sign in with F-book", user_facebook_omniauth_authorize_path, class: 'btn btn-primary text-light'
+        = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary text-light'

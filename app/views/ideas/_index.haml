@@ -24,38 +24,41 @@
           .row
           = fa_icon "thumbs-down", class: 'btn btn-sm btn-outline-danger rounded-circle'
     .col
-      .card.container
-        %b= link_to idea.name, idea
-        = simple_format(idea.description)
-        .row
-        .form-inline
-          - idea.tags.each do |tag|
-            %span.badge.badge-default
-              = link_to tag.name, tag
-          %br
-        .row.bg-light
-          .col
-            = link_to idea_path(idea) do
-              = fa_icon "comments"
-              = idea.comments.count
-            = link_to idea_path(idea) do
-              = fa_icon "users"
-              = idea.cofounders.count
-            - if current_user
-              - if idea.cofounders.where(user_id: current_user.id).present?
-                %span.badge.badge-secondary
-                  You've applied!
-          .col
-            .text-right
-              .font-weight-light.font-italic
-                = time_ago_in_words(idea.created_at)
-                ago by
-                - if current_user
-                  - if idea.user_id == current_user.id
-                    %span.badge.badge-success
-                      You
+      .card
+        %h5.card-header.bg-light
+          = link_to idea.name, idea, class: 'text-dark'
+        .card-body
+          = simple_format(idea.description)
+          .row
+          .form-inline
+            - idea.tags.each do |tag|
+              %span.badge.badge-default
+                = link_to tag.name, tag
+            %br
+        .container
+          .row.bg-light
+            .col
+              = link_to idea_path(idea) do
+                = fa_icon "comments"
+                = idea.comments.count
+              = link_to idea_path(idea) do
+                = fa_icon "users"
+                = idea.cofounders.count
+              - if current_user
+                - if idea.cofounders.where(user_id: current_user.id).present?
+                  %span.badge.badge-secondary
+                    You've applied!
+            .col
+              .text-right
+                .font-weight-light.font-italic
+                  = time_ago_in_words(idea.created_at)
+                  ago by
+                  - if current_user
+                    - if idea.user_id == current_user.id
+                      %span.badge.badge-success
+                        You
+                    - else
+                      = link_to idea.user.username, user_path(idea.user)
                   - else
                     = link_to idea.user.username, user_path(idea.user)
-                - else
-                  = link_to idea.user.username, user_path(idea.user)
   %p

@@ -2,7 +2,8 @@ class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :destroy]
   
   def index
-    @tags = Tag.order("name ASC")
+    #@tags = Tag.order("name ASC")
+    @tags = Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC')
   end
 
   def show
