@@ -1,15 +1,26 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-success.sticky-top.navbar-expand-sm
+
+  /%a.navbar-brand{:href => "#"}
+  /  %img.d-inline-block.align-top{:alt => "", :height => "30", :src => "/docs/4.1/assets/brand/bootstrap-solid.svg", :width => "30"}/
+  /  Bootstrap
+
   %a.navbar-brand{:href => "/"}
     .white-text
+      = image_tag "doesmystartupideasuck-logo-alt.png", size: "25x25", class: "mx-auto d-inline align-top", :alt => "avatar"
       /= image_tag 'doesmystartupideasuck-logo.png', size: '25x25'
-      = fa_icon "rocket"
-      doesmystartupideasuck
-      = fa_icon "rocket"
-  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+      /= image_tag 'doesmystartupideasuck-logo-alt.png', size: '25x25'
+      /= image_tag 'askdemos-logo-1.png', size: '30x30'
+      /= fa_icon "trash"
+      Ideabucket
+  %button.navbar-toggler.bg-light{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.nav.navbar-nav
       = nav_bar do
+        /%form.form-inline.my-2.my-lg-0
+        /  %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+        /  %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
+
         /%li.nav-item= nav_link "Offices", random_ideas_path
         /%span.badge.bg-light
         /  = Idea.where.not(id: current_user.find_voted_items.map(&:id)).count
