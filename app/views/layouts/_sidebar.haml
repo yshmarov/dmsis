@@ -20,10 +20,10 @@
     %p
     %b= link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path
     %p
-    %b
-      = current_user.votes.down.count
-      downvotes
-    %p
+    /%b
+    /  = current_user.votes.down.count
+    /  downvotes
+    /%p
     %b= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path
     %p
   %p
@@ -57,30 +57,28 @@
     %p
   %br
 - else
-  .card.container
-    .row
-    %h4
-      %b Startup inspiration from the crowd
+  .card
+    %h5.card-header.bg-success.white-text Startup inspiration from the crowd
     .embed-responsive.embed-responsive-16by9
-      %iframe{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
-    %p
-    %h5 
-      Validate your ideas.
-      %br
-      Discover new ones.
-      %br
-      Find a team.
-    .text-center
-      = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
-      %p
-      = link_to 'Privacy Policy', privacy_policy_path
-      %br
-      = link_to 'Terms of service', terms_of_service_path
-      %br
-      = link_to 'Contact', contacts_path
-      .footer-copyright.py-3.text-center
-        © #{Time.now.year} Copyright:
-        %a{:href => "https://www.doesmystartupideasuck.com/"} doesmystartupideasuck.com
+      %iframe.embed-responsive-item{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
+    .card-body
+      %h5 
+        Validate your ideas.
         %br
-        Last updated on #{Time.now.strftime('%F')}
+        Discover new ones.
+        %br
+        Find a team.
+      .text-center
+        = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
+        %p
+        = link_to 'Privacy Policy', privacy_policy_path
+        %br
+        = link_to 'Terms of service', terms_of_service_path
+        %br
+        = link_to 'Contact', contacts_path
+        .footer-copyright.py-3.text-center
+          © #{Time.now.year} Copyright:
+          %a{:href => "https://www.doesmystartupideasuck.com/"} doesmystartupideasuck.com
+          %br
+          Last updated on #{Time.now.strftime('%F')}
 %br

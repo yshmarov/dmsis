@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-success
+%nav.navbar.navbar-expand-lg.navbar-light.bg-success.sticky-top.navbar-expand-sm
   %a.navbar-brand{:href => "/"}
     .white-text
       /= image_tag 'doesmystartupideasuck-logo.png', size: '25x25'
@@ -13,6 +13,12 @@
         /%li.nav-item= nav_link "Offices", random_ideas_path
         /%span.badge.bg-light
         /  = Idea.where.not(id: current_user.find_voted_items.map(&:id)).count
+
+        /%button.btn.btn-primary{:type => "button"}
+        /  Profile
+        /  %span.badge.badge-light 9
+        /  %span.sr-only unread messages
+
         /%b
         /  %li= link_to "<i class='fa fa-dashboard'></i> New ideas".html_safe, root_path, class: 'nav-link'
         %b
@@ -34,6 +40,6 @@
           /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
       - if current_user
         - unless current_user.name
-          %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-danger button'
-      /- else
-      /  = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary button'
+          %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
+      - else
+        = link_to "Sign in with F-book", user_facebook_omniauth_authorize_path, class: 'btn btn-primary text-light'

@@ -2,7 +2,7 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   def index
-    redirect_to fresh_ideas_path
+    redirect_to top_ideas_path
   end
 
   def trending

@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_idea, only: [:show]
 
   def show
+    #@ideas = Idea.where(user_id: @user.id)
+    @ideas = @user.ideas
   end
   
   def index
