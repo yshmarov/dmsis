@@ -76,3 +76,4 @@ gem 'omniauth-facebook'
 gem 'friendly_id'
 gem "pundit"
 gem "rolify"
+gem 'ransack'

@@ -3,7 +3,9 @@ class TagsController < ApplicationController
   
   def index
     #@tags = Tag.order("name ASC")
-    @tags = Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC')
+    #@tags = Tag.joins(:idea_tags).group('tags.id').order('count(tags.id) DESC')
+    @q = Tag.ransack(params[:q])
+    @tags = @q.result(distinct: true)
   end
 
   def show

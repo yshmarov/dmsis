@@ -1,10 +1,12 @@
-= form_tag users_path, method: :get do
-  = text_field_tag 'term', params[:term], placeholder: "Enter user's name or surname"
-  = submit_tag 'Search!'
-
+= search_form_for @q, url: tags_path do |f|
+  .form-inline
+    = f.text_field :name_cont, class: "form-control", autofocus: true
+    = button_tag "", type: 'submit', class: "btn btn-success fa fa-search", title: 'Search', 'data-toggle' => 'tooltip', 'data-placement' => 'top'
+    = link_to '', tags_path, class: "form-control fa fa-refresh", title: 'Refresh', 'data-toggle' => 'tooltip', 'data-placement' => 'top'
+%br
 - @tags.each do |tag|
-  %span.badge.badge-secondary
-    = link_to tag.popular_name, tag_path(tag), class: 'text-light'
+  %span.badge.badge-default.border
+    = link_to tag.popular_name, tag_path(tag), class: 'text-dark'
 %br
 - if current_user.has_role?(:admin)
   %h1 Tags
@@ -22,3 +24,4 @@
           %td= tag.name
           %td= tag.idea_tags.count
           %td= link_to 'delete', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%br
