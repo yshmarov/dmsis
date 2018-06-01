@@ -41,7 +41,7 @@
         = nav_link "Top", top_ideas_path
         = nav_link "Fresh", fresh_ideas_path
         = nav_link "Tags", tags_path
-        .d-lg-none.d-xl-block
+        .d-lg-none
           - if current_user
             = link_to 'Submit new idea', new_idea_path, class: 'btn btn-light btn-block'
             - if current_user.image?
