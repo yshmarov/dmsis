@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to idea_path(@comment.idea), notice: 'Comment was successfully created.'
     else
-      redirect_to idea_path(@comment.idea), alert: 'No text in comment.'
+      redirect_to idea_path(@comment.idea), alert: 'No text in comment. Try again!'
       #render :new
     end
   end

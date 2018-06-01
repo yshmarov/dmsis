@@ -42,7 +42,7 @@ class Idea < ApplicationRecord
   end
 
   def associations?
-    votes_for.size > 0 || comments.any? || cofounders.any?
+    votes_for.size > 0 || comments.any? || cofounders.any? || attachments.any?
   end
 
   private

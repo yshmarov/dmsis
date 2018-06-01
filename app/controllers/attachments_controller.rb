@@ -11,7 +11,7 @@ class AttachmentsController < ApplicationController
     if @attachment.save
       redirect_to idea_path(@attachment.idea), notice: 'Attachment was successfully created.'
     else
-      render :new
+      redirect_to idea_path(@attachment.idea), alert: 'Not all fields filled. Try again!'
     end
   end
 
