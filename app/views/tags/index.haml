@@ -1,7 +1,7 @@
 %form.form-inline.my-2.my-lg-0
   = search_form_for @q, url: tags_path do |f|
     .mr-sm-2
-      = f.text_field :name_cont, class: 'form-control', placeholder: 'Tag name', autofocus: true
+      = f.text_field :name_cont, class: 'form-control', placeholder: 'Find Tag', autofocus: true
     %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
     .my-2.my-sm-0
       = link_to "<i class='fa fa-refresh'></i>".html_safe, tags_path, class: 'btn btn-outline-secondary'

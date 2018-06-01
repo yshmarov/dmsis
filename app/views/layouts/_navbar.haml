@@ -41,6 +41,17 @@
         = nav_link "Top", top_ideas_path
         = nav_link "Fresh", fresh_ideas_path
         = nav_link "Tags", tags_path
+        .d-lg-none.d-xl-block
+          - if current_user
+            = link_to 'Submit new idea', new_idea_path, class: 'btn btn-light btn-block'
+            - if current_user.image?
+              = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
+            %b= link_to current_user.username, user_path(current_user), class: 'text-white'
+            = link_to destroy_user_session_path, method: :delete do
+              = 'Sign out'
+              /= fa_icon "sign-out", class: 'text-white'
+
+
         /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
       - if current_user
         - unless current_user.name
