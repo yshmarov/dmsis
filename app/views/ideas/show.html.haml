@@ -49,6 +49,7 @@
           = @idea.comments.count
           = fa_icon "users"
           = @idea.cofounders.count
+          = social_share_button_tag('Great idea!', :url => idea_path(@idea), desc: @idea.name, :allow_sites => %w(twitter facebook linkedin telegram))
         .col
           .text-right
             .font-weight-light.font-italic
