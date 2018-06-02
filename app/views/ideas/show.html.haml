@@ -50,8 +50,11 @@
           = fa_icon "users"
           = @idea.cofounders.count
           .form-inline
-            = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram))
-            = social_share_button_tag('Great idea!', :url => idea_path(@idea), desc: @idea.name, :allow_sites => %w(facebook))
+            /with a title for twitter
+            /= social_share_button_tag(@idea.name, 'data-twitter-title' => 'TheTitleForTwitter')
+            /= social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description, :image => "http://foo.bar/images/a.jpg")
+            = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
+            = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
         .col
           .text-right
             .font-weight-light.font-italic

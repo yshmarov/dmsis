@@ -63,8 +63,8 @@
                   %span.badge.badge-secondary
                     You've applied!
               .form-inline
-                = social_share_button_tag("What do you think about this startup idea? '#{idea.name}'", :allow_sites => %w(twitter linkedin telegram))
-                = social_share_button_tag('Great idea!', :url => idea_path(idea), desc: idea.name, :allow_sites => %w(facebook))
+                = social_share_button_tag("What do you think about this startup idea? '#{idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: idea.description)
+                = social_share_button_tag idea.name, desc: idea.description, :allow_sites => %w(facebook)
             .col
               .text-right
                 .font-weight-light.font-italic
