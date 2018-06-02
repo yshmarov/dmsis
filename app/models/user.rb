@@ -19,6 +19,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy
 
+  #has_many :idea_tags, through: :ideas
+  #has_many :tags, through: :idea_tags
+
   after_create :assign_default_role
 
   def assign_default_role
