@@ -77,3 +77,4 @@ gem 'friendly_id'
 gem "pundit"
 gem "rolify"
 gem 'ransack'
+gem 'social-share-button'

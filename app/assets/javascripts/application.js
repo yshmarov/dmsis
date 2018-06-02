@@ -18,4 +18,5 @@
 //= require activestorage
 //= require turbolinks
 //= require cocoon
+//= require social-share-button
 //= require_tree .

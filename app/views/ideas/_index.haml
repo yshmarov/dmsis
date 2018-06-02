@@ -62,6 +62,8 @@
                 - if idea.cofounders.where(user_id: current_user.id).present?
                   %span.badge.badge-secondary
                     You've applied!
+              /= social_share_button_tag(idea.name)
+              = social_share_button_tag('Great idea!', :url => idea_path(idea), desc: idea.name, :allow_sites => %w(twitter facebook linkedin telegram))
             .col
               .text-right
                 .font-weight-light.font-italic
