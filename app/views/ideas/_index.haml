@@ -62,9 +62,9 @@
                 - if idea.cofounders.where(user_id: current_user.id).present?
                   %span.badge.badge-secondary
                     You've applied!
-              .form-inline
-                = social_share_button_tag("What do you think about this startup idea? '#{idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: idea.description)
-                = social_share_button_tag idea.name, desc: idea.description, :allow_sites => %w(facebook)
+              /.form-inline
+              /  = social_share_button_tag("What do you think about this startup idea? '#{idea.name}'", :allow_sites => %w(twitter linkedin telegram email), desc: idea.description)
+              /  = social_share_button_tag idea.name, desc: idea.description, :allow_sites => %w(facebook)
             .col
               .text-right
                 .font-weight-light.font-italic
