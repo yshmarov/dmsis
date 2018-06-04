@@ -34,38 +34,41 @@
         .row
         = fa_icon "thumbs-down", class: 'btn btn-sm btn-outline-danger rounded-circle'
   .col
-    .card.container
-      %b= @idea.name
-      = simple_format(@idea.description)
-      .row
-      .form-inline
-        - @idea.tags.each do |tag|
-          %span.badge.badge-default
-            = link_to tag.name, tag
-        %br
-      .row.bg-light
-        .col
-          = fa_icon "comments"
-          = @idea.comments.count
-          = fa_icon "users"
-          = @idea.cofounders.count
-          .form-inline
-            /with a title for twitter
-            /= social_share_button_tag(@idea.name, 'data-twitter-title' => 'TEST')
-            /= social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description, :image => "http://foo.bar/images/a.jpg")
-            = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
-            = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
-        .col
-          .text-right
-            .font-weight-light.font-italic
-              = time_ago_in_words(@idea.created_at)
-              ago by
-              - if @idea.user_id == current_user.id
-                %span.badge.badge-success
-                  You
-              - else
-                = link_to @idea.user.username, user_path(@idea.user)
-                /= @idea.user.username
+    .card
+      %h5.card-header.bg-light
+        = @idea.name
+      .card-body
+        = simple_format(@idea.description)
+        .row
+        .form-inline
+          - @idea.tags.each do |tag|
+            %span.badge.badge-default.border
+              = link_to tag.name, tag_path(tag), class: 'text-dark'
+          %p
+      .container
+        .row.bg-light
+          .col
+            = fa_icon "comments"
+            = @idea.comments.count
+            = fa_icon "users"
+            = @idea.cofounders.count
+            .form-inline
+              /with a title for twitter
+              /= social_share_button_tag(@idea.name, 'data-twitter-title' => 'TEST')
+              /= social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description, :image => "http://foo.bar/images/a.jpg")
+              = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
+              = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
+          .col
+            .text-right
+              .font-weight-light.font-italic
+                = time_ago_in_words(@idea.created_at)
+                ago by
+                - if @idea.user_id == current_user.id
+                  %span.badge.badge-success
+                    You
+                - else
+                  = link_to @idea.user.username, user_path(@idea.user)
+                  /= @idea.user.username
 %p
 - if @idea.votes_for.any?
   .progress{:style => "height: 13px"}

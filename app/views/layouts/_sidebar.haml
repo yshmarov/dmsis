@@ -16,7 +16,7 @@
         = link_to destroy_user_session_path, method: :delete do
           = fa_icon "sign-out"
     %p
-    %b= link_to "#{current_user.ideas.count} ideas", mine_ideas_path
+    %b= link_to "#{current_user.ideas.count} ideas", my_ideas_path
     %p
     %b= link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path
     %p

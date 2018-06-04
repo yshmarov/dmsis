@@ -31,7 +31,7 @@ class IdeasController < ApplicationController
     render 'ideas/index'
   end
 
-  def mine
+  def my
     @ideas = Idea.where(user: current_user)
     render 'ideas/index'
   end

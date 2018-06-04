@@ -40,24 +40,26 @@
     .col
       .card
         %h5.card-header.bg-light
-          = link_to idea.name, idea
+          = link_to idea.name, idea, class: 'text-dark'
         .card-body
           = simple_format(idea.description)
           .row
           .form-inline
             - idea.tags.each do |tag|
-              %span.badge.badge-default
-                = link_to tag.name, tag
-            %br
+              %span.badge.badge-default.border
+                = link_to tag.name, tag_path(tag), class: 'text-dark'
+            %p
         .container
           .row.bg-light
             .col
               = link_to idea_path(idea) do
                 = fa_icon "comments"
                 = idea.comments.count
+                comments
               = link_to idea_path(idea) do
                 = fa_icon "users"
                 = idea.cofounders.count
+                cofounders
               - if current_user
                 - if idea.cofounders.where(user_id: current_user.id).present?
                   %span.badge.badge-secondary
