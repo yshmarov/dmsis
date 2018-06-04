@@ -6,7 +6,7 @@ class User < ApplicationRecord
   acts_as_voter
 
   def points
-    comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2
+    comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count
   end
 
   def to_s
