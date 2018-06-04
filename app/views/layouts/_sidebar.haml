@@ -16,6 +16,10 @@
         = link_to destroy_user_session_path, method: :delete do
           = fa_icon "sign-out"
     %p
+    %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "score based on all activity"}
+      =  current_user.points
+      points
+    %p
     %b= link_to "#{current_user.ideas.count} ideas", my_ideas_path
     %p
     %b= link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path

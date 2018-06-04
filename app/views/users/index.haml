@@ -9,6 +9,7 @@
       %th Sign_in_at
       %th Sign_in_IP
       %th Roles
+      %th Points
   %tbody
     - @users.each do |user|
       %tr
@@ -19,3 +20,4 @@
         %td= user.current_sign_in_at
         %td= user.current_sign_in_ip
         %td= user.roles.collect{|r| r.name}.to_sentence
+        %td= user.points

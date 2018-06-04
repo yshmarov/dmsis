@@ -5,6 +5,10 @@ class User < ApplicationRecord
 
   acts_as_voter
 
+  def points
+    comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2
+  end
+
   def to_s
     id
   end
@@ -18,6 +22,7 @@ class User < ApplicationRecord
   has_many :ideas, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy
+  has_many :attachments, dependent: :destroy
 
   #has_many :idea_tags, through: :ideas
   #has_many :tags, through: :idea_tags
