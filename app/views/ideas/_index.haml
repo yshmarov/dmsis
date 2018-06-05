@@ -3,11 +3,9 @@
     .col-md-auto
       .text-center
         - if current_user
-
           /= link_to like_idea_path(idea), method: :put, class: "btn btn-secondary" do
           /  %span.fa.fa-arrow-up
           /  = idea.get_upvotes.size
-
           /.btn-group.pull-right
           /  = link_to like_idea_path(idea), method: :put, class: 'btn btn-secondary btn-sm' do
           /    %span.fa.fa-arrow-up
@@ -19,6 +17,8 @@
           /    #{idea.get_downvotes.size}
           - if current_user.voted_up_on? idea
             = fa_icon "thumbs-up", class: 'btn btn-sm btn-default', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
+            - if current_user.has_role?(:admin)
+              = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger rounded-circle'
           - unless current_user.voted_for? idea
             = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
           .row
@@ -30,6 +30,8 @@
             = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-danger rounded-circle'
           - if current_user.voted_down_on? idea
             = fa_icon "thumbs-down", class: 'btn btn-sm btn-default', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already downvoted"
+            - if current_user.has_role?(:admin)
+              = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
         - else
           = fa_icon "thumbs-up", class: 'btn btn-sm btn-outline-success rounded-circle'
           .row

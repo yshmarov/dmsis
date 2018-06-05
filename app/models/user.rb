@@ -6,7 +6,13 @@ class User < ApplicationRecord
   acts_as_voter
 
   def points
+    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
+    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
     comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count
+    #includes(:expence).where(expences: {job_id: nil}).where.not(supplier_id: nil).where.not(supplier_price: 0) }
+    #.joins(:ideas).where
+    #ActsAsVotable::Vote.count
+    #votes.count
   end
 
   def to_s
