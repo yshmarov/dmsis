@@ -1,13 +1,19 @@
-/%p#notice= notice
 /.text-right
 - if @idea.user == current_user
+  /.card.container
+  /  .form-inline
   - if @idea.created_at > Time.now - 24.hours
-    You have
-    = distance_of_time_in_words @idea.created_at + 24.hours - Time.now
-    to edit
     = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning'
+  - else
+    = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning disabled'
   - unless @idea.associations?
     = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+  - else
+    = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger disabled'
+  = fa_icon "question", class: 'btn btn-sm btn-outline-secondary rounded-circle', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You have #{distance_of_time_in_words @idea.created_at + 24.hours - Time.now} to edit. You can not delete idea if it has votes or other stuff."
+  /= link_to 'Transfer ownership', edit_idea_path(@idea), class: 'btn btn-warning disabled'
+  /= link_to 'Change idea status', edit_idea_path(@idea), class: 'btn btn-warning disabled'
+  /= link_to 'Add proof of realisation', edit_idea_path(@idea), class: 'btn btn-warning disabled'
 %p
 .row
   .col-md-auto
@@ -48,10 +54,15 @@
       .container
         .row.bg-light
           .col
-            = fa_icon "comments"
-            = @idea.comments.count
-            = fa_icon "users"
-            = @idea.cofounders.count
+            %span.badge.badge-light
+              = fa_icon "comments"
+              = pluralize(@idea.comments.count, 'comment')
+            %span.badge.badge-light
+              = fa_icon "users"
+              = pluralize(@idea.cofounders.count, 'cofounder')
+            %span.badge.badge-light
+              = fa_icon "exclamation-triangle"
+              = pluralize(@idea.attachments.count, 'attachment')
             .form-inline
               /with a title for twitter
               /= social_share_button_tag(@idea.name, 'data-twitter-title' => 'TEST')

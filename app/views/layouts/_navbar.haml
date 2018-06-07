@@ -1,43 +1,19 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-success.sticky-top.navbar-expand-sm
-
-  /%a.navbar-brand{:href => "#"}
-  /  %img.d-inline-block.align-top{:alt => "", :height => "30", :src => "/docs/4.1/assets/brand/bootstrap-solid.svg", :width => "30"}/
-  /  Bootstrap
-
   %a.navbar-brand{:href => "/"}
     .white-text
       = image_tag "doesmystartupideasuck-logo-alt.png", size: "25x25", class: "mx-auto d-inline align-top", :alt => "avatar"
-      /= image_tag 'doesmystartupideasuck-logo.png', size: '25x25'
-      /= image_tag 'doesmystartupideasuck-logo-alt.png', size: '25x25'
-      /= image_tag 'askdemos-logo-1.png', size: '30x30'
-      /= fa_icon "trash"
-      Idea.sucks?
+      DMSIS?
   %button.navbar-toggler.bg-light{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.nav.navbar-nav
       = nav_bar do
-        /%form.form-inline.my-2.my-lg-0
-        /  %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
-        /  %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
-
-        /%li.nav-item= nav_link "Offices", random_ideas_path
-        /%span.badge.bg-light
-        /  = Idea.where.not(id: current_user.find_voted_items.map(&:id)).count
-
-        /%button.btn.btn-primary{:type => "button"}
-        /  Profile
-        /  %span.badge.badge-light 9
-        /  %span.sr-only unread messages
-
-        /  %li= link_to "<i class='fa fa-dashboard'></i> New ideas".html_safe, root_path, class: 'nav-link'
         - if current_user
           = nav_link "Unvoted #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unvoted_ideas_path
         - else
           = nav_link "Unvoted", unvoted_ideas_path
         = nav_link "Random", random_ideas_path
-        /- if current_user
-        /  %li.nav-item= link_to "Trending", trending_ideas_path, class: "nav-link"
+        /%li.nav-item= link_to "Trending", trending_ideas_path, class: "nav-link"
         = nav_link "Top", top_ideas_path
         = nav_link "Fresh", fresh_ideas_path
         = nav_link "Tags", tags_path
@@ -49,14 +25,8 @@
                 = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
               %b= link_to current_user.username, user_path(current_user), class: 'text-white'
               = link_to "<i class='fa fa-sign-out'></i> Sign out".html_safe, destroy_user_session_path, method: :delete, class: 'nav-link text-white'
-              /= link_to destroy_user_session_path, method: :delete do
-              /  = 'Sign out'
-              /  = fa_icon "sign-out", class: 'text-white'
-
-
-        /%li.nav-item= link_to "Fresh", fresh_ideas_path, class: "nav-link"
       - if current_user
         - unless current_user.name
-          %li= link_to "Link your Facebook account", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
+          %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
       - else
         = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary text-light'

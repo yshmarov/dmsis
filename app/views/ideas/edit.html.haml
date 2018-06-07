@@ -1,7 +1,8 @@
-%h1 Editing idea
+%h3 Editing idea
+%p
 .card.container
   = render 'form'
   %br
 %p
-= link_to 'Back', ideas_path, class: 'btn btn-secondary'
+= link_to 'Cancel', idea_path(@idea), class: 'btn btn-danger'
 %br
