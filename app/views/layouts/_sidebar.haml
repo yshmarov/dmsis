@@ -6,29 +6,31 @@
     /.form-inline
     .row
       .col-auto
-        - if current_user.image?
-          = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
-        %b= link_to current_user.username, user_path(current_user)
+        = link_to user_path(current_user), class: 'btn btn-default' do
+          - if current_user.image?
+            = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
+          %b= link_to current_user.username, user_path(current_user), class: 'text-dark'
       /.col
       /  = link_to edit_user_registration_path do
       /    = fa_icon "cog"
       .col
         = link_to destroy_user_session_path, method: :delete do
-          = fa_icon "sign-out"
+          = fa_icon "sign-out", class: 'btn btn-default text-dark'
     %p
     %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "score based on all activity"}
       =  current_user.points
       points
     %p
-    %b= link_to "#{current_user.ideas.count} ideas", my_ideas_path
+    = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'text-dark'
     %p
-    %b= link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path
+    = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'text-dark'
     %p
     /%b
     /  = current_user.votes.down.count
     /  downvotes
     /%p
-    %b= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path
+    = link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path, class: 'text-dark'
+    /= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
     %p
   %p
   .card.container-fluid

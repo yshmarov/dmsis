@@ -4,7 +4,9 @@
 
 .text-center
   %h3
+    /%span.badge.badge-light
     = controller.action_name.capitalize
+    ideas
     - if controller.action_name == 'random'
       = link_to 'Next', random_ideas_path, class: 'btn btn-secondary rounded-circle'
 
