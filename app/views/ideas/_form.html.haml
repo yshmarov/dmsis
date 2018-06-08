@@ -15,4 +15,6 @@
       = link_to_add_association 'add a tag', f, :idea_tags, class: 'btn btn-secondary'
   %p
   .form-actions
-    = f.button :submit, class: 'btn btn-success'
+    /= f.button :submit, class: 'btn btn-success'
+    /= f.submit "Save draft", class: 'btn btn-secondary'
+    = f.submit "Publish now", class: 'btn btn-success'
