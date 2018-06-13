@@ -8,8 +8,8 @@
         = link_to "<i class='fa fa-refresh'></i>".html_safe, tags_path, class: 'btn btn-outline-secondary'
   %br
   - @tags.each do |tag|
-    %span.badge.badge-light.border
-      = link_to tag.popular_name, tag_path(tag), class: 'text-dark'
+    %span.badge.badge-success.border
+      = link_to tag.popular_name, tag_path(tag), class: 'text-white'
   %br
   - if current_user.has_role?(:admin)
     %h1 Tags

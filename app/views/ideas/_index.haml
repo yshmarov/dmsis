@@ -45,8 +45,8 @@
           .row
           .form-inline
             - idea.tags.each do |tag|
-              %span.badge.badge-default.border
-                = link_to tag.name, tag_path(tag), class: 'text-dark'
+              %span.badge.badge-success
+                = link_to tag.name, tag_path(tag), class: 'text-white'
             %p
         %small.container
           .row.bg-light

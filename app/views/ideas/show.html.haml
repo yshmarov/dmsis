@@ -30,7 +30,7 @@
     .text-center
       - if current_user
         - if current_user.voted_up_on? @idea
-          = fa_icon "thumbs-up", class: 'btn btn-sm btn-default', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
+          = fa_icon "thumbs-up", class: 'btn btn-sm btn-success disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
         - unless current_user.voted_for? @idea
           = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(@idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
         .row
@@ -41,7 +41,7 @@
         - unless current_user.voted_for? @idea
           = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(@idea), method: :put, class: 'btn btn-sm btn-outline-danger rounded-circle'
         - if current_user.voted_down_on? @idea
-          = fa_icon "thumbs-down", class: 'btn btn-sm btn-default', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already downvoted"
+          = fa_icon "thumbs-down", class: 'btn btn-sm btn-danger disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already downvoted"
       - else
         = fa_icon "thumbs-up", class: 'btn btn-sm btn-outline-success rounded-circle'
         .row
@@ -58,8 +58,8 @@
         .row
         .form-inline
           - @idea.tags.each do |tag|
-            %span.badge.badge-default.border
-              = link_to tag.name, tag_path(tag), class: 'text-dark'
+            %span.badge.badge-success
+              = link_to tag.name, tag_path(tag), class: 'text-white'
           %p
       .container
         .row.bg-light
