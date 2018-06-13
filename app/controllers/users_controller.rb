@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     #@ideas = Idea.where(user_id: @user.id)
     @ideas = @user.ideas.order('created_at DESC')
     #@ideas =  @user.ideas.order('published_at DESC')
+    @comments = @user.comments
   end
   
   def index
