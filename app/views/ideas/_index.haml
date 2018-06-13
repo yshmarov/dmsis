@@ -50,25 +50,24 @@
             %p
         %small.container
           .row.bg-light
-            .col-auto
-              .form-inline
-                = link_to idea_path(idea), class: 'badge badge-light' do
-                  = fa_icon "comments"
-                  = pluralize(idea.comments.count, 'comment')
-                = link_to idea_path(idea), class: 'badge badge-light' do
-                  = fa_icon "users"
-                  = pluralize(idea.cofounders.count, 'cofounder')
-                = link_to idea_path(idea), class: 'badge badge-light' do
-                  = fa_icon "exclamation-triangle"
-                  = pluralize(idea.attachments.count, 'attachment')
-                - if current_user
-                  - if idea.cofounders.where(user_id: current_user.id).present?
-                    %span.badge.badge-secondary
-                      You've applied!
+            .col-lg
+              = link_to idea_path(idea), class: 'badge badge-light' do
+                = fa_icon "comments"
+                = pluralize(idea.comments.count, 'comment')
+              = link_to idea_path(idea), class: 'badge badge-light' do
+                = fa_icon "users"
+                = pluralize(idea.cofounders.count, 'cofounder')
+              = link_to idea_path(idea), class: 'badge badge-light' do
+                = fa_icon "exclamation-triangle"
+                = pluralize(idea.attachments.count, 'attachment')
+              - if current_user
+                - if idea.cofounders.where(user_id: current_user.id).present?
+                  %span.badge.badge-secondary
+                    You've applied!
               /.form-inline
               /  = social_share_button_tag("What do you think about this startup idea? '#{idea.name}'", :allow_sites => %w(twitter linkedin telegram email), desc: idea.description)
               /  = social_share_button_tag idea.name, desc: idea.description, :allow_sites => %w(facebook)
-            .col
+            .col-lg
               .text-right
                 .font-weight-light.font-italic
                   = time_ago_in_words(idea.created_at)
