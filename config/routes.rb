@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'home/index'
   resources :ideas do
     member do
+      patch :publish
+      patch :unpublish
       put "like", to: "ideas#upvote"
       put "dislike", to: "ideas#downvote"
     end

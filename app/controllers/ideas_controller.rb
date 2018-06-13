@@ -1,5 +1,15 @@
 class IdeasController < ApplicationController
-  before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote, :publish, :unpublish]
+
+  def publish
+  	@idea.update_attribute(:published_at, Time.now)
+  	redirect_to @idea, notice: "Published!"
+  end
+
+  def unpublish
+  	@idea.update_attribute(:published_at, nil)
+  	redirect_to @idea, notice: "UnPublished!"
+  end
 
   def index
     redirect_to top_ideas_path
@@ -86,7 +96,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
     @idea.user = current_user
     if @idea.save
-      redirect_to @idea, notice: 'Idea was successfully created.'
+      redirect_to @idea, notice: 'Idea draft was created. Review and publish!'
     else
       render :new
     end

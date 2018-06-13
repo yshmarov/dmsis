@@ -3,14 +3,16 @@ class UsersController < ApplicationController
 
   def show
     #@ideas = Idea.where(user_id: @user.id)
-    @ideas = @user.ideas
+    @ideas = @user.ideas.order('created_at DESC')
+    #@ideas =  @user.ideas.order('published_at DESC')
   end
   
   def index
-    if current_user.has_role?(:admin)
+    if current_user.has_role?(:adminz)
       @users = User.order("created_at DESC")
     else
-      redirect_to root_path, alert: 'Page does not exist.'
+      redirect_to user_path(current_user)
+      #redirect_to root_path, alert: 'Page does not exist.'
     end
   end
 

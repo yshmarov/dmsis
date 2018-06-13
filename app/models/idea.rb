@@ -3,6 +3,16 @@ class Idea < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  scope :published, -> { where.not(published_at: nil) }
+
+  def published
+    if published_at == nil
+      false
+    else
+      true
+    end
+  end
+
   belongs_to :user
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
