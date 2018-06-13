@@ -1,29 +1,30 @@
-%form.form-inline.my-2.my-lg-0
-  = search_form_for @q, url: tags_path do |f|
-    .mr-sm-2
-      = f.text_field :name_cont, class: 'form-control', placeholder: 'Find Tag', autofocus: true
-    %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
-    .my-2.my-sm-0
-      = link_to "<i class='fa fa-refresh'></i>".html_safe, tags_path, class: 'btn btn-outline-secondary'
-%br
-- @tags.each do |tag|
-  %span.badge.badge-default.border
-    = link_to tag.popular_name, tag_path(tag), class: 'text-dark'
-%br
-- if current_user.has_role?(:admin)
-  %h1 Tags
-  %table.table.table-hover.table-striped.table-sm.table-responsive
-    %thead
-      %tr
-        %th ID
-        %th Name
-        %th Ideas
-        %th
-    %tbody
-      - @tags.each do |tag|
+.text-white
+  %form.form-inline.my-2.my-lg-0
+    = search_form_for @q, url: tags_path do |f|
+      .mr-sm-2
+        = f.text_field :name_cont, class: 'form-control', placeholder: 'Find Tag', autofocus: true
+      %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
+      .my-2.my-sm-0
+        = link_to "<i class='fa fa-refresh'></i>".html_safe, tags_path, class: 'btn btn-outline-secondary'
+  %br
+  - @tags.each do |tag|
+    %span.badge.badge-light.border
+      = link_to tag.popular_name, tag_path(tag), class: 'text-dark'
+  %br
+  - if current_user.has_role?(:admin)
+    %h1 Tags
+    %table.table.table-hover.table-striped.table-sm.table-responsive
+      %thead
         %tr
-          %td= tag.id
-          %td= tag.name
-          %td= tag.idea_tags.count
-          %td= link_to 'delete', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          %th ID
+          %th Name
+          %th Ideas
+          %th
+      %tbody
+        - @tags.each do |tag|
+          %tr
+            %td= tag.id
+            %td= tag.name
+            %td= tag.idea_tags.count
+            %td= link_to 'delete', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br

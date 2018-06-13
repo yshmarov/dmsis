@@ -1,7 +1,7 @@
 .card.container
   .form-inline
     .col
-      Actions
+      Owner actions
     .col-auto
       .form-inline
         - if @idea.user == current_user
@@ -103,23 +103,26 @@
 %p
 .row
   .col-lg
-    = fa_icon "exclamation-triangle"
-    Similar projects
-    = render 'attachments/form'
-    %p
-    = render 'attachments/index'
-    %p
-
-    = fa_icon "comments"
-    Discussion
+    .form-inline
+      .text-white
+        = fa_icon "exclamation-triangle"
+        Similar projects
+      = render 'attachments/form'
+      %p
+      = render 'attachments/index'
+      %p
+    .text-white
+      = fa_icon "comments"
+      Discussion
     %p
     = render 'comments/form'
     %p
     = render 'comments/index'
     %p
   .col-lg
-    = fa_icon "users"
-    Cofounders
+    .text-white
+      = fa_icon "users"
+      Cofounders
     - unless @current_user_is_a_cofounder
       = render 'ideas/cofounder_modal'
     - else

@@ -1,23 +1,24 @@
-%h1 Users
-%table.table.table-hover.table-striped.table-sm.table-responsive
-  %thead
-    %tr
-      %th ID
-      %th Email
-      %th FB_name
-      %th Sign_in_Q
-      %th Sign_in_at
-      %th Sign_in_IP
-      %th Roles
-      %th Points
-  %tbody
-    - @users.each do |user|
+.text-white
+  %h1 Users
+  %table.table.table-hover.table-striped.table-sm.table-responsive
+    %thead
       %tr
-        %td= link_to user.id, user_path(user)
-        %td= user.email
-        %td= user.name
-        %td= user.sign_in_count
-        %td= user.current_sign_in_at
-        %td= user.current_sign_in_ip
-        %td= user.roles.collect{|r| r.name}.to_sentence
-        %td= user.points
+        %th ID
+        %th Email
+        %th FB_name
+        %th Sign_in_Q
+        %th Sign_in_at
+        %th Sign_in_IP
+        %th Roles
+        %th Points
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= link_to user.id, user_path(user)
+          %td= user.email
+          %td= user.name
+          %td= user.sign_in_count
+          %td= user.current_sign_in_at
+          %td= user.current_sign_in_ip
+          %td= user.roles.collect{|r| r.name}.to_sentence
+          %td= user.points
