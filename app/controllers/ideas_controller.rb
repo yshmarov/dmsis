@@ -96,7 +96,8 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
     @idea.user = current_user
     if @idea.save
-      redirect_to @idea, notice: 'Idea draft was created. Review and publish!'
+      redirect_to @idea, notice: 'Idea was successfully created.'
+      #redirect_to @idea, notice: 'Idea draft was created. Review and publish!'
     else
       render :new
     end

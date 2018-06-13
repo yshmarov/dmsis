@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    if current_user.has_role?(:adminz)
+    if current_user.has_role?(:admin)
       @users = User.order("created_at DESC")
     else
       redirect_to user_path(current_user)
