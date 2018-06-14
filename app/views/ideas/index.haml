@@ -2,6 +2,11 @@
   = controller.action_name.capitalize
   startup ideas
 
+- unless current_user
+  %div{:class => "alert alert-warning", :role => "alert"}
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+    Sign in to see more!
+    /Sign in to vote, join idea discussion, or become a cofounder
 .text-center.text-white
   %h3
     /%span.badge.badge-light

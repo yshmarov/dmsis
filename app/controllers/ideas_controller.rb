@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote, :publish, :unpublish]
+  skip_before_action :authenticate_user!, :only => [ :top ]
 
   def publish
   	@idea.update_attribute(:published_at, Time.now)
@@ -52,7 +53,11 @@ class IdeasController < ApplicationController
   end
 
   def top
-    @ideas = Idea.order(:cached_weighted_score => :desc)
+    unless current_user
+      @ideas = Idea.order(:cached_weighted_score => :desc).limit(3)
+    else
+      @ideas = Idea.order(:cached_weighted_score => :desc)
+    end
     render 'ideas/index'
   end
 
