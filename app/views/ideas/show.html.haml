@@ -99,6 +99,15 @@
       =  @idea.positive_score
     .progress-bar.bg-danger{:style => "width:50%"}
       =  @idea.negative_score
+.row.text-light
+  .col-lg
+    Liked by:
+    - @idea.votes_for.up.by_type(User).voters.each do |user|
+      #{user.username},
+  .col-lg
+    Disliked by:
+    - @idea.votes_for.down.by_type(User).voters.each do |user|
+      = user.username
 %p
 /progress-bar
 /bottom-actions
