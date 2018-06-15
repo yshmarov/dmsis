@@ -40,6 +40,13 @@
       .card
         %h5.card-header.bg-light
           = link_to idea.name, idea, class: 'text-dark'
+          .pull-right
+            - if idea.published_at?
+              %span.badge.badge-success.btn-block
+                Published
+            - else
+              %span.badge.badge-secondary.btn-block
+                Draft
         .card-body
           = simple_format(idea.description)
           .row

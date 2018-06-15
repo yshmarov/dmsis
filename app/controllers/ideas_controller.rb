@@ -33,12 +33,12 @@ class IdeasController < ApplicationController
   end
 
   def unvoted
-    @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id))
+    @ideas = Idea.published.where.not(id: current_user.find_voted_items.map(&:id))
     render 'ideas/index'
   end
 
   def random
-    @ideas = Idea.limit(1).order("RANDOM()")
+    @ideas = Idea.published.limit(1).order("RANDOM()")
     render 'ideas/index'
   end
 
@@ -48,15 +48,15 @@ class IdeasController < ApplicationController
   end
 
   def fresh
-    @ideas = Idea.order("created_at DESC").all
+    @ideas = Idea.published.order("created_at DESC").all
     render 'ideas/index'
   end
 
   def top
     unless current_user
-      @ideas = Idea.order(:cached_weighted_score => :desc).limit(3)
+      @ideas = Idea.published.order(:cached_weighted_score => :desc).limit(3)
     else
-      @ideas = Idea.order(:cached_weighted_score => :desc)
+      @ideas = Idea.published.order(:cached_weighted_score => :desc)
     end
     render 'ideas/index'
   end

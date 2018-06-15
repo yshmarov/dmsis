@@ -3,13 +3,6 @@
   - unless @idea.published_at?
     %div{:class => "alert alert-warning", :role => "alert"}
       Publish the idea to make it visible to others.
-  .form-inline
-    - unless @idea.published
-      = button_to "Publish", publish_idea_path(@idea), method: :patch, class: 'btn btn-success btn-sm'
-    - else
-      = button_to "Publish", publish_idea_path(@idea), method: :patch, class: 'btn btn-success disabled btn-sm'
-      = button_to "UnPublish", unpublish_idea_path(@idea), method: :patch, class: 'btn btn-success btn-sm'
-    = fa_icon "question", class: 'btn btn-sm btn-secondary rounded-circle active', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You can edit or delete before you publish."
     /= link_to 'Transfer ownership', edit_idea_path(@idea), class: 'btn btn-warning disabled'
     /= link_to 'Change idea status', edit_idea_path(@idea), class: 'btn btn-warning disabled'
     /= link_to 'Add proof of realisation', edit_idea_path(@idea), class: 'btn btn-warning disabled'
@@ -45,11 +38,16 @@
     .card
       %h5.card-header.bg-light
         = @idea.name
-        .pull-right
-          - unless @idea.published_at?
-            = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
-          - unless @idea.associations? && @idea.published_at?
-            = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
+        - if @idea.user == current_user
+          .pull-right
+            - unless @idea.published
+              = link_to "Publish", publish_idea_path(@idea), method: :patch, class: 'badge badge-success'
+            /- else
+            /  = link_to "UnPublish", unpublish_idea_path(@idea), method: :patch, class: 'badge badge-success'
+            - unless @idea.published_at?
+              = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
+            - unless @idea.associations? && @idea.published_at?
+              = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
       .card-body
         = simple_format(@idea.description)
         .form-inline
