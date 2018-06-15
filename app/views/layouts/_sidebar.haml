@@ -77,6 +77,8 @@
         %br
         Find a team.
       .text-center
+        = link_to "Log in", new_user_session_path, class: 'badge badge-secondary'
+        = link_to "Sign up", new_user_registration_path, class: 'badge badge-warning'
         = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
         %p
         = link_to 'Privacy Policy', privacy_policy_path
