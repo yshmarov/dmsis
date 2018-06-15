@@ -9,7 +9,7 @@ class CofoundersController < ApplicationController
     @cofounder = Cofounder.new(cofounder_params)
     @cofounder.user_id = current_user.id
     if @cofounder.save
-      redirect_to idea_path(@cofounder.idea), notice: 'Cofounder was successfully created.'
+      redirect_to idea_path(@cofounder.idea), notice: 'Next step: contact the other cofounders and get things done.'
     else
       redirect_to idea_path(@cofounder.idea), notice: 'You are already signed up!.'
       #render :new
@@ -18,7 +18,7 @@ class CofoundersController < ApplicationController
 
   def destroy
     @cofounder.destroy
-      redirect_to idea_path(@cofounder.idea), notice: 'Cofounder was successfully destroyed.'
+      redirect_to idea_path(@cofounder.idea), notice: 'You have dropped out. One day this idea will turn into the new Google and you will regret :)'
   end
 
   private

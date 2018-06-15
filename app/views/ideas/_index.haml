@@ -70,7 +70,10 @@
             .col-lg
               .text-right
                 .font-weight-light.font-italic
-                  = time_ago_in_words(idea.created_at)
+                  - if idea.published_at?
+                    = time_ago_in_words(idea.published_at)
+                  - else
+                    = time_ago_in_words(idea.created_at)
                   ago by
                   - if current_user
                     - if idea.user_id == current_user.id

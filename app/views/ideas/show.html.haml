@@ -1,36 +1,22 @@
+/owner actions
 - if @idea.user == current_user
-  .card.container
-    .form-inline
-      .col
-        Owner actions
-      .col-auto
-        .form-inline
-          /with a title for twitter
-          /= social_share_button_tag(@idea.name, 'data-twitter-title' => 'TEST')
-          /= social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description, :image => "http://foo.bar/images/a.jpg")
-          = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
-          = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
-          /- unless @idea.published
-          /  = button_to "Publish", publish_idea_path(@idea), method: :patch, class: 'btn btn-success btn-sm'
-          /- else
-          /  = button_to "Publish", publish_idea_path(@idea), method: :patch, class: 'btn btn-success disabled btn-sm'
-          /  = button_to "UnPublish", unpublish_idea_path(@idea), method: :patch, class: 'btn btn-success btn-sm'
-          /.card.container
-          /  .form-inline
-          - if @idea.created_at > Time.now - 24.hours
-            = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning btn-sm'
-          - else
-            = link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-warning  btn-sm disabled'
-          - unless @idea.associations?
-            = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
-          - else
-            = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger disabled btn-sm'
-          = fa_icon "question", class: 'btn btn-sm btn-secondary rounded-circle active', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You have #{distance_of_time_in_words @idea.created_at + 24.hours - Time.now} to edit. You can not delete idea if it has votes or other stuff."
-          /= link_to 'Transfer ownership', edit_idea_path(@idea), class: 'btn btn-warning disabled'
-          /= link_to 'Change idea status', edit_idea_path(@idea), class: 'btn btn-warning disabled'
-          /= link_to 'Add proof of realisation', edit_idea_path(@idea), class: 'btn btn-warning disabled'
+  - unless @idea.published_at?
+    %div{:class => "alert alert-warning", :role => "alert"}
+      Publish the idea to make it visible to others.
+  .form-inline
+    - unless @idea.published
+      = button_to "Publish", publish_idea_path(@idea), method: :patch, class: 'btn btn-success btn-sm'
+    - else
+      = button_to "Publish", publish_idea_path(@idea), method: :patch, class: 'btn btn-success disabled btn-sm'
+      = button_to "UnPublish", unpublish_idea_path(@idea), method: :patch, class: 'btn btn-success btn-sm'
+    = fa_icon "question", class: 'btn btn-sm btn-secondary rounded-circle active', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You can edit or delete before you publish."
+    /= link_to 'Transfer ownership', edit_idea_path(@idea), class: 'btn btn-warning disabled'
+    /= link_to 'Change idea status', edit_idea_path(@idea), class: 'btn btn-warning disabled'
+    /= link_to 'Add proof of realisation', edit_idea_path(@idea), class: 'btn btn-warning disabled'
+/owner actions
 %p
 .row
+  /likes
   .col-md-auto
     .text-center
       - if current_user
@@ -39,7 +25,6 @@
         - unless current_user.voted_for? @idea
           = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(@idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
         .row
-        /%span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes", :type => "button"}
         %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "all upvotes - downvotes"}
           = @idea.total_score
         .row
@@ -54,40 +39,41 @@
           = @idea.total_score
         .row
         = fa_icon "thumbs-down", class: 'btn btn-sm btn-outline-danger rounded-circle'
+  /likes
+  /card
   .col
     .card
       %h5.card-header.bg-light
         = @idea.name
+        .pull-right
+          - unless @idea.published_at?
+            = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
+          - unless @idea.associations? && @idea.published_at?
+            = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
       .card-body
         = simple_format(@idea.description)
-        .row
         .form-inline
           - @idea.tags.each do |tag|
             %span.badge.badge-success
               = link_to tag.name, tag_path(tag), class: 'text-white'
-          %p
       .container
         .row.bg-light
-          .col
-            %span.badge.badge-light
-              = fa_icon "comments"
-              = pluralize(@idea.comments.count, 'comment')
-            %span.badge.badge-light
-              = fa_icon "users"
-              = pluralize(@idea.cofounders.count, 'cofounder')
+          .col-lg
             %span.badge.badge-light
               = fa_icon "exclamation-triangle"
               = pluralize(@idea.attachments.count, 'attachment')
-            - unless @idea.user == current_user
-              .form-inline
-                /with a title for twitter
-                /= social_share_button_tag(@idea.name, 'data-twitter-title' => 'TEST')
-                /= social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description, :image => "http://foo.bar/images/a.jpg")
-                = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
-                = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
-          .col
+            %span.badge.badge-light
+              = fa_icon "users"
+              = pluralize(@idea.cofounders.count, 'cofounder')
+          .col-lg
             .text-right
               .font-weight-light.font-italic
+                - if @idea.published_at?
+                  published
+                  = time_ago_in_words(@idea.published_at)
+                  ago
+                  %br
+                created
                 = time_ago_in_words(@idea.created_at)
                 ago by
                 - if @idea.user_id == current_user.id
@@ -95,8 +81,14 @@
                     You
                 - else
                   = link_to @idea.user.username, user_path(@idea.user)
-                  /= @idea.user.username
+    .form-inline
+      = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
+      = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
+/card
+/progress-bar
 %p
+.text-light.text-center
+  = pluralize(@idea.total_score, 'vote')
 - if @idea.votes_for.any?
   .progress{:style => "height: 13px"}
     .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}
@@ -105,35 +97,31 @@
       =  @idea.negative_score
 - else
   .progress{:style => "height: 13px"}
-    .progress-bar.bg-success{:style => "width: 0%"}
+    .progress-bar.bg-success{:style => "width:50%"}
+      =  @idea.positive_score
+    .progress-bar.bg-danger{:style => "width:50%"}
+      =  @idea.negative_score
 %p
+/progress-bar
+/bottom-actions
 .row
   .col-lg
-    .form-inline
-      .text-white
-        = fa_icon "exclamation-triangle"
-        Similar projects
-      = render 'attachments/form'
-      %p
-      = render 'attachments/index'
-      %p
     .text-white
-      = fa_icon "comments"
-      Discussion
+      = fa_icon "exclamation-triangle"
+      Similar projects
+    = render 'attachments/form'
     %p
-    = render 'comments/form'
-    %p
-    = render 'comments/index'
-    %p
+    = render 'attachments/index'
   .col-lg
     .text-white
       = fa_icon "users"
       Cofounders
     - unless @current_user_is_a_cofounder
-      = render 'ideas/cofounder_modal'
+      = render 'cofounders/form'
     - else
       %span.badge.badge-secondary
         %h5 You've applied!
     %p
     = render 'cofounders/index'
+/bottom-actions
 %br

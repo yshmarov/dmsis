@@ -14,7 +14,6 @@
           .form-inputs
             = f.input :url, label: false, placeholder: 'URL'
             = f.input :title, label: false, placeholder: 'description'
-            = f.input :status, collection: ["Similar", "Article"], as: :radio_buttons, label: 'Type'
             = f.input :idea_id, input_html: {value: @idea.id}, as: :hidden
           .form-actions
             = f.submit "Add", class: 'btn btn-success'

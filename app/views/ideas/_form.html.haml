@@ -1,12 +1,10 @@
 = simple_form_for(@idea) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
   .form-inputs
     = f.input :name, autofocus: true, maxlength: 255, placeholder: 'Title of the idea'
     %div{:style => "min-height: 100%"}
     = f.input :description, maxlength: 10000, placeholder: 'What problem do you want to solve? What solution do you suggest?', :input_html => {:rows => 8}
-    /= f.association :user
     %h4 Tags
     #tags.tab-pane
       = f.simple_fields_for :idea_tags do |idea_tag|
@@ -14,7 +12,8 @@
       %p
       = link_to_add_association 'add a tag', f, :idea_tags, class: 'btn btn-secondary'
   %p
+  %hr
   .form-actions
     /= f.button :submit, class: 'btn btn-success'
-    /= f.submit "Save draft", class: 'btn btn-secondary'
+    /= f.submit "Save as draft", class: 'btn btn-secondary'
     = f.submit "Publish now", class: 'btn btn-success'

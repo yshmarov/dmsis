@@ -1,17 +1,21 @@
-/.card.container
-%p
--# frozen_string_literal: true
-= simple_form_for(@cofounder) do |f|
-  = f.error_notification
-  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
-  .form-inputs
-    = f.input :role, label: 'My role'
-    = f.input :location, label: 'My location'
-    = f.input :idea_id, input_html: {value: @idea.id}, as: :hidden
-    /= f.input :user_id, input_html: {value: current_user.id}, as: :hidden
-
-  .form-actions
-    /= f.button :submit, class: 'btn btn-success'
-    = f.submit "Add me", class: 'btn btn-success'
-%p
+%button.btn.btn-primary{"data-target" => "#exampleModal", "data-toggle" => "modal", :type => "button"}
+  Become a cofounder
+#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title I wanna do this!
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        Get in touch with people passionate about realizing this idea. Show others how you can contribute (eg. webdesign, funding, media coverage, launch in your country).
+        = simple_form_for(@cofounder) do |f|
+          = f.error_notification
+          = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+          .form-inputs
+            = f.input :role, label: false, placeholder: 'My role'
+            = f.input :location, label: false, placeholder: 'My location'
+            = f.input :idea_id, input_html: {value: @idea.id}, as: :hidden
+            /= f.input :user_id, input_html: {value: current_user.id}, as: :hidden
+          .form-actions
+            = f.submit "Add me", class: 'btn btn-success'

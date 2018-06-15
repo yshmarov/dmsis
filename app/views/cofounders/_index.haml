@@ -1,4 +1,3 @@
-%p
 - @cofounders.each do |cofounder|
   .card.container
     .row
@@ -6,14 +5,11 @@
         - if cofounder.user_id?
           - if cofounder.user.image.present?
             = image_tag cofounder.user.image, size: '20x20', alt: "that's me"
-          /= cofounder.user.username
           = link_to cofounder.user.username, user_path(cofounder.user)
-
         %br
         - if cofounder.user == current_user
           = link_to 'remove me', cofounder, method: :delete, data: { confirm: 'Are you sure?' }
       .col
         = cofounder.role
         (#{cofounder.location})
-
   %p
