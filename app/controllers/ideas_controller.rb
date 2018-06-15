@@ -1,16 +1,6 @@
 class IdeasController < ApplicationController
-  before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote, :publish, :unpublish]
+  before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   skip_before_action :authenticate_user!, :only => [ :top ]
-
-  def publish
-  	@idea.update_attribute(:published_at, Time.now)
-  	redirect_to @idea, notice: "Published!"
-  end
-
-  def unpublish
-  	@idea.update_attribute(:published_at, nil)
-  	redirect_to @idea, notice: "UnPublished!"
-  end
 
   def index
     redirect_to top_ideas_path
@@ -33,12 +23,12 @@ class IdeasController < ApplicationController
   end
 
   def unvoted
-    @ideas = Idea.published.where.not(id: current_user.find_voted_items.map(&:id))
+    @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id))
     render 'ideas/index'
   end
 
   def random
-    @ideas = Idea.published.limit(1).order("RANDOM()")
+    @ideas = Idea.limit(1).order("RANDOM()")
     render 'ideas/index'
   end
 
@@ -48,15 +38,15 @@ class IdeasController < ApplicationController
   end
 
   def fresh
-    @ideas = Idea.published.order("created_at DESC").all
+    @ideas = Idea.order("created_at DESC").all
     render 'ideas/index'
   end
 
   def top
     unless current_user
-      @ideas = Idea.published.order(:cached_weighted_score => :desc).limit(3)
+      @ideas = Idea.order(:cached_weighted_score => :desc).limit(3)
     else
-      @ideas = Idea.published.order(:cached_weighted_score => :desc)
+      @ideas = Idea.order(:cached_weighted_score => :desc)
     end
     render 'ideas/index'
   end
@@ -102,7 +92,6 @@ class IdeasController < ApplicationController
     @idea.user = current_user
     if @idea.save
       redirect_to @idea, notice: 'Idea was successfully created.'
-      #redirect_to @idea, notice: 'Idea draft was created. Review and publish!'
     else
       render :new
     end
@@ -133,7 +122,7 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :published_at, :user_id,
+      params.require(:idea).permit(:name, :description, :user_id,
         idea_tags_attributes: [:id, :_destroy, :tag_id, tag_attributes: [:id, :_destroy, :name]]      
       )
     end
