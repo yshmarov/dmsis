@@ -10,7 +10,7 @@ class User < ApplicationRecord
   def points
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
-    comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count
+    ideas.count + cofounders.count + attachments.count + votes.count
     #includes(:expence).where(expences: {job_id: nil}).where.not(supplier_id: nil).where.not(supplier_price: 0) }
     #.joins(:ideas).where
     #ActsAsVotable::Vote.count
