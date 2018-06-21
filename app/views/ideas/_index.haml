@@ -31,11 +31,12 @@
           = fa_icon "thumbs-up", class: 'btn btn-sm btn-success disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
           .row
           %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
-            = idea.total_score
+            = idea.cached_weighted_average
           .row
           = fa_icon "thumbs-down", class: 'btn btn-sm btn-danger disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
-          /.row
-          /%small= pluralize(idea.total_votes, 'vote')
+        .row
+        .text-white
+          %small= pluralize(idea.total_votes, 'vote')
     .col
       .card
         %h5.card-header.bg-light

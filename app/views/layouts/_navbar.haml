@@ -25,10 +25,7 @@
                 = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
               %b= link_to current_user.username, user_path(current_user), class: 'text-white'
               = link_to "<i class='fa fa-sign-out'></i> Sign out".html_safe, destroy_user_session_path, method: :delete, class: 'nav-link text-white'
-      - if current_user
-        - unless current_user.name
-          %li= link_to "Link your FB account", user_facebook_omniauth_authorize_path, class: 'btn btn-primary'
-      - else
+      - unless current_user
         .d-lg-none
           = link_to "Log in", new_user_session_path, class: 'btn btn-light btn-block'
           = link_to "Sign up", new_user_registration_path, class: 'btn btn-warning btn-block text-dark'
