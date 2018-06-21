@@ -46,8 +46,8 @@ class IdeasController < ApplicationController
     unless current_user
       @ideas = Idea.order(:cached_weighted_score => :desc).limit(3)
     else
-      #@ideas = Idea.order(:cached_weighted_score => :desc)
-      @ideas = Idea.order(:cached_weighted_average => :desc)
+      @ideas = Idea.order(:cached_weighted_score => :desc)
+      #@ideas = Idea.order(:cached_weighted_average => :desc)
     end
     render 'ideas/index'
   end
