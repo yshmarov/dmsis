@@ -31,7 +31,7 @@
           = fa_icon "thumbs-up", class: 'btn btn-sm btn-success disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
           .row
           %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
-            = idea.cached_weighted_average
+            = idea.cached_weighted_score
           .row
           = fa_icon "thumbs-down", class: 'btn btn-sm btn-danger disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
         .row
