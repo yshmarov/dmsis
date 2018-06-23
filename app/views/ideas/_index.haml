@@ -44,7 +44,8 @@
           /.pull-right
           /  TEST
         .card-body
-          = simple_format(idea.description)
+          .text-dark
+            = simple_format(idea.description)
           .row
           .form-inline
             - idea.tags.each do |tag|
@@ -55,8 +56,8 @@
           .row.bg-light
             .col-lg
               = link_to idea_path(idea), class: 'badge badge-light' do
-                = fa_icon "comments"
-                = pluralize(idea.comments.count, 'comment')
+                /= fa_icon "comments"
+                /= pluralize(idea.comments.count, 'comment')
               = link_to idea_path(idea), class: 'badge badge-light' do
                 = fa_icon "users"
                 = pluralize(idea.cofounders.count, 'cofounder')
