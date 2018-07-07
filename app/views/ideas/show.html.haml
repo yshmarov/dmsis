@@ -72,7 +72,7 @@
 /progress-bar
 %p
 .text-light.text-center
-  = pluralize(@idea.total_score, 'vote')
+  = pluralize(@idea.total_votes, 'vote')
 - if @idea.votes_for.any?
   .progress{:style => "height: 13px"}
     .progress-bar.bg-success{:style => "width:#{@idea.positive_percent}%"}

@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :cofounders
   resources :tags, only: [:show, :index, :destroy]
   resources :users, only: [:show, :index]
+  get 'people', to: 'users#people'
 end

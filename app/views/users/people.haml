@@ -1,0 +1,38 @@
+.text-white
+  %h1 People
+  %table.table.table-hover.table-striped.table-sm.table-responsive
+    %thead
+      %tr
+        %th Name
+        %th Watching
+        %th Ideas
+        %th Cofounding
+        %th Upvotes
+        %th Downvotes
+        %th Points
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= link_to user.username, user_path(user), class: 'text-white'
+          %td
+          %td
+            - if user.ideas.any?
+              = user.ideas.count
+            - else
+              \-
+          %td
+            - if user.cofounders.any?
+              = user.cofounders.count
+            - else
+              \-
+          %td
+            - if user.votes.up.any?
+              = user.votes.up.count
+            - else
+              \-
+          %td
+            - if user.votes.down.any?
+              = user.votes.down.count
+            - else
+              \-
+          %td= user.points
