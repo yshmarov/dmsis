@@ -3,7 +3,7 @@ class Idea < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy

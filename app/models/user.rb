@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   rolify
+  #User.find_each { |user| User.reset_counters(user.id, :ideas) }
+  #User.find_each { |user| User.reset_counters(user.id, :cofounders) }
+  #User.find_each { |user| User.reset_counters(user.id, :favorites) }
 
   #devise :database_authenticatable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   devise :database_authenticatable, :registerable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
@@ -20,7 +23,7 @@ class User < ApplicationRecord
   def points
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
-    ideas.count + cofounders.count + attachments.count + votes.count + favorites.count
+    ideas.count + cofounders.count + votes.count + favorites.count
     #includes(:expence).where(expences: {job_id: nil}).where.not(supplier_id: nil).where.not(supplier_price: 0) }
     #.joins(:ideas).where
     #ActsAsVotable::Vote.count

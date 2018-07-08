@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.order("created_at DESC")
     if current_user.has_role?(:admin)
       @users = User.order("created_at DESC")
     else
@@ -19,7 +18,9 @@ class UsersController < ApplicationController
   end
 
   def people
-    @users = User.order("created_at DESC")
+    #@users = User.all
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
   end
 
   private
