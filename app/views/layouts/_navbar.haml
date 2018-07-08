@@ -8,8 +8,8 @@
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.nav.navbar-nav
       = nav_bar do
-        /- if current_user
-        /  = nav_link "Unvoted #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unvoted_ideas_path
+        - if current_user
+          /= nav_link "Unvoted #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unvoted_ideas_path
         /- else
         /  = nav_link "Unvoted", unvoted_ideas_path
         /= nav_link "Random", random_ideas_path
