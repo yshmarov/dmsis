@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_23_140211) do
+ActiveRecord::Schema.define(version: 2018_07_07_224619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2018_05_23_140211) do
     t.datetime "updated_at", null: false
     t.index ["idea_id"], name: "index_comments_on_idea_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "idea_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["idea_id"], name: "index_favorites_on_idea_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -132,20 +141,18 @@ ActiveRecord::Schema.define(version: 2018_05_23_140211) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  create_table "votes", force: :cascade do |t|
+  create_table "votes", id: :integer, default: nil, force: :cascade do |t|
     t.string "votable_type"
-    t.bigint "votable_id"
+    t.integer "votable_id"
     t.string "voter_type"
-    t.bigint "voter_id"
+    t.integer "voter_id"
     t.boolean "vote_flag"
     t.string "vote_scope"
     t.integer "vote_weight"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
-    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
-    t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
   add_foreign_key "attachments", "ideas"
@@ -154,6 +161,8 @@ ActiveRecord::Schema.define(version: 2018_05_23_140211) do
   add_foreign_key "cofounders", "users"
   add_foreign_key "comments", "ideas"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "ideas"
+  add_foreign_key "favorites", "users"
   add_foreign_key "idea_tags", "ideas"
   add_foreign_key "idea_tags", "tags"
   add_foreign_key "ideas", "users"

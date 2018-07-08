@@ -6,11 +6,21 @@ class User < ApplicationRecord
   #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   acts_as_voter
+  has_many :ideas, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :cofounders, dependent: :destroy
+  has_many :attachments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  #has_many :idea_tags, through: :ideas
+  #has_many :tags, through: :idea_tags
+
+  after_create :assign_default_role
+  validates :email, uniqueness: true, if: :email_present
 
   def points
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
-    ideas.count + cofounders.count + attachments.count + votes.count
+    ideas.count + cofounders.count + attachments.count + votes.count + favorites.count
     #includes(:expence).where(expences: {job_id: nil}).where.not(supplier_id: nil).where.not(supplier_price: 0) }
     #.joins(:ideas).where
     #ActsAsVotable::Vote.count
@@ -21,21 +31,14 @@ class User < ApplicationRecord
     id
   end
 
-  validates :email, uniqueness: true, if: :email_present
-
   def email_present
     email.present?
   end
 
-  has_many :ideas, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :cofounders, dependent: :destroy
-  has_many :attachments, dependent: :destroy
-
-  #has_many :idea_tags, through: :ideas
-  #has_many :tags, through: :idea_tags
-
-  after_create :assign_default_role
+  def favorites?(idea)
+    #favorites.find_by(idea_id: idea.id).present?
+    idea.favorites.where(user_id: id).any?
+  end
 
   def assign_default_role
     self.add_role(:member) if self.roles.blank?
@@ -56,17 +59,6 @@ class User < ApplicationRecord
       end
     end
   end
-
-  #if the user is new
-  #def self.from_omniauth(auth)
-  #  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  #    user.email = auth.info.email
-  #    user.password = Devise.friendly_token[0,20]
-  #    user.name = auth.info.name   # assuming the user model has a name
-  #    user.image = auth.info.image # assuming the user model has an image
-  #    #user.description = auth.extra.raw_info.bio
-  #  end
-  #end
 
   def self.from_omniauth(auth)
     if !where(email: auth.info.email).empty?
@@ -91,14 +83,4 @@ class User < ApplicationRecord
       end
     end
   end
-  ### if user signed in with an email and wants to add FB
-  
-  #def self.from_omniauth(auth)
-  #  where(auth.info.slice(:email)).first_or_create do |user|
-  #    user.email = auth.info.email
-  #    user.password = Devise.friendly_token[0,20]
-  #    user.name = auth.info.name
-  #    user.image = auth.info.image # assuming the user model has an image
-  #  end
-  #end
 end

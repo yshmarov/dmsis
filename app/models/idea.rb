@@ -3,20 +3,11 @@ class Idea < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  scope :published, -> { where.not(published_at: nil) }
-
-  def published
-    if published_at == nil
-      false
-    else
-      true
-    end
-  end
-
   belongs_to :user
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :idea_tags, inverse_of: :idea, dependent: :destroy
   has_many :tags, through: :idea_tags
   accepts_nested_attributes_for :tags
@@ -52,7 +43,7 @@ class Idea < ApplicationRecord
   end
 
   def associations?
-    votes_for.size > 0 || comments.any? || cofounders.any? || attachments.any?
+    votes_for.size > 0 || comments.any? || cofounders.any? || attachments.any? || favorites.any?
   end
 
   private

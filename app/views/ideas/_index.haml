@@ -3,21 +3,11 @@
     .col-md-auto
       .text-center
         - if current_user
-          /.btn-group.pull-right
-          /  = link_to like_idea_path(idea), method: :put, class: 'btn btn-secondary btn-sm' do
-          /    %span.fa.fa-arrow-up
-          /    Upvote
-          /    #{idea.get_upvotes.size}
-          /  = link_to dislike_idea_path(idea), method: :put, class: 'btn btn-secondary btn-sm' do
-          /    %span.fa.fa-arrow-down
-          /    Downvote
-          /    #{idea.get_downvotes.size}
           - if current_user.voted_up_on? idea
             = fa_icon "thumbs-up", class: 'btn btn-sm btn-success disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
           - unless current_user.voted_for? idea
             = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
           .row
-          /%span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes", :type => "button"}
           %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
             = idea.total_score
           .row
@@ -41,8 +31,26 @@
       .card
         %h5.card-header.bg-light
           = link_to idea.name, idea, class: 'text-dark'
-          /.pull-right
-          /  TEST
+          .pull-right
+            - if user_signed_in? && current_user.favorites?(idea)
+              Unlike
+              /= link_to "Unlike", post_like_path(post), method: :delete, remote: true
+            - else
+              Like
+              /= link_to "Like", post_like_path(post), method: :post, remote: true
+            = idea.favorites.count
+
+            - if current_user
+              - if favorite = current_user.favorites?(idea)
+                = link_to [idea, favorite], class: 'btn btn-outline-danger', method: :delete do
+                  %i.fa.fa-star>
+                    Unwatch
+              - else
+                = link_to idea, class: 'btn btn-outline-success', method: :idea do
+                  %i.fa.fa-star>
+                    Watch
+            - else
+              = fa_icon "star", class: 'btn btn-sm btn-success disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to watch"
         .card-body
           .text-dark
             = simple_format(idea.description)
@@ -56,9 +64,6 @@
           .row.bg-light
             .col-lg
               = link_to idea_path(idea), class: 'badge badge-light' do
-                /= fa_icon "comments"
-                /= pluralize(idea.comments.count, 'comment')
-              = link_to idea_path(idea), class: 'badge badge-light' do
                 = fa_icon "users"
                 = pluralize(idea.cofounders.count, 'cofounder')
               = link_to idea_path(idea), class: 'badge badge-light' do
@@ -68,9 +73,6 @@
                 - if idea.cofounders.where(user_id: current_user.id).present?
                   %span.badge.badge-secondary
                     You've applied!
-              /.form-inline
-              /  = social_share_button_tag("What do you think about this startup idea? '#{idea.name}'", :allow_sites => %w(twitter telegram email), desc: idea.description)
-              /  = social_share_button_tag idea.name, desc: idea.description, :allow_sites => %w(facebook)
             .col-lg
               .text-right
                 .font-weight-light.font-italic
