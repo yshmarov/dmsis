@@ -23,7 +23,7 @@
       %tbody
         - @tags.each do |tag|
           %tr
-            %td= tag.id
+            %td= tag.idea_tags_count
             %td= tag.name
             %td= tag.idea_tags.count
             %td= link_to 'delete', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
