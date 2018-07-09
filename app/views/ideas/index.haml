@@ -2,6 +2,20 @@
   = controller.action_name.capitalize
   startup ideas
 
+%nav.navbar.navbar-expand-lg
+  /%ul.nav.navbar-nav
+  .card.bg-success
+    = nav_bar do
+      - if current_user
+        = nav_link "Unvoted #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unvoted_ideas_path
+      - else
+        = nav_link "Unvoted", unvoted_ideas_path
+      = nav_link "Random", random_ideas_path
+      /= nav_link "Trending", trending_ideas_path
+      = nav_link "Top", top_ideas_path
+      = nav_link "Fresh", fresh_ideas_path
+
+
 .text-center.text-white
   %h3
     /%span.badge.badge-light

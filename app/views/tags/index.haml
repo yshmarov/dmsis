@@ -12,7 +12,7 @@
   .form-inline
     - @tags.each do |tag|
       = link_to tag.popular_name, tag_path(tag), class: 'btn btn-success btn-sm'
-      /  - if current_user.has_role?(:admin)
-      /    %span.badge.badge-danger
-      /      = link_to 'x', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'text-white'
+      - if current_user.has_role?(:admin)
+        %span.badge.badge-danger
+          = link_to 'x', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'text-white'
 %br
