@@ -9,8 +9,9 @@
     ago
   .container
     %h6
-      - if current_user.name
-        = link_to "Link your Facebook account", user_facebook_omniauth_authorize_path
+      - if current_user.id == @user.id
+        - unless current_user.name
+          = link_to "Link your Facebook account", user_facebook_omniauth_authorize_path
       %br
       Posted
       = @user.ideas.count

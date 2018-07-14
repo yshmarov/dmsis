@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   get 'terms_of_service', to: 'static_pages#terms_of_service'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'contacts', to: 'static_pages#contacts'
+
   resources :ideas do
+    #resource :favorite, only: [:create, :destroy]
     member do
-      patch :publish
-      patch :unpublish
       put "like", to: "ideas#upvote"
       put "dislike", to: "ideas#downvote"
     end

@@ -43,6 +43,7 @@ class IdeasController < ApplicationController
   end
 
   def top
+    #@ideas = @ideas.favorited_by(params[:favorited]) if params[:favorited].present?
     unless current_user
       @ideas = Idea.order(:cached_weighted_score => :desc).limit(3)
     else

@@ -20,6 +20,22 @@ class User < ApplicationRecord
   after_create :assign_default_role
   validates :email, uniqueness: true, if: :email_present
 
+  #def favorite(idea)
+  #  favorites.find_or_create_by(idea: idea)
+  #end
+  #def unfavorite(idea)
+  #  favorites.where(idea: idea).destroy_all
+  #  favorite = self.favorites.find_by_idea_id(idea.id)
+  #  favorite.destroy!
+  #
+  #  idea.reload
+  #end
+  #def favorited?(idea)
+  #  self.favorites.find_by_idea_id(idea.id)
+  #  favorites.find_by(idea_id: idea.id).present?
+  #  #idea.favorites.where(user_id: id).any?
+  #end
+
   def points
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
     #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
@@ -36,11 +52,6 @@ class User < ApplicationRecord
 
   def email_present
     email.present?
-  end
-
-  def favorites?(idea)
-    #favorites.find_by(idea_id: idea.id).present?
-    idea.favorites.where(user_id: id).any?
   end
 
   def assign_default_role
