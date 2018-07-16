@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  root to: "ideas#top"
+  root to: "ideas#index"
   get 'terms_of_service', to: 'static_pages#terms_of_service'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'contacts', to: 'static_pages#contacts'
