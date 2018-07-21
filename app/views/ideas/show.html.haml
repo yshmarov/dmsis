@@ -1,3 +1,6 @@
+- content_for :title do
+  = @idea.name
+  | Does my startup idea suck?
 /owner actions
 /= link_to 'Transfer ownership', edit_idea_path(@idea), class: 'btn btn-warning disabled'
 /= link_to 'Change idea status', edit_idea_path(@idea), class: 'btn btn-warning disabled'
