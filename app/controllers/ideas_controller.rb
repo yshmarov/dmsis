@@ -3,7 +3,7 @@ class IdeasController < ApplicationController
   skip_before_action :authenticate_user!, :only => [ :top ]
 
   def index
-    redirect_to top_ideas_path
+    redirect_to fresh_ideas_path
   end
 
   def trending
