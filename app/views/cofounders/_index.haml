@@ -6,6 +6,7 @@
           - if cofounder.user.image.present?
             = image_tag cofounder.user.image, size: '20x20', alt: "that's me"
           = link_to cofounder.user.username, user_path(cofounder.user)
+          /= cofounder.user.email
         %br
         - if cofounder.user == current_user
           = link_to 'remove me', cofounder, method: :delete, data: { confirm: 'Are you sure?' }
