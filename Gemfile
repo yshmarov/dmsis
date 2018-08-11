@@ -78,3 +78,4 @@ gem "pundit"
 gem "rolify"
 gem 'ransack'
 gem 'social-share-button'
+gem 'exception_notification'
