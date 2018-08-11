@@ -7,7 +7,7 @@ Rails.application.configure do
       :exception_recipients => %w{yshmarov@gmail.com}
     }
   # devise says to define default url
-  config.action_mailer.default_url_options = { :host => 'secure.doesmystartupideasuck.herokuapp.com', :protocol => 'https' }
+  config.action_mailer.default_url_options = { :host => 'doesmystartupideasuck.herokuapp.com', :protocol => 'https' }
 
 
   #config.action_mailer.delivery_method = :sendmail
