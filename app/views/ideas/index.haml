@@ -24,7 +24,7 @@
     - if controller.action_name == 'random'
       = link_to 'Next', random_ideas_path, class: 'btn btn-secondary rounded-circle'
 
-= render 'ideas/index'
+= render 'ideas/new_index'
 - unless current_user
   %div{:class => "alert alert-warning", :role => "alert"}
     %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
