@@ -6,73 +6,79 @@
 /= link_to 'Change idea status', edit_idea_path(@idea), class: 'btn btn-warning disabled'
 /= link_to 'Add proof of realisation', edit_idea_path(@idea), class: 'btn btn-warning disabled'
 /owner actions
-%p
-.row
-  /likes
-  .col-md-auto
-    .text-center
-      - if current_user
-        - if current_user.voted_up_on? @idea
-          = fa_icon "thumbs-up", class: 'btn btn-sm btn-success disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
-        - unless current_user.voted_for? @idea
-          = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(@idea), method: :put, class: 'btn btn-sm btn-outline-success rounded-circle'
-        .row
-        %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "all upvotes - downvotes"}
-          = @idea.total_score
-        .row
-        - unless current_user.voted_for? @idea
-          = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(@idea), method: :put, class: 'btn btn-sm btn-outline-danger rounded-circle'
-        - if current_user.voted_down_on? @idea
-          = fa_icon "thumbs-down", class: 'btn btn-sm btn-danger disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already downvoted"
-      - else
-        = fa_icon "thumbs-up", class: 'btn btn-sm btn-outline-success rounded-circle'
-        .row
-        %span.badge.badge-secondary.btn-block
-          = @idea.total_score
-        .row
-        = fa_icon "thumbs-down", class: 'btn btn-sm btn-outline-danger rounded-circle'
-  /likes
-  /card
-  .col
-    .card
-      %h5.card-header.bg-light
-        = @idea.name
-        - if @idea.user == current_user
-          .pull-right
-            = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
-            - unless @idea.associations?
-              = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
-      .card-body
-        = simple_format(@idea.description)
-        .form-inline
-          - @idea.tags.each do |tag|
-            %span.badge.badge-success
-              = link_to tag.name, tag_path(tag), class: 'text-white'
-      .container
-        .row.bg-light
-          .col-lg
-            %span.badge.badge-light
-              = fa_icon "exclamation-triangle"
-              = pluralize(@idea.attachments.count, 'attachment')
-            %span.badge.badge-light
-              = fa_icon "users"
-              = pluralize(@idea.cofounders.count, 'cofounder')
-          .col-lg
-            .text-right
-              .font-weight-light.font-italic
-                created
-                = time_ago_in_words(@idea.created_at)
-                ago by
-                - if @idea.user_id == current_user.id
-                  %span.badge.badge-success
-                    You
-                - else
-                  = link_to @idea.user.username, user_path(@idea.user)
-    .form-inline
-      = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
-      = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
 /card
 /progress-bar
+.card
+  %h5.card-header.bg-light
+    = link_to @idea.name, @idea, class: 'text-dark'
+    - if @idea.user == current_user
+      .pull-right
+        = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
+        - unless @idea.associations?
+          = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
+
+  .card-body
+    = simple_format(@idea.description)
+    .row
+    .form-inline
+      - @idea.tags.each do |tag|
+        %span.badge.badge-success
+          = link_to tag.name, tag_path(tag), class: 'text-white'
+      %p
+  .card-footer.bg-light
+    .row.text-center
+      - if current_user
+        .col-4
+          - if current_user.voted_down_on? @idea
+            = fa_icon "thumbs-down", class: 'btn btn-lg btn-danger btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already downvoted"
+          - unless current_user.voted_for? @idea
+            = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(@idea), method: :put, class: 'btn btn-lg btn-outline-danger btn-block'
+        .col-4
+          %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
+            = pluralize(@idea.total_score, 'point')
+          %small= pluralize(@idea.total_votes, 'vote')
+        .col-4
+          - if current_user.voted_up_on? @idea
+            = fa_icon "thumbs-up", class: 'btn btn-lg btn-success btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
+          - unless current_user.voted_for? @idea
+            = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(@idea), method: :put, class: 'btn btn-lg btn-outline-success btn-block'
+      - else
+        .col
+          = fa_icon "thumbs-up", class: 'btn btn-lg btn-success btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
+        .col
+          %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
+            = idea.cached_weighted_score
+        .col
+          = fa_icon "thumbs-down", class: 'btn btn-lg btn-danger btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
+  %small.container
+    .row.bg-light
+      .col
+        = link_to idea_path(@idea), class: 'badge badge-light' do
+          = fa_icon "users"
+          = pluralize(@idea.cofounders.count, 'cofounder')
+        = link_to idea_path(@idea), class: 'badge badge-light' do
+          = fa_icon "exclamation-triangle"
+          = pluralize(@idea.attachments.count, 'attachment')
+        - if current_user
+          - if @idea.cofounders.where(user_id: current_user.id).present?
+            %span.badge.badge-secondary
+              You've applied!
+      .col
+        .text-right
+          .font-weight-light.font-italic
+            = time_ago_in_words(@idea.created_at)
+            ago by
+            - if current_user
+              - if @idea.user_id == current_user.id
+                %span.badge.badge-success
+                  You
+              - else
+                = link_to @idea.user.username, user_path(idea.user)
+            - else
+              = link_to @idea.user.username, user_path(idea.user)
+.form-inline
+  = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
+  = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
 %p
 .text-light.text-center
   = pluralize(@idea.total_votes, 'vote')
