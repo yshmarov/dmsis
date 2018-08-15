@@ -4,7 +4,7 @@ class Idea < ApplicationRecord
   friendly_id :name, use: :slugged
 
   include PublicActivity::Model
-  tracked
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   #scope :authored_by, ->(username) { where(user: User.where(username: username)) }
   #scope :favorited_by, -> (username) { joins(:favorites).where(favorites: { user: User.where(username: username) }) }

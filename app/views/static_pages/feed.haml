@@ -9,7 +9,9 @@
       = link_to a.trackable.name, a.trackable
     - else
       which has since been removed
-    = link_to a.owner.name, a.owner if a.owner
+    - if a.owner
+      by
+      = link_to a.owner.name, a.owner
     /= a.trackable_type
     /= a.trackable_id
   /= render_activities(@activities, layout: :activity)
