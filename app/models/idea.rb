@@ -3,6 +3,9 @@ class Idea < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  include PublicActivity::Model
+  tracked
+
   #scope :authored_by, ->(username) { where(user: User.where(username: username)) }
   #scope :favorited_by, -> (username) { joins(:favorites).where(favorites: { user: User.where(username: username) }) }
   belongs_to :user, counter_cache: true

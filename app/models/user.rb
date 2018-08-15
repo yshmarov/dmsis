@@ -7,6 +7,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable, :omniauth_providers => [:facebook]
 
+  include PublicActivity::Model
+  tracked
+
   acts_as_voter
   has_many :ideas, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -18,6 +21,7 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
   validates :email, uniqueness: true, if: :email_present
+
 
   #def favorite(idea)
   #  favorites.find_or_create_by(idea: idea)
