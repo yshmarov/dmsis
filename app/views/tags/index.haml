@@ -5,21 +5,24 @@
     = search_form_for @q, url: tags_path do |f|
       .mr-sm-2
         = f.text_field :name_cont, class: 'form-control', placeholder: 'Find Tag', autofocus: true
-      %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
+      %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"}
+        .fa.fa-search
       .my-2.my-sm-0
         = link_to "<i class='fa fa-refresh'></i>".html_safe, tags_path, class: 'btn btn-outline-secondary'
-  %br
-  .form-inline
-    - @tags.each do |tag|
-      = link_to tag.popular_name, tag_path(tag), class: 'btn btn-success btn-sm'
+  %table
+    %thead
+      %tr
+        %th= sort_link(@q, :name, "Tag")
+        %th= sort_link(@q, :idea_tags_count, "Ideas")
+        %th
+    %tbody
+      - @tags.order('name ASC').each do |tag|
+        %tr
+          %p
+            %td= link_to tag.name, tag_path(tag), class: 'btn btn-success btn-sm'
+            %td= tag.idea_tags_count
+            %td
+              - if current_user.has_role?(:admin)
+                = link_to 'x', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-sm btn-danger'
 %br
-- if current_user.has_role?(:admin)
-  .text-white
-    .text-center 
-      %h3 Admin Tags
-  %p
-  - @tags.each do |tag|
-    %p
-      = link_to tag.popular_name, tag_path(tag)
-      = link_to 'x', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-sm btn-danger'
-  %br
+

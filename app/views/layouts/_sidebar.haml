@@ -51,13 +51,13 @@
     %p
     .row
       .col
-        Top tags
+        Top Tags
       .col
         .text-right
           = link_to 'all', tags_path
     %p
     .form-inline
-      - Tag.all.limit(5).each do |tag|
+      - Tag.limit(5).order('idea_tags_count DESC').each do |tag|
         /%div{:style => "word-wrap: break-word"}
         %span.badge.badge-success
           = link_to tag.popular_name, tag_path(tag), class: 'text-white'
