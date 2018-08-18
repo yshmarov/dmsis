@@ -24,10 +24,8 @@
     %p
     = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'text-dark'
     %p
-    /%b
-    /  = current_user.votes.down.count
-    /  downvotes
-    /%p
+    = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'text-dark'
+    %p
     = link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path, class: 'text-dark'
     /= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
     %p

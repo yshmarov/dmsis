@@ -22,6 +22,11 @@ class IdeasController < ApplicationController
     render 'ideas/index'
   end
 
+  def downvoted
+    @ideas = Idea.where(id: current_user.find_down_voted_items.map(&:id))
+    render 'ideas/index'
+  end
+
   def unvoted
     @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id))
     render 'ideas/index'
