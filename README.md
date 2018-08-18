@@ -1,3 +1,6 @@
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U yaro -d doesmystartupideasuck_development latest.dump
+
+
 doesmystartupideasuck.com
 doesmystartupsuck.com
 share. validate. discover.
