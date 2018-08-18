@@ -20,49 +20,17 @@
       =  current_user.points
       points
     %p
-    = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'text-dark'
+    = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
     %p
-    = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'text-dark'
+    = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
     %p
-    /%b
-    /  = current_user.votes.down.count
-    /  downvotes
-    /%p
-    = link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path, class: 'text-dark'
-    /= link_to "#{current_user.cofounders.count} want to do", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
+    = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
+    %p
+    /= link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'text-dark'
+    = link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
     %p
   %p
-  = link_to 'Submit new idea', new_idea_path, class: 'btn btn-success btn-block'
-  %p
-  .card.container-fluid
-    %p
-    Discover
-    = Idea.count
-    ideas 
-    %br
-    validated by 
-    = User.count
-    users
-    = ActsAsVotable::Vote.count
-    times
-    %p
-  %p
-  .card.container-fluid
-    %p
-    .row
-      .col
-        Top Tags
-      .col
-        .text-right
-          = link_to 'all', tags_path
-    %p
-    .form-inline
-      - Tag.limit(5).order('idea_tags_count DESC').each do |tag|
-        /%div{:style => "word-wrap: break-word"}
-        %span.badge.badge-success
-          = link_to tag.popular_name, tag_path(tag), class: 'text-white'
-    %p
-  %br
+  = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-success btn-block'
 - else
   .card
     %h5.card-header.bg-success.white-text Startup inspiration from the crowd
@@ -91,4 +59,34 @@
           %a{:href => "https://www.doesmystartupideasuck.com/"} doesmystartupideasuck.com
           %br
           Last updated on #{Time.now.strftime('%F')}
+%p
+.card.container-fluid
+  %p
+  Discover
+  = Idea.count
+  ideas 
+  %br
+  validated by 
+  = User.count
+  users
+  = ActsAsVotable::Vote.count
+  times
+  %p
+%p
+.card.container-fluid
+  %p
+  .row
+    .col
+      Top Tags
+    .col
+      .text-right
+        = link_to 'all', tags_path
+  %p
+  .form-inline
+    - Tag.limit(5).order('idea_tags_count DESC').each do |tag|
+      /%div{:style => "word-wrap: break-word"}
+      %span.badge.badge-success
+        = link_to tag.popular_name, tag_path(tag), class: 'text-white'
+  %p
+  %br
 %br

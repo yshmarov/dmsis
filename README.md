@@ -1,3 +1,6 @@
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U yaro -d doesmystartupideasuck_development latest.dump
+Idea.find(60).update_attributes!(user_id: "20")
+
 doesmystartupideasuck.com
 doesmystartupsuck.com
 share. validate. discover.

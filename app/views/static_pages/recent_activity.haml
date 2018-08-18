@@ -1,5 +1,5 @@
 .text-white
-  %h1 Feed
+  %h1 Recent activity
   - @activities.each do |a|
     %p
     = distance_of_time_in_words Time.now, a.created_at

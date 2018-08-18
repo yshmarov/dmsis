@@ -16,12 +16,12 @@
         /= nav_link "Trending", trending_ideas_path
         /= nav_link "Top", top_ideas_path
         /= nav_link "Fresh", fresh_ideas_path
-        = nav_link "FEED", feed_path
+        = nav_link "Recent activity", recent_activity_path
         = nav_link "Ideas", fresh_ideas_path
         = nav_link "Tags", tags_path
         = nav_link "People", people_path
         /= link_to "+ Idea", new_idea_path, class: 'btn btn-outline-warning'
-        = link_to '+ Submit an Idea', new_idea_path, class: 'btn btn-warning'
+        = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-warning'
         .d-lg-none
           - if current_user
             = link_to 'Submit new idea', new_idea_path, class: 'btn btn-light btn-block'

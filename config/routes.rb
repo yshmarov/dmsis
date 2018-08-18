@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'terms_of_service', to: 'static_pages#terms_of_service'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'contacts', to: 'static_pages#contacts'
-  get 'feed', to: 'static_pages#feed'
+  get 'recent_activity', to: 'static_pages#recent_activity'
 
   resources :ideas do
     #resource :favorite, only: [:create, :destroy]
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       put "like", to: "ideas#upvote"
       put "dislike", to: "ideas#downvote"
     end
-    get :fresh, :top, :my, :random, :unvoted, :upvoted, :cofounding, :trending, on: :collection
+    get :fresh, :top, :my, :random, :unvoted, :upvoted, :downvoted, :cofounding, :trending, on: :collection
   end
   resources :comments
   resources :attachments

@@ -11,7 +11,7 @@
 .card
   %h5.card-header.bg-light
     = link_to @idea.name, @idea, class: 'text-dark'
-    - if @idea.user == current_user
+    - if policy(@idea).update?
       .pull-right
         = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
         - unless @idea.associations?
@@ -73,9 +73,9 @@
                 %span.badge.badge-success
                   You
               - else
-                = link_to @idea.user.username, user_path(idea.user)
+                = link_to @idea.user.username, user_path(@idea.user)
             - else
-              = link_to @idea.user.username, user_path(idea.user)
+              = link_to @idea.user.username, user_path(@idea.user)
 .form-inline
   = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
   = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)

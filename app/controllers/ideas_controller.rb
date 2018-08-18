@@ -22,6 +22,11 @@ class IdeasController < ApplicationController
     render 'ideas/index'
   end
 
+  def downvoted
+    @ideas = Idea.where(id: current_user.find_down_voted_items.map(&:id))
+    render 'ideas/index'
+  end
+
   def unvoted
     @ideas = Idea.where.not(id: current_user.find_voted_items.map(&:id))
     render 'ideas/index'
@@ -87,6 +92,10 @@ class IdeasController < ApplicationController
   end
 
   def edit
+    if @idea.user_id == current_user.id
+    else
+      redirect_to @idea, notice: "You don't own the idea."
+    end
   end
 
   def create
@@ -100,6 +109,7 @@ class IdeasController < ApplicationController
   end
 
   def update
+    authorize @idea
     #if @idea.created_at > Time.now - 24.hours
     if @idea.update(idea_params)
       redirect_to @idea, notice: 'Idea was successfully updated.'
