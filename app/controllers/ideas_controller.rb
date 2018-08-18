@@ -109,20 +109,17 @@ class IdeasController < ApplicationController
   end
 
   def update
+    authorize @idea
     #if @idea.created_at > Time.now - 24.hours
-    if @idea.user_id == current_user.id
-      if @idea.update(idea_params)
-        redirect_to @idea, notice: 'Idea was successfully updated.'
-      else
-        render :edit
-        format.html { render :edit }
-      end
-      #else
-      #  render :edit, notice: 'Too old to update.'
-      #end
+    if @idea.update(idea_params)
+      redirect_to @idea, notice: 'Idea was successfully updated.'
     else
-      redirect_to @idea, notice: "You don't own the idea."
+      render :edit
+      format.html { render :edit }
     end
+    #else
+    #  render :edit, notice: 'Too old to update.'
+    #end
   end
 
   def destroy

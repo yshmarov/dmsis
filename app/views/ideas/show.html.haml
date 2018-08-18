@@ -11,7 +11,7 @@
 .card
   %h5.card-header.bg-light
     = link_to @idea.name, @idea, class: 'text-dark'
-    - if @idea.user == current_user
+    - if policy(@idea).update?
       .pull-right
         = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
         - unless @idea.associations?
