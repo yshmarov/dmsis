@@ -92,6 +92,10 @@ class IdeasController < ApplicationController
   end
 
   def edit
+    if @idea.user_id == current_user.id
+    else
+      redirect_to @idea, notice: "You don't own the idea."
+    end
   end
 
   def create
@@ -106,15 +110,19 @@ class IdeasController < ApplicationController
 
   def update
     #if @idea.created_at > Time.now - 24.hours
-    if @idea.update(idea_params)
-      redirect_to @idea, notice: 'Idea was successfully updated.'
+    if @idea.user_id == current_user.id
+      if @idea.update(idea_params)
+        redirect_to @idea, notice: 'Idea was successfully updated.'
+      else
+        render :edit
+        format.html { render :edit }
+      end
+      #else
+      #  render :edit, notice: 'Too old to update.'
+      #end
     else
-      render :edit
-      format.html { render :edit }
+      redirect_to @idea, notice: "You don't own the idea."
     end
-    #else
-    #  render :edit, notice: 'Too old to update.'
-    #end
   end
 
   def destroy
