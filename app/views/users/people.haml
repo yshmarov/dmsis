@@ -1,6 +1,8 @@
 .text-white
   .text-center
     %h3 People
+    - if current_user.has_role?(:admin)
+      = link_to 'Users', users_path
   %br
   %table.table.table-hover.table-striped.table-sm.table-responsive
     %thead
