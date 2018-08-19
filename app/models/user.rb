@@ -7,8 +7,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable, :omniauth_providers => [:facebook]
 
-  #include PublicActivity::Model
-  #tracked
+  include PublicActivity::Model
+  tracked
 
   acts_as_voter
   has_many :ideas, dependent: :destroy

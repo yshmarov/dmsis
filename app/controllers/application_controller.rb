@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :authenticate_user!
 
-  #include PublicActivity::StoreController 
+  include PublicActivity::StoreController 
   private
     def user_not_authorized
       flash[:alert] = "You are not authorized to access this page."
