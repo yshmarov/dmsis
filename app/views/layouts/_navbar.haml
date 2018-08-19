@@ -21,10 +21,9 @@
         = nav_link "Tags", tags_path
         = nav_link "People", people_path
         /= link_to "+ Idea", new_idea_path, class: 'btn btn-outline-warning'
-        = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-warning'
         .d-lg-none
           - if current_user
-            = link_to 'Submit new idea', new_idea_path, class: 'btn btn-light btn-block'
+            = link_to 'Submit new idea', new_idea_path, class: 'btn btn-warning btn-block'
             .text-center
               - if current_user.image?
                 = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
@@ -35,3 +34,22 @@
           = link_to "Log in", new_user_session_path, class: 'btn btn-light btn-block'
           = link_to "Sign up", new_user_registration_path, class: 'btn btn-warning btn-block text-dark'
           = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary btn-block text-light'
+  /.d-none.d-lg-block
+  /  .form-inline.my-2.my-lg-0
+  /    = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-warning'
+/%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+/  %button.navbar-toggler{"aria-controls" => "navbarTogglerDemo01", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarTogglerDemo01", "data-toggle" => "collapse", :type => "button"}
+/    %span.navbar-toggler-icon
+/  #navbarTogglerDemo01.collapse.navbar-collapse
+/    %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+/      %li.nav-item.active
+/        %a.nav-link{:href => "#"}
+/          Home
+/          %span.sr-only (current)
+/      %li.nav-item
+/        %a.nav-link{:href => "#"} Link
+/      %li.nav-item
+/        %a.nav-link.disabled{:href => "#"} Disabled
+/    %form.form-inline.my-2.my-lg-0
+/      %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+/      %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search

@@ -25,6 +25,8 @@
             %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
               = pluralize(idea.total_score, 'point')
             %small= pluralize(idea.total_votes, 'vote')
+            /%small= idea.cached_weighted_average
+            /approval
           .col-4
             - if current_user.voted_up_on? idea
               = fa_icon "thumbs-up", class: 'btn btn-lg btn-success btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already upvoted"
