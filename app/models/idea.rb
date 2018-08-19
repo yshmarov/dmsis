@@ -8,7 +8,7 @@ class Idea < ApplicationRecord
 
   #scope :authored_by, ->(username) { where(user: User.where(username: username)) }
   #scope :favorited_by, -> (username) { joins(:favorites).where(favorites: { user: User.where(username: username) }) }
-  belongs_to :user, counter_cache: true
+  belongs_to :user, counter_cache: true, touch: true
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy

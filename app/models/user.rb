@@ -8,7 +8,8 @@ class User < ApplicationRecord
   #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable, :omniauth_providers => [:facebook]
 
   include PublicActivity::Model
-  tracked
+  tracked only: [:create]
+  #tracked
 
   acts_as_voter
   has_many :ideas, dependent: :destroy
@@ -20,8 +21,9 @@ class User < ApplicationRecord
   #has_many :tags, through: :idea_tags
 
   after_create :assign_default_role
+  after_update :update_points
+  after_touch :update_points
   validates :email, uniqueness: true, if: :email_present
-
 
   #def favorite(idea)
   #  favorites.find_or_create_by(idea: idea)
@@ -38,16 +40,6 @@ class User < ApplicationRecord
   #  favorites.find_by(idea_id: idea.id).present?
   #  #idea.favorites.where(user_id: id).any?
   #end
-
-  def points
-    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
-    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
-    ideas.count + cofounders.count + votes.count + favorites.count
-    #includes(:expence).where(expences: {job_id: nil}).where.not(supplier_id: nil).where.not(supplier_price: 0) }
-    #.joins(:ideas).where
-    #ActsAsVotable::Vote.count
-    #votes.count
-  end
 
   def to_s
     id
@@ -67,6 +59,16 @@ class User < ApplicationRecord
     elsif email.present?
       self.email.split(/@/).first
     end
+  end
+
+  def update_points
+    update_column :points, (ideas.count + cofounders.count + votes.count + favorites.count + attachments.count)
+    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
+    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
+    #includes(:expence).where(expences: {job_id: nil}).where.not(supplier_id: nil).where.not(supplier_price: 0) }
+    #.joins(:ideas).where
+    #ActsAsVotable::Vote.count
+    #votes.count
   end
 
   def self.new_with_session(params, session)

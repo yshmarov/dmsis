@@ -1,3 +1,8 @@
+- content_for :title do
+  Feed | Does my startup idea suck?
+/= controller.action_name.capitalize
+/startup ideas
+
 .text-white
   %h1 Recent activity
   - @activities.each do |a|
@@ -16,4 +21,3 @@
     /= a.trackable_id
   /= render_activities(@activities, layout: :activity)
   /= render_activities(@activities)
-

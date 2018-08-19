@@ -28,7 +28,7 @@
             .text-center
               - if current_user.image?
                 = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
-              %b= link_to current_user.username, user_path(current_user), class: 'text-white'
+              %b= link_to current_user.name, user_path(current_user), class: 'text-white'
               = link_to "<i class='fa fa-sign-out'></i> Sign out".html_safe, destroy_user_session_path, method: :delete, class: 'nav-link text-white'
       - unless current_user
         .d-lg-none
