@@ -15,7 +15,7 @@
         %th Downvotes
         %th= sort_link @q, :points_count, "Points"
     %tbody
-      - @users.order('points ASC').each do |user|
+      - @users.order('points DESC').each do |user|
         %tr
           %td= link_to user.username, user_path(user)
           %td= user.ideas_count
