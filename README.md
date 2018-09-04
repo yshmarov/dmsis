@@ -1,3 +1,11 @@
+User.find_each { |user| User.reset_counters(user.id, :ideas) }
+User.find_each { |user| User.reset_counters(user.id, :cofounders) }
+User.find_each { |user| User.reset_counters(user.id, :favorites) }
+Tag.find_each { |tag| Tag.reset_counters(tag.id, :idea_tags) }
+User.find_each {|m| m.update_attributes(updated_at: Time.now)}
+
+
+
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U yaro -d doesmystartupideasuck_development latest.dump
 Idea.find(60).update_attributes!(user_id: "20")
 
