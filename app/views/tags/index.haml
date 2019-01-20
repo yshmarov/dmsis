@@ -4,7 +4,9 @@
   %form.form-inline.my-2.my-lg-0
     = search_form_for @q, url: tags_path do |f|
       .mr-sm-2
-        = f.text_field :name_cont, class: 'form-control', placeholder: 'Find Tag', autofocus: true
+        /= f.text_field :name_cont, class: 'form-control', placeholder: 'Find Tag', autofocus: true
+        = f.select :name_cont, Tag.all.map{|c| [c.name, c.name]}, {include_blank: true}, class: 'selectize', style: 'width: 150px'
+
       %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"}
         .fa.fa-search
       .my-2.my-sm-0
