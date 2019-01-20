@@ -5,12 +5,11 @@
     = f.input :name, autofocus: true, maxlength: 255, placeholder: 'Title of the idea'
     %div{:style => "min-height: 100%"}
     = f.input :description, maxlength: 10000, placeholder: 'What problem do you want to solve? What solution do you suggest?', :input_html => {:rows => 8}
-    %h4 Tags
-    #tags.tab-pane
-      = f.simple_fields_for :idea_tags do |idea_tag|
-        = render 'idea_tag_fields', :f => idea_tag
-      %p
-      = link_to_add_association 'add a tag', f, :idea_tags, class: 'btn btn-secondary'
+
+
+    = f.label :tags
+    = f.select :idea_tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize" }
+
   %p
   %hr
   .form-actions

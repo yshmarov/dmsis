@@ -15,8 +15,8 @@ class Idea < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :idea_tags, inverse_of: :idea, dependent: :destroy
   has_many :tags, through: :idea_tags
-  accepts_nested_attributes_for :tags
-  accepts_nested_attributes_for :idea_tags, allow_destroy: true
+  #accepts_nested_attributes_for :tags
+  #accepts_nested_attributes_for :idea_tags, allow_destroy: true
   acts_as_votable
 
   validates :user_id, :name, :description, presence: :true

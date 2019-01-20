@@ -1,3 +1,7 @@
+/*global $*/
+/*global app*/
+/*global moment*/
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -16,7 +20,16 @@
 //= require bootstrap
 //= require rails-ujs
 //= require activestorage
+//= require selectize
 //= require turbolinks
 //= require cocoon
 //= require social-share-button
 //= require_tree .
+$(document).on('turbolinks:load', function(){
+
+  if ($('.selectize')){
+      $('.selectize').selectize({
+          sortField: 'text'
+      });
+  }
+});
