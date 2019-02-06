@@ -81,3 +81,4 @@ gem 'social-share-button'
 gem 'exception_notification'
 gem 'public_activity'
 gem "selectize-rails"
+gem 'rjv'
