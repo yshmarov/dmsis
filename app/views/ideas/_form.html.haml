@@ -10,6 +10,9 @@
     = f.label :tags
     = f.select :idea_tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: "selectize" }
 
+    /= select :user, options_for_collection_for_select(User.all, :name, :name), { prompt: "Please select.." }, { multiple: true, class: "selectize" }
+
+
   %p
   %hr
   .form-actions

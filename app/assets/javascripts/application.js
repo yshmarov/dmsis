@@ -23,7 +23,7 @@
 //= require cocoon
 //= require social-share-button
 
-$(document).on('turbolinks:load', function(){
+$(document).ready(function(){
 
   if ($('.selectize')){
       $('.selectize').selectize({
@@ -31,11 +31,5 @@ $(document).on('turbolinks:load', function(){
       });
   }
 
-  $('form').on('cocoon:after-insert', function(e, addedItem) {
-    $(addedItem).find('.selectize').selectize({
-      sortField: 'text'
-    })
-  });
-
-  
 });
+
