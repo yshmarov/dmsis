@@ -22,7 +22,7 @@
 //= require turbolinks
 //= require cocoon
 //= require social-share-button
-//= require_tree .
+
 $(document).on('turbolinks:load', function(){
 
   if ($('.selectize')){
@@ -30,4 +30,12 @@ $(document).on('turbolinks:load', function(){
           sortField: 'text'
       });
   }
+
+  $('form').on('cocoon:after-insert', function(e, addedItem) {
+    $(addedItem).find('.selectize').selectize({
+      sortField: 'text'
+    })
+  });
+
+  
 });
