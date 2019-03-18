@@ -18,12 +18,12 @@
 //= require selectize
 //= require popper
 //= require rails-ujs
-//= require activestorage
-//= require turbolinks
 //= require cocoon
 //= require social-share-button
+//= require activestorage
+//= require turbolinks
 
-$(document).ready(function(){
+$(document).on('turbolinks:load', function(){
 
   if ($('.selectize')){
       $('.selectize').selectize({
