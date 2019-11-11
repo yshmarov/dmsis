@@ -43,10 +43,8 @@
         Discover new ones.
         %br
         Find a team.
+      %hr
       .text-center
-        = link_to "Log in", new_user_session_path, class: 'btn btn-outline-success'
-        = link_to "Sign up", new_user_registration_path, class: 'btn btn-success'
-        %p
         = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary'
         %p
         = link_to 'Privacy Policy', privacy_policy_path
