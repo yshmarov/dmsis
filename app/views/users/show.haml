@@ -27,11 +27,6 @@
       = @user.votes.down.count
       downvotes
       %br
-      Wrote
-      = @user.comments.count
-      comments
-      %br
-      %br
 %br
 %nav
   #nav-tab.nav.nav-tabs{:role => "tablist"}
@@ -40,7 +35,6 @@
     - if current_user.has_role?(:admin)
       %a#nav-profile-tab.nav-item.nav-link{"aria-controls" => "nav-profile", "aria-selected" => "false", "data-toggle" => "tab", :href => "#nav-profile", :role => "tab"} Upvoted
       %a#nav-contact-tab.nav-item.nav-link{"aria-controls" => "nav-contact", "aria-selected" => "false", "data-toggle" => "tab", :href => "#nav-contact", :role => "tab"} Downvoted
-      %a#nav-comment-tab.nav-item.nav-link{"aria-controls" => "nav-comment", "aria-selected" => "false", "data-toggle" => "tab", :href => "#nav-comment", :role => "tab"} Comments
 #nav-tabContent.tab-content
   #nav-home.tab-pane.fade.show.active{"aria-labelledby" => "nav-home-tab", :role => "tabpanel"}
     %br= render 'ideas/index'
@@ -55,10 +49,3 @@
       - Idea.where(id: @user.find_down_voted_items.map(&:id)).each do |idea|
         %br= link_to idea.name, idea_path(idea)
       %br
-    #nav-comment.tab-pane.fade{"aria-labelledby" => "nav-contact-tab", :role => "tabpanel"}
-      %br
-      - @comments.each do |comment|
-        %br
-          .text-white
-            "#{comment}"
-            in #{link_to comment.idea.name, idea_path(comment.idea)}

@@ -13,7 +13,6 @@ class User < ApplicationRecord
 
   acts_as_voter
   has_many :ideas, dependent: :destroy
-  has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy
   has_many :attachments, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -63,12 +62,6 @@ class User < ApplicationRecord
 
   def update_points
     update_column :points, (ideas.count + cofounders.count + votes.count + favorites.count + attachments.count)
-    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + find_voted_items.count
-    #comments.count + ideas.count * 10 + cofounders.count * 5 + attachments.count * 2 + votes.count + ideas.get_votes.size
-    #includes(:expence).where(expences: {job_id: nil}).where.not(supplier_id: nil).where.not(supplier_price: 0) }
-    #.joins(:ideas).where
-    #ActsAsVotable::Vote.count
-    #votes.count
   end
 
   def self.new_with_session(params, session)

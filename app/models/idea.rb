@@ -10,7 +10,6 @@ class Idea < ApplicationRecord
   #scope :favorited_by, -> (username) { joins(:favorites).where(favorites: { user: User.where(username: username) }) }
   belongs_to :user, counter_cache: true, touch: true
   has_many :attachments, dependent: :destroy
-  has_many :comments, dependent: :destroy
   has_many :cofounders, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :idea_tags, inverse_of: :idea, dependent: :destroy

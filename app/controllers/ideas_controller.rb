@@ -73,8 +73,6 @@ class IdeasController < ApplicationController
   end
 
   def show
-    @comment = Comment.new
-    @comments = @idea.comments
     @attachment = Attachment.new
     @attachments = @idea.attachments
     @cofounder = Cofounder.new
