@@ -2,10 +2,7 @@ class UsersController < ApplicationController
   before_action :set_idea, only: [:show]
 
   def show
-    #@ideas = Idea.where(user_id: @user.id)
     @ideas = @user.ideas.order('created_at DESC')
-    #@ideas =  @user.ideas.order('published_at DESC')
-    @comments = @user.comments
   end
   
   def index

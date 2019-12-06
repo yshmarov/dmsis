@@ -19,18 +19,13 @@
     %span.badge.badge-dark.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "score based on all activity"}
       =  current_user.points
       points
-    %p
     = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-    %p
     = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-    %p
     = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-    %p
-    /= link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'text-dark'
     = link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
     %p
   %p
-  = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-warning btn-block'
+  = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-success btn-block'
 - else
   .card
     %h5.card-header.bg-success.white-text Startup inspiration from the crowd
