@@ -1,13 +1,6 @@
 - content_for :title do
   = @idea.name
   | Does my startup idea suck?
-/owner actions
-/= link_to 'Transfer ownership', edit_idea_path(@idea), class: 'btn btn-warning disabled'
-/= link_to 'Change idea status', edit_idea_path(@idea), class: 'btn btn-warning disabled'
-/= link_to 'Add proof of realisation', edit_idea_path(@idea), class: 'btn btn-warning disabled'
-/owner actions
-/card
-/progress-bar
 .card
   %h5.card-header.bg-light
     = link_to @idea.name, @idea, class: 'text-dark'
@@ -89,9 +82,6 @@
                 = link_to @idea.user.username, user_path(@idea.user)
             - else
               = link_to @idea.user.username, user_path(@idea.user)
-.form-inline
-  = social_share_button_tag("What do you think about this startup idea? '#{@idea.name}'", :allow_sites => %w(twitter linkedin telegram), desc: @idea.description)
-  = social_share_button_tag @idea.name, desc: @idea.description, :allow_sites => %w(facebook)
 %p
 .text-light.text-center
   = pluralize(@idea.total_votes, 'vote')

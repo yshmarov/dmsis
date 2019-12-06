@@ -19,7 +19,6 @@
 //= require popper
 //= require rails-ujs
 //= require cocoon
-//= require social-share-button
 //= require activestorage
 //= require turbolinks
 
