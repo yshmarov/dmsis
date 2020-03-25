@@ -1,25 +1,19 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-success.sticky-top.navbar-expand-sm
+%nav.navbar.navbar-expand-lg.navbar-light.bg-success.sticky-top
   %a.navbar-brand{:href => "/"}
     .white-text
       = image_tag "doesmystartupideasuck-logo-alt.png", size: "25x25", class: "mx-auto d-inline align-top", :alt => "avatar"
-      DMSIS?
+      /DMSIS
+      Ideabox
+      /%small does my startup idea suck?
   %button.navbar-toggler.bg-light{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.nav.navbar-nav
       = nav_bar do
-        - if current_user
-          /= nav_link "Unvoted #{Idea.where.not(id: current_user.find_voted_items.map(&:id)).count}", unvoted_ideas_path
-        /- else
-        /  = nav_link "Unvoted", unvoted_ideas_path
-        /= nav_link "Random", random_ideas_path
-        /= nav_link "Trending", trending_ideas_path
-        /= nav_link "Top", top_ideas_path
-        /= nav_link "Fresh", fresh_ideas_path
-        = nav_link "Recent activity", recent_activity_path
         = nav_link "Ideas", fresh_ideas_path
         = nav_link "Tags", tags_path
         = nav_link "People", people_path
+        = nav_link "Recent activity", recent_activity_path
         /= link_to "+ Idea", new_idea_path, class: 'btn btn-outline-warning'
         .d-lg-none
           - if current_user
@@ -34,22 +28,3 @@
           = link_to "Log in", new_user_session_path, class: 'btn btn-light btn-block'
           = link_to "Sign up", new_user_registration_path, class: 'btn btn-warning btn-block text-dark'
           = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-primary btn-block text-light'
-  /.d-none.d-lg-block
-  /  .form-inline.my-2.my-lg-0
-  /    = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-warning'
-/%nav.navbar.navbar-expand-lg.navbar-light.bg-light
-/  %button.navbar-toggler{"aria-controls" => "navbarTogglerDemo01", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarTogglerDemo01", "data-toggle" => "collapse", :type => "button"}
-/    %span.navbar-toggler-icon
-/  #navbarTogglerDemo01.collapse.navbar-collapse
-/    %ul.navbar-nav.mr-auto.mt-2.mt-lg-0
-/      %li.nav-item.active
-/        %a.nav-link{:href => "#"}
-/          Home
-/          %span.sr-only (current)
-/      %li.nav-item
-/        %a.nav-link{:href => "#"} Link
-/      %li.nav-item
-/        %a.nav-link.disabled{:href => "#"} Disabled
-/    %form.form-inline.my-2.my-lg-0
-/      %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
-/      %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search

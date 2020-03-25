@@ -12,14 +12,14 @@
     = csrf_meta_tags
     = render 'layouts/google_analytics'
   %body.bg-dark
-    = rjv_tags
     = render 'layouts/navbar'
     .container
-      %br
+      %p
       .row
-        .col-lg
+        .col-lg-9
           = render 'layouts/messages'
           = yield
+          = rjv_tags
         .col-lg-3
           .d-none.d-lg-block.sticky-top
             = render 'layouts/sidebar'

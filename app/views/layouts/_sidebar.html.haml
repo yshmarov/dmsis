@@ -19,13 +19,14 @@
     %span.badge.badge-dark.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "score based on all activity"}
       =  current_user.points
       points
-    = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-    = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-    = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-    = link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
+    .btn-group-vertical
+      = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
+      = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
+      = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
+      = link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
     %p
   %p
-  = link_to '+ Submit a Startup Idea', new_idea_path, class: 'btn btn-success btn-block'
+  = link_to '+ Submit an Idea', new_idea_path, class: 'btn btn-success btn-block'
 - else
   .card
     %h5.card-header.bg-success.white-text Startup inspiration from the crowd
@@ -41,11 +42,11 @@
       %hr
       .text-center
         = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary'
+        /%p
+        /= link_to 'Privacy Policy', privacy_policy_path
+        /%p
+        /= link_to 'Terms of service', terms_of_service_path
         %p
-        = link_to 'Privacy Policy', privacy_policy_path
-        %br
-        = link_to 'Terms of service', terms_of_service_path
-        %br
         = link_to 'Contact', contacts_path
         .footer-copyright.py-3.text-center
           © #{Time.now.year} Copyright:
