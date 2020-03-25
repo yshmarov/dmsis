@@ -15,6 +15,7 @@
             %th Upvotes
             %th Downvotes
             %th= sort_link @q, :points_count, "Points"
+            %th= sort_link @q, :created_at, "Registration date"
         %tbody
           - @users.order('points DESC').each do |user|
             %tr
@@ -33,3 +34,4 @@
                 - else
                   \-
               %td= user.points
+              %td= user.created_at.strftime("%d-%h-%Y")

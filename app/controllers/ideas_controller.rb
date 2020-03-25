@@ -8,7 +8,7 @@ class IdeasController < ApplicationController
 
   def trending
     #has the most association quantity in the last X days
-    @ideas = Idea.all
+    @ideas = Idea.includes(:idea_tags, :idea_tags => :tags)
     render 'ideas/index'
   end
 

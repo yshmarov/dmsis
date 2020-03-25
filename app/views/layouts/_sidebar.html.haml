@@ -68,7 +68,6 @@
     .form-inline
       - Tag.limit(5).order('idea_tags_count DESC').each do |tag|
         /%div{:style => "word-wrap: break-word"}
-        %span.badge.badge-success
+        .badge.badge-success
           = link_to tag.popular_name, tag_path(tag), class: 'text-white'
-  %p
 %br
