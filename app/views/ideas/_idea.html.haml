@@ -42,8 +42,8 @@
               = pluralize(idea.total_score, 'point')
             %small= pluralize(idea.total_votes, 'vote')
           .col-4
-            = fa_icon "thumbs-up", class: 'btn btn-lg btn-success btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
-
+            .btn.btn-lg.btn-success.btn-block.disabled
+              .fa.fa-thumbs-up
       - else
         .col
           .btn.btn-lg.btn-success.btn-block.disabled
