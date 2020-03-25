@@ -1,8 +1,9 @@
 .text-white
   %h3 Editing idea
 %p
-.card.container
-  = render 'form'
+.card
+  .card-body
+    = render 'form'
   %br
 %p
 = link_to 'Cancel', idea_path(@idea), class: 'btn btn-danger'

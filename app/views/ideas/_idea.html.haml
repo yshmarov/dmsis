@@ -17,7 +17,8 @@
       - if current_user
         - if current_user.voted_down_on? idea
           .col-4
-            = fa_icon "thumbs-down", class: 'btn btn-lg btn-danger btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "You've already downvoted"
+            .btn.btn-lg.btn-danger.btn-block.disabled
+              .fa.fa-thumbs-down
           .col-4
             %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
               = pluralize(idea.total_score, 'point')
@@ -45,20 +46,22 @@
 
       - else
         .col
-          = fa_icon "thumbs-up", class: 'btn btn-lg btn-success btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
+          .btn.btn-lg.btn-success.btn-block.disabled
+            .fa.fa-thumbs-up
         .col
-          %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
+          .badge.badge-secondary.btn-block
             = idea.cached_weighted_score
         .col
-          = fa_icon "thumbs-down", class: 'btn btn-lg btn-danger btn-block disabled', "data-placement" => "right", "data-toggle" => "tooltip", :title => "Sign in to vote"
+          .btn.btn-lg.btn-success.btn-block.disabled
+            .fa.fa-thumbs-down
   %small.container
     .row.bg-light
       .col
         = link_to idea_path(idea), class: 'badge badge-light' do
-          = fa_icon "users"
+          .fa.fa-users
           = pluralize(idea.cofounders.count, 'cofounder')
         = link_to idea_path(idea), class: 'badge badge-light' do
-          = fa_icon "exclamation-triangle"
+          .fa.fa-exclamation-triangle
           = pluralize(idea.attachments.count, 'attachment')
         - if current_user
           - if idea.cofounders.where(user_id: current_user.id).present?
