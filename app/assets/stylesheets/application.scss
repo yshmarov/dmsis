@@ -12,9 +12,10 @@
  *
  */
 @import "bootstrap";
+@import "font-awesome-sprockets";
 @import "font-awesome";
 @import 'selectize';
-@import 'selectize.bootstrap3';
+@import 'selectize.default';
 
 
 #sidebar{ padding-top: 40px; }

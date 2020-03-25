@@ -15,12 +15,12 @@
       = nav_link "Top", top_ideas_path
       = nav_link "Fresh", fresh_ideas_path
 
-
 .text-center.text-white
   %h3
-    /%span.badge.badge-light
     = controller.action_name.capitalize
     ideas
+    .badge.badge-secondary
+      = @ideas.count
     - if controller.action_name == 'random'
       = link_to 'Next', random_ideas_path, class: 'btn btn-secondary rounded-circle'
 

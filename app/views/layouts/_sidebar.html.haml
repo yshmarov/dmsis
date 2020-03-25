@@ -1,35 +1,25 @@
 - if current_user
-  .card.container-fluid
-    %p
-    /.form-inline
-    .row
-      .col-auto
-        = link_to user_path(current_user), class: 'btn btn-default' do
+  .card
+    .card-header
+      .btn-group-vertical.btn-block
+        = link_to user_path(current_user), class: 'btn btn-outline-secondary btn-sm' do
           - if current_user.image?
             = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
-          %b= link_to current_user.username, user_path(current_user), class: 'text-dark'
-      .col
-        = link_to destroy_user_session_path, method: :delete do
-          = fa_icon "sign-out", class: 'btn btn-default text-dark'
-    %br
-      = link_to edit_user_registration_path, class: 'btn btn-outline-secondary btn-sm' do
-        \  
-        %i.fa.fa-lock>
-          Account Settings
-    %span.badge.badge-dark.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "score based on all activity"}
-      =  current_user.points
-      points
-    .btn-group-vertical
-      = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-      = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-      = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-      = link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'btn btn-outline-success btn-block btn-sm'
-    %p
+          = current_user.username
+        = link_to "Account Settings", edit_user_registration_path, class: 'btn btn-outline-secondary btn-sm'
+        = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm'
+      .btn-group-vertical.btn-block
+        = link_to "#{current_user.points} points", people_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'btn btn-outline-success btn-sm'
   %p
   = link_to '+ Submit an Idea', new_idea_path, class: 'btn btn-success btn-block'
 - else
   .card
-    %h5.card-header.bg-success.white-text Startup inspiration from the crowd
+    .card-header
+      %h4 Startup inspiration from the crowd
     .embed-responsive.embed-responsive-16by9
       %iframe.embed-responsive-item{:allow => "autoplay; encrypted-media", :allowfullscreen => "", :frameborder => "0", :height => "315", :src => "https://www.youtube.com/embed/H16ldnm_-ak?rel=0", :width => "560"}
     .card-body
@@ -47,40 +37,38 @@
         /%p
         /= link_to 'Terms of service', terms_of_service_path
         %p
-        = link_to 'Contact', contacts_path
-        .footer-copyright.py-3.text-center
-          © #{Time.now.year} Copyright:
-          %a{:href => "https://www.doesmystartupideasuck.com/"} doesmystartupideasuck.com
-          %br
-          Last updated on #{Time.now.strftime('%F')}
+        = link_to 'Contact us', contacts_path
+        %p
+        © #{Time.now.year} Copyright:
+        %a{:href => "https://www.github.com/yshmarov/"} doesmystartupideasuck.com
+        %br
+        Last updated on #{Time.now.strftime('%F')}
 %p
-.card.container-fluid
-  %p
-  Discover
-  = Idea.count
-  ideas 
-  %br
-  validated by 
-  = User.count
-  users
-  = ActsAsVotable::Vote.count
-  times
-  %p
+.card
+  .card-header
+    Discover
+    = Idea.count
+    ideas 
+    %br
+    validated by 
+    = User.count
+    users
+    = ActsAsVotable::Vote.count
+    times
 %p
-.card.container-fluid
+.card
+  .card-header
+    .row
+      .col
+        Top Tags
+      .col
+        .text-right
+          = link_to 'all', tags_path
+  .card-body
+    .form-inline
+      - Tag.limit(5).order('idea_tags_count DESC').each do |tag|
+        /%div{:style => "word-wrap: break-word"}
+        %span.badge.badge-success
+          = link_to tag.popular_name, tag_path(tag), class: 'text-white'
   %p
-  .row
-    .col
-      Top Tags
-    .col
-      .text-right
-        = link_to 'all', tags_path
-  %p
-  .form-inline
-    - Tag.limit(5).order('idea_tags_count DESC').each do |tag|
-      /%div{:style => "word-wrap: break-word"}
-      %span.badge.badge-success
-        = link_to tag.popular_name, tag_path(tag), class: 'text-white'
-  %p
-  %br
 %br

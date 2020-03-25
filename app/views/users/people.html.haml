@@ -1,34 +1,35 @@
-.text-white
-  .text-center
+.card
+  .card-header
     %h3 People
     - if current_user.has_role?(:admin)
       = link_to 'Users', users_path
-  %br
-  %table.table.table-hover.table-striped.table-sm.table-responsive
-    %thead
-      %tr
-        %th Name
-        %th= sort_link @q, :ideas_count, "Ideas"
-        %th= sort_link @q, :favorites_count, "Watching"
-        %th= sort_link @q, :cofounders_count, "Cofounding"
-        %th Upvotes
-        %th Downvotes
-        %th= sort_link @q, :points_count, "Points"
-    %tbody
-      - @users.order('points DESC').each do |user|
-        %tr
-          %td= link_to user.username, user_path(user)
-          %td= user.ideas_count
-          %td= user.favorites_count
-          %td= user.cofounders_count
-          %td
-            - if user.votes.up.any?
-              = user.votes.up.count
-            - else
-              \-
-          %td
-            - if user.votes.down.any?
-              = user.votes.down.count
-            - else
-              \-
-          %td= user.points
+  .card-body
+    .table-responsive
+      %table.table.table-hover.table-striped.table-sm
+        %thead
+          %tr
+            %th Name
+            %th= sort_link @q, :ideas_count, "Ideas"
+            %th= sort_link @q, :favorites_count, "Watching"
+            %th= sort_link @q, :cofounders_count, "Cofounding"
+            %th Upvotes
+            %th Downvotes
+            %th= sort_link @q, :points_count, "Points"
+        %tbody
+          - @users.order('points DESC').each do |user|
+            %tr
+              %td= link_to user.username, user_path(user)
+              %td= user.ideas_count
+              %td= user.favorites_count
+              %td= user.cofounders_count
+              %td
+                - if user.votes.up.any?
+                  = user.votes.up.count
+                - else
+                  \-
+              %td
+                - if user.votes.down.any?
+                  = user.votes.down.count
+                - else
+                  \-
+              %td= user.points

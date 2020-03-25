@@ -36,7 +36,7 @@ gem 'haml-rails'
 gem 'simple_form'
 
 gem 'devise'
-gem "font-awesome-rails"
+gem "font-awesome-sass"
 gem 'friendly_id'
 gem "pundit"
 gem "rolify"
