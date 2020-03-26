@@ -12,10 +12,10 @@
       %span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.mr-auto
-        %li{class: "#{'active font-weight-bold card bg-secondary' if current_page?(fresh_ideas_path)}"}
+        %li{class: "#{'active font-weight-bold card bg-secondary' if controller_name == "ideas"}"}
           = link_to fresh_ideas_path, class: 'nav-link' do
             .far.fa-lightbulb
-            Fresh Ideas
+            Ideas
         %li{class: "#{'active font-weight-bold card bg-secondary' if current_page?(tags_path)}"}
           = link_to tags_path, class: 'nav-link' do
             .fa.fa-tags

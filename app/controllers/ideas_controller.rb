@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-  skip_before_action :authenticate_user!, :only => [ :top ]
+  #skip_before_action :authenticate_user!, :only => [ :top ]
 
   def index
     redirect_to fresh_ideas_path
@@ -49,10 +49,10 @@ class IdeasController < ApplicationController
 
   def top
     #@ideas = @ideas.favorited_by(params[:favorited]) if params[:favorited].present?
-    unless current_user
-      @ideas = Idea.order(:cached_weighted_score => :desc).limit(3)
-    else
+    if current_user
       @ideas = Idea.order(:cached_weighted_score => :desc)
+    else
+      @ideas = Idea.order(:cached_weighted_score => :desc).limit(3)
       #@ideas = Idea.order(:cached_weighted_average => :desc)
     end
     render 'ideas/index'
