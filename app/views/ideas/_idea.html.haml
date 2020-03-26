@@ -1,11 +1,12 @@
 .card
-  %h5.card-header.bg-light
-    = link_to idea.name, idea, class: 'text-dark'
-    - if policy(idea).update?
-      .float-right
-        = link_to 'Edit', edit_idea_path(idea), class: 'badge badge-warning'
-        - unless idea.associations?
-          = link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
+  .card-header
+    %h5
+      = link_to idea.name, idea, class: 'text-dark'
+      - if policy(idea).update?
+        .float-right
+          = link_to 'Edit', edit_idea_path(idea), class: 'badge badge-warning'
+          - unless idea.associations?
+            = link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
   .card-body
     = simple_format(idea.description)
     .row
@@ -55,7 +56,7 @@
             = idea.cached_weighted_score
         .col-4
           .btn.btn-lg.btn-success.btn-block.disabled
-            .fa.fa-thumbs-down
+            .fa.fa-thumbs-up
   %small.container
     .row.bg-light
       .col

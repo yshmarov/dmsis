@@ -1,91 +1,15 @@
 - content_for :title do
   = @idea.name
   | Does my startup idea suck?
-.card
-  %h5.card-header.bg-light
-    = link_to @idea.name, @idea, class: 'text-dark'
-    - if policy(@idea).update?
-      .float-right
-        = link_to 'Edit', edit_idea_path(@idea), class: 'badge badge-warning'
-        - unless @idea.associations?
-          = link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
-  .card-body
-    = simple_format(@idea.description)
-    .row
-    .form-inline
-      - @idea.tags.each do |tag|
-        %span.badge.badge-success
-          = link_to tag.name, tag_path(tag), class: 'text-white'
-      %p
-  .card-footer.bg-light
-    .row.text-center
-      - if current_user
-        - if current_user.voted_down_on? @idea
-          .col-4
-            .btn.btn-lg.btn-danger.btn-block.disabled
-              .fa.fa-thumbs-down
-          .col-4
-            %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
-              = pluralize(@idea.total_score, 'point')
-            %small= pluralize(@idea.total_votes, 'vote')
-          .col-4
-            = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(@idea), method: :put, class: 'btn btn-lg btn-outline-success btn-block'
-        - unless current_user.voted_for? @idea
-          .col-4
-            = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(@idea), method: :put, class: 'btn btn-lg btn-outline-danger btn-block'
-          .col-4
-            %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
-              = pluralize(@idea.total_score, 'point')
-            %small= pluralize(@idea.total_votes, 'vote')
-          .col-4
-            = link_to "<i class='fa fa-thumbs-up'></i>".html_safe, like_idea_path(@idea), method: :put, class: 'btn btn-lg btn-outline-success btn-block'
-        - if current_user.voted_up_on? @idea
-          .col-4
-            = link_to "<i class='fa fa-thumbs-down'></i>".html_safe, dislike_idea_path(@idea), method: :put, class: 'btn btn-lg btn-outline-danger btn-block'
-          .col-4
-            %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
-              = pluralize(@idea.total_score, 'point')
-            %small= pluralize(@idea.total_votes, 'vote')
-          .col-4
-            .btn.btn-lg.btn-success.btn-block.disabled
-              .fa.fa-thumbs-up
-      - else
-        .col-4
-          .btn.btn-lg.btn-success.btn-block.disabled
-            .fa.fa-thumbs-up
-        .col-4
-          %span.badge.badge-secondary.btn-block{"data-placement" => "right", "data-toggle" => "tooltip", :title => "upvotes - downvotes"}
-            = idea.cached_weighted_score
-        .col-4
-          .btn.btn-lg.btn-success.btn-block.disabled
-            .fa.fa-thumbs-up
-  %small.container
-    .row.bg-light
-      .col
-        = link_to idea_path(@idea), class: 'badge badge-light' do
-          .fa.fa-users
-          = pluralize(@idea.cofounders.count, 'cofounder')
-        = link_to idea_path(@idea), class: 'badge badge-light' do
-          .fa.fa-exclamation-triangle
-          = pluralize(@idea.attachments.count, 'attachment')
-        - if current_user
-          - if @idea.cofounders.where(user_id: current_user.id).present?
-            %span.badge.badge-secondary
-              You've applied!
-      .col
-        .text-right
-          .font-weight-light.font-italic
-            = time_ago_in_words(@idea.created_at)
-            ago by
-            - if current_user
-              - if @idea.user_id == current_user.id
-                %span.badge.badge-success
-                  You
-              - else
-                = link_to @idea.user.username, user_path(@idea.user)
-            - else
-              = link_to @idea.user.username, user_path(@idea.user)
-%p
+
+%small
+  .text-white 
+    = link_to 'ideas', ideas_path
+    \/
+    = link_to @idea.name, @idea
+
+= render 'ideas/idea', idea: @idea
+
 .text-light.text-center
   = pluralize(@idea.total_votes, 'vote')
 - if @idea.votes_for.any?

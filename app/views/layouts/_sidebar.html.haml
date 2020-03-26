@@ -1,19 +1,20 @@
 - if current_user
   .card
     .card-header
+      = link_to user_path(current_user), class: 'btn btn-outline-secondary btn-sm btn-block' do
+        - if current_user.image?
+          = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
+        = current_user.username
       .btn-group-vertical.btn-block
-        = link_to user_path(current_user), class: 'btn btn-outline-secondary btn-sm' do
-          - if current_user.image?
-            = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
-          = current_user.username
-        = link_to "Account Settings", edit_user_registration_path, class: 'btn btn-outline-secondary btn-sm'
-        = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'btn btn-outline-secondary btn-sm'
-      .btn-group-vertical.btn-block
-        = link_to "#{current_user.points} points", people_path, class: 'btn btn-outline-success btn-sm'
-        = link_to "#{current_user.ideas.count} ideas", my_ideas_path, class: 'btn btn-outline-success btn-sm'
-        = link_to "#{current_user.votes.up.count} upvotes", upvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
-        = link_to "#{current_user.votes.down.count} downvotes", downvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
-        = link_to "#{current_user.cofounders.count} want to cofound", cofounding_ideas_path, class: 'btn btn-outline-success btn-sm'
+        /%li{class: "#{'active font-weight-bold' if current_page?(recent_activity_path)}"}
+        /  = link_to recent_activity_path, class: 'nav-link' do
+        /    .fa.fa-bell
+        /%li{class: "#{'active font-weight-bold card bg-secondary' if current_page?(people_path)}"}
+        = link_to "#{pluralize(current_user.points, 'point')}", people_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{pluralize(current_user.ideas.count, 'idea')}", my_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{pluralize(current_user.votes.up.count, 'upvote')}", upvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{pluralize(current_user.votes.down.count, 'downvote')}", downvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{current_user.cofounders.count} want to join", cofounding_ideas_path, class: 'btn btn-outline-success btn-sm'
   %p
   = link_to '+ Submit an Idea', new_idea_path, class: 'btn btn-success btn-block'
 - else
@@ -31,7 +32,12 @@
         Find a team.
       %hr
       .text-center
-        = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'btn btn-outline-primary'
+        = link_to user_facebook_omniauth_authorize_path, class: 'btn btn-primary' do
+          .fab.fa-facebook
+          Sign in
+        %p
+        = link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-dark'
+        = link_to 'Log In', new_user_session_path, class: 'btn btn-outline-dark'
         /%p
         /= link_to 'Privacy Policy', privacy_policy_path
         /%p

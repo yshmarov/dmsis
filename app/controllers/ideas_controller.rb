@@ -43,7 +43,7 @@ class IdeasController < ApplicationController
   end
 
   def fresh
-    @ideas = Idea.order("created_at DESC").all
+    @ideas = Idea.order("created_at DESC").all.where('name ILIKE ?', "%#{params[:name]}%")
     render 'ideas/index'
   end
 
