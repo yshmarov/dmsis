@@ -24,6 +24,12 @@ class User < ApplicationRecord
   after_touch :update_points
   validates :email, uniqueness: true, if: :email_present
 
+  after_create do
+    if User.count == 1
+      user.add_role(:admin)
+    end
+  end
+
   #def favorite(idea)
   #  favorites.find_or_create_by(idea: idea)
   #end
