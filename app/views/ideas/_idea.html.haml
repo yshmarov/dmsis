@@ -5,8 +5,7 @@
       - if policy(idea).update?
         .float-right
           = link_to 'Edit', edit_idea_path(idea), class: 'badge badge-warning'
-          - unless idea.associations?
-            = link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
+          = link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' }, class: 'badge badge-danger'
   .card-body
     = simple_format(idea.description)
     .row

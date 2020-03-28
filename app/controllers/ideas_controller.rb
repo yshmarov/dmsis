@@ -90,6 +90,7 @@ class IdeasController < ApplicationController
   end
 
   def edit
+    authorize @idea
     if @idea.user_id == current_user.id
     else
       redirect_to @idea, notice: "You don't own the idea."
@@ -121,6 +122,7 @@ class IdeasController < ApplicationController
   end
 
   def destroy
+    authorize @idea
     @idea.destroy
       redirect_to fresh_ideas_path, notice: 'Idea was successfully destroyed.'
   end

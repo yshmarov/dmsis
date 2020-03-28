@@ -49,13 +49,4 @@ class Idea < ApplicationRecord
   def associations?
     votes_for.size > 0 || cofounders.any? || attachments.any? || favorites.any?
   end
-
-  private
-
-  def check_for_associations
-    if associations?
-      errors[:base] << "cannot delete"
-      false
-    end
-  end
 end
