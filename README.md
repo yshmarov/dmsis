@@ -1,3 +1,5 @@
+git push heroku master
+heroku run rake db:migrate
 
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -d doesmystartupideasuck_development latest.dump
 

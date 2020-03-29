@@ -8,7 +8,6 @@ class Idea < ApplicationRecord
 
   belongs_to :user, counter_cache: true, touch: true
   has_many :attachments, dependent: :destroy
-  has_many :cofounders, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :idea_tags, inverse_of: :idea, dependent: :destroy
   has_many :tags, through: :idea_tags
@@ -45,6 +44,6 @@ class Idea < ApplicationRecord
   end
 
   def associations?
-    votes_for.size > 0 || cofounders.any? || attachments.any? || favorites.any?
+    votes_for.size > 0 || attachments.any? || favorites.any?
   end
 end

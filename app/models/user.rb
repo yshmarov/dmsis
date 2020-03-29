@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   rolify
   #User.find_each { |user| User.reset_counters(user.id, :ideas) }
-  #User.find_each { |user| User.reset_counters(user.id, :cofounders) }
   #User.find_each { |user| User.reset_counters(user.id, :favorites) }
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
@@ -13,7 +12,6 @@ class User < ApplicationRecord
 
   acts_as_voter
   has_many :ideas, dependent: :destroy
-  has_many :cofounders, dependent: :destroy
   has_many :attachments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   #has_many :idea_tags, through: :ideas
@@ -67,7 +65,7 @@ class User < ApplicationRecord
   end
 
   def update_points
-    update_column :points, (ideas.count + cofounders.count + votes.count + favorites.count + attachments.count)
+    update_column :points, (ideas.count + votes.count + favorites.count + attachments.count)
   end
 
   def self.new_with_session(params, session)
