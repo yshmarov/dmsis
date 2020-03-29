@@ -61,10 +61,10 @@
       .col
         = link_to idea_path(idea), class: 'badge badge-light' do
           .fa.fa-users
-          = pluralize(idea.cofounders.count, 'cofounder')
+          = pluralize(idea.cofounders_count, 'cofounder')
         = link_to idea_path(idea), class: 'badge badge-light' do
           .fa.fa-exclamation-triangle
-          = pluralize(idea.attachments.count, 'attachment')
+          = pluralize(idea.attachments_count, 'attachment')
         - if current_user
           - if idea.cofounders.where(user_id: current_user.id).present?
             %span.badge.badge-secondary

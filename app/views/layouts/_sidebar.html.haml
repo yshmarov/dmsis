@@ -5,16 +5,18 @@
         - if current_user.image?
           = image_tag current_user.image, size: '20x20', alt: "that's me", class: 'rounded-circle'
         = current_user.username
+        - if current_user.has_role?(:admin)
+          .badge.badge-dark admin
       .btn-group-vertical.btn-block
         /%li{class: "#{'active font-weight-bold' if current_page?(recent_activity_path)}"}
         /  = link_to recent_activity_path, class: 'nav-link' do
         /    .fa.fa-bell
         /%li{class: "#{'active font-weight-bold card bg-secondary' if current_page?(people_path)}"}
         = link_to "#{pluralize(current_user.points, 'point')}", people_path, class: 'btn btn-outline-success btn-sm'
-        = link_to "#{pluralize(current_user.ideas.count, 'idea')}", my_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{pluralize(current_user.ideas_count, 'idea')}", my_ideas_path, class: 'btn btn-outline-success btn-sm'
         = link_to "#{pluralize(current_user.votes.up.count, 'upvote')}", upvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
         = link_to "#{pluralize(current_user.votes.down.count, 'downvote')}", downvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
-        = link_to "#{current_user.cofounders.count} want to join", cofounding_ideas_path, class: 'btn btn-outline-success btn-sm'
+        = link_to "#{current_user.cofounders_count} want to join", cofounding_ideas_path, class: 'btn btn-outline-success btn-sm'
   %p
   = link_to '+ Submit an Idea', new_idea_path, class: 'btn btn-success btn-block'
 - else

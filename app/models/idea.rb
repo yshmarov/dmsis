@@ -6,8 +6,6 @@ class Idea < ApplicationRecord
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  #scope :authored_by, ->(username) { where(user: User.where(username: username)) }
-  #scope :favorited_by, -> (username) { joins(:favorites).where(favorites: { user: User.where(username: username) }) }
   belongs_to :user, counter_cache: true, touch: true
   has_many :attachments, dependent: :destroy
   has_many :cofounders, dependent: :destroy

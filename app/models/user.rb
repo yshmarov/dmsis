@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   after_create do
     if User.count == 1
-      user.add_role(:admin)
+      User.first.add_role(:admin)
     end
   end
 

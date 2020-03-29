@@ -1,3 +1,6 @@
+
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d doesmystartupideasuck_development latest.dump
+
 User.find_each { |user| User.reset_counters(user.id, :ideas) }
 User.find_each { |user| User.reset_counters(user.id, :cofounders) }
 User.find_each { |user| User.reset_counters(user.id, :favorites) }
@@ -6,7 +9,7 @@ User.find_each {|m| m.update_attributes(updated_at: Time.now)}
 
 
 
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -U yaro -d doesmystartupideasuck_development latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U ubuntu -d doesmystartupideasuck_development latest.dump
 Idea.find(60).update_attributes!(user_id: "20")
 
 doesmystartupideasuck.com

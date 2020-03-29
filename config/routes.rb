@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     end
     get :fresh, :top, :my, :random, :unvoted, :upvoted, :downvoted, :cofounding, :trending, on: :collection
   end
-  resources :comments
   resources :attachments
   resources :cofounders
   resources :tags, only: [:show, :index, :destroy]
