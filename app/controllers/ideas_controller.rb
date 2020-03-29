@@ -12,11 +12,6 @@ class IdeasController < ApplicationController
     render 'ideas/index'
   end
 
-  def cofounding
-    @ideas = Idea.joins(:cofounders).where(cofounders: {user_id: current_user.id})
-    render 'ideas/index'
-  end
-
   def upvoted
     @ideas = Idea.where(id: current_user.find_up_voted_items.map(&:id))
     render 'ideas/index'
@@ -75,9 +70,6 @@ class IdeasController < ApplicationController
   def show
     @attachment = Attachment.new
     @attachments = @idea.attachments
-    @cofounder = Cofounder.new
-    @cofounders = @idea.cofounders
-    @current_user_is_a_cofounder = Cofounder.where(idea_id: @idea.id).where(user_id: current_user.id).present?
   end
 
   def tag_cloud

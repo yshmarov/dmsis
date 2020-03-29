@@ -45,16 +45,5 @@
     = render 'attachments/form'
     %p
     = render 'attachments/index'
-  .col-lg
-    .text-white
-      .fa.fa-users
-      Cofounders
-    - unless @current_user_is_a_cofounder
-      = render 'cofounders/form'
-    - else
-      %span.badge.badge-secondary
-        %h5 You've applied!
-    %p
-    = render 'cofounders/index'
 /bottom-actions
 %br

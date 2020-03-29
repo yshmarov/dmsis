@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_091739) do
+ActiveRecord::Schema.define(version: 2020_03_29_092306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,17 +44,6 @@ ActiveRecord::Schema.define(version: 2020_03_29_091739) do
     t.datetime "updated_at", null: false
     t.index ["idea_id"], name: "index_attachments_on_idea_id"
     t.index ["user_id"], name: "index_attachments_on_user_id"
-  end
-
-  create_table "cofounders", force: :cascade do |t|
-    t.string "role"
-    t.string "location"
-    t.bigint "user_id"
-    t.bigint "idea_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["idea_id"], name: "index_cofounders_on_idea_id"
-    t.index ["user_id"], name: "index_cofounders_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -102,7 +91,6 @@ ActiveRecord::Schema.define(version: 2020_03_29_091739) do
     t.float "cached_weighted_average", default: 0.0
     t.string "slug"
     t.integer "favorites_count", default: 0, null: false
-    t.integer "cofounders_count", default: 0, null: false
     t.integer "attachments_count", default: 0, null: false
     t.index ["slug"], name: "index_ideas_on_slug", unique: true
     t.index ["user_id"], name: "index_ideas_on_user_id"
@@ -143,7 +131,6 @@ ActiveRecord::Schema.define(version: 2020_03_29_091739) do
     t.string "name"
     t.text "image"
     t.integer "ideas_count", default: 0, null: false
-    t.integer "cofounders_count", default: 0, null: false
     t.integer "favorites_count", default: 0, null: false
     t.integer "points", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -176,8 +163,6 @@ ActiveRecord::Schema.define(version: 2020_03_29_091739) do
 
   add_foreign_key "attachments", "ideas"
   add_foreign_key "attachments", "users"
-  add_foreign_key "cofounders", "ideas"
-  add_foreign_key "cofounders", "users"
   add_foreign_key "favorites", "ideas"
   add_foreign_key "favorites", "users"
   add_foreign_key "idea_tags", "ideas"

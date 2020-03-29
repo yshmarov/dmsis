@@ -16,7 +16,6 @@
         = link_to "#{pluralize(current_user.ideas_count, 'idea')}", my_ideas_path, class: 'btn btn-outline-success btn-sm'
         = link_to "#{pluralize(current_user.votes.up.count, 'upvote')}", upvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
         = link_to "#{pluralize(current_user.votes.down.count, 'downvote')}", downvoted_ideas_path, class: 'btn btn-outline-success btn-sm'
-        = link_to "#{current_user.cofounders_count} want to join", cofounding_ideas_path, class: 'btn btn-outline-success btn-sm'
   %p
   = link_to '+ Submit an Idea', new_idea_path, class: 'btn btn-success btn-block'
 - else
