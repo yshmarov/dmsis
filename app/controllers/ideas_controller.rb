@@ -126,6 +126,6 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :user_id, idea_tag_ids: [])
+      params.require(:idea).permit(:name, :description, :user_id, tag_ids: [])
     end
 end
